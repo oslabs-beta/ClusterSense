@@ -1,1 +1,1 @@
-# GUI-Kafka
+# Cluster Sense - Kafka Cluster Management Tool
