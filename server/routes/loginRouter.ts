@@ -12,34 +12,29 @@ const loginRouter = express.Router();
 //     },
 // );
 //    sessionController.startSession,
-//    cookieController.setSSIDCookie,
-loginRouter.get(
-  "/",() => {
-    console.log('in loginRouter');
-  },
-  (_req: Request, res: Response) => {
-      console.log('get Request for /');
-      return res.status(201).json({ message: "Regular Login/ get request works!" });
-  }
-);
+//    cookieController.setSSIDCookie
 
-
+// authorizing user who has already logged in
 // loginRouter.get(
-//   "/signupRequest",
+//   "/isLoggedIn",
 //   (_req: Request, res: Response) => {
 //       console.log('get Request');
-//       return res.status(201).json({ message: "Sign up successful" });
+//       return res.status(201).json({ message: "login successful" });
 //   }
 // );
 
 //Sign up request
 loginRouter.post(
-    "/signupRequest",
-    userController.createUser,
-    (_req: Request, res: Response) => {
-      console.log('post Request')
-      return res.status(201)//.json({ userId: res.locals.userId });
-    },
+  "/signupRequest",
+  userController.createUser,
+  (_req: Request, res: Response) => {
+    if (res.locals.userId) {
+      return res.status(201).json({ userId: res.locals.userId });
+    } else {
+      return res.status(500).json({ error: 'User ID not found' });
+    }
+  },
 );
-//    userController.createUser,
+
+
 export { loginRouter };
