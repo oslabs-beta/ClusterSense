@@ -28,7 +28,7 @@ const userController = {
 
         const { username, password } = req.body;
         console.log(`${username}, ${password}`)
-
+        // console.log('this is link', process.env.PG_URL)
         // checking if input fields are empty
         // if (!username || !password) {
         //   return next({
@@ -62,6 +62,7 @@ const userController = {
           const insertQuery = `INSERT INTO "users" (username, password) VALUES ($1, $2) RETURNING *`;
           const insertValues = [username, hashedPassword];
           const createUser = await pool.query(insertQuery, insertValues);
+          console.log('createUser', createUser)
           //save the user's id to res.locals
           res.locals.userId = createUser.rows[0].user_id;
           console.log(`{res.locals.userId}`);

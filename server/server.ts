@@ -2,6 +2,7 @@ import express, { Request, Response } from 'express';
 import dotenv from 'dotenv';
 import path from 'path';
 import cors from 'cors';
+dotenv.config();
 // import cookieParser from 'cookie-parser';
 // import passport from 'passport';
 // import "./passport-config"; // Import the Passport configuration
@@ -10,7 +11,6 @@ import { ServerError } from '../types';
 import { loginRouter } from "./routes/loginRouter";
 
 // require .env files in
-dotenv.config();
 const app = express();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());

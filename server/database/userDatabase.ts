@@ -1,6 +1,8 @@
-//import { Pool } from 'pg';
-import pkg from 'pg';
-const { Pool } = pkg;
+// import { Pool } from 'pg';
+// import pg from 'pg';
+// const { Pool } = 'pg';
+import pg from 'pg';
+const { Pool } = pg;
 
 const pool = new Pool({
   connectionString: process.env.PG_URL
