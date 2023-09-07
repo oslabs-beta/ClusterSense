@@ -1,5 +1,6 @@
 import { NextFunction, Request, Response } from "express";
-import  from "../models/userModel";
+// const User = require('../database/userDatabase');
+import { pool } from "../database/userDatabase";
 import bcrypt from 'bcryptjs';
 
 /*
@@ -17,9 +18,11 @@ import bcrypt from 'bcryptjs';
 */
 
 const userController = {
+    
     // Creating a new user
     createUser: async (req: Request, res: Response, next: NextFunction,
       ): Promise<void> => {
+        console.log('this is inside our userController createUser')
         const { username, password } = req.body;
         // checking if input fields are empty
         if (!username || !password) {
@@ -34,18 +37,18 @@ const userController = {
           const existingUserQuery = `SELECT * FROM "user" WHERE username = $1`;
           const existingUserValues = [req.body.username];
           // Check if the username already exists
-          const existingUserResult = await User.query(
+          const existingUserResult = await pool.query(
              existingUserQuery,
              existingUserValues
           );
           if (existingUserResult.rows.length > 0) {
-            return res.status(409).json({ error: 'Username already exists' });
+            res.status(409).json({ error: 'Username already exists' });
           }
           const salt = await bcrypt.genSalt(10);
           const hashedPassword = await bcrypt.hash(password, salt);
           const insertQuery = `INSERT INTO "user" (username, password) VALUES ($1, $2) RETURNING *`;
           const insertValues = [username, hashedPassword];
-          const createUser = await User.query(insertQuery, insertValues);
+          const createUser = await pool.query(insertQuery, insertValues);
           //save the user's id to res.locals
           res.locals.userId = createUser.rows[0].user_id;
           return next();

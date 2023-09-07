@@ -1,5 +1,5 @@
-import express, {Request, Response} from 'express';
-const app = express();
+import express, { Request, Response } from 'express';
+
 import path from 'path';
 import cors from 'cors';
 import { ServerError } from '../types';
@@ -11,17 +11,35 @@ import dotenv from 'dotenv';
 
 // require .env files in
 dotenv.config();
+const app = express();
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 4000;
 
 app.use(express.json());
 app.use(cors());
-
+// console.log('hi')
 // route handlers
-app.use('/login', loginRouter);
+app.use('/login', () => {
+  console.log('before loginRouter');
+}, loginRouter);
 
-//is this public? 
-app.use('/', express.static(path.join(__dirname, '../public')));
+// app.use('/login', (req, res, next) => {
+//   console.log('before loginRouter');
+//   next();
+// }, loginRouter);
+
+// //is this public? 
+// app.use('/', express.static(path.join(__dirname, '../public')));
+
+// If env is Production, serve our static bundle
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(path.resolve(), "dist")));
+  app.get("/*", function (_req, res) {
+    return res.sendFile(path.join(path.resolve(), "dist", "index.html"));
+  });
+}
 
 // catch-all handler
 app.use((_req: Request, res: Response) => {
