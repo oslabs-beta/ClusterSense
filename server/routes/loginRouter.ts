@@ -3,7 +3,7 @@ import { Request, Response } from 'express';
 import { userController } from "../controllers/userController";
 const loginRouter = express.Router();
 
-// loginRouter to handle login request
+// login request
 // loginRouter.post(
 //     "/loginRequest",
 //     userController.verifyUser,
@@ -23,7 +23,7 @@ const loginRouter = express.Router();
 //   }
 // );
 
-//Sign up request
+// sign up request
 loginRouter.post(
   "/signupRequest",
   userController.createUser,
