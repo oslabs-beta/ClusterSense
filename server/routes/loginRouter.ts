@@ -3,26 +3,6 @@ import { Request, Response } from 'express';
 import { userController } from "../controllers/userController";
 const loginRouter = express.Router();
 
-// login request
-// loginRouter.post(
-//     "/loginRequest",
-//     userController.verifyUser,
-//     (_req: Request, res: Response) => {
-//       return res.status(200).send("You are logged in");
-//     },
-// );
-//    sessionController.startSession,
-//    cookieController.setSSIDCookie
-
-// authorizing user who has already logged in
-// loginRouter.get(
-//   "/isLoggedIn",
-//   (_req: Request, res: Response) => {
-//       console.log('get Request');
-//       return res.status(201).json({ message: "login successful" });
-//   }
-// );
-
 // sign up request
 loginRouter.post(
   "/signupRequest",
@@ -36,5 +16,24 @@ loginRouter.post(
   },
 );
 
+// login request
+loginRouter.post(
+    "/loginRequest",
+    userController.verifyUser,
+    (_req: Request, res: Response) => {
+      return res.status(200).send("You are logged in");
+    },
+);
+//    sessionController.startSession,
+//    cookieController.setSSIDCookie
+
+// authorizing user who has already logged in
+// loginRouter.get(
+//   "/isLoggedIn",
+//   (_req: Request, res: Response) => {
+//       console.log('get Request');
+//       return res.status(201).json({ message: "login successful" });
+//   }
+// );
 
 export { loginRouter };

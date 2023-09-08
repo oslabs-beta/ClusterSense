@@ -12,7 +12,6 @@ export const query = (
   params: Array<string | number | boolean>,
   callback: (error: Error, result: unknown) => void
 ) => {
-  console.log('executed query', text);
   return pool.query(text, params, callback);
 };
 

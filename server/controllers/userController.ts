@@ -1,5 +1,4 @@
 import { NextFunction, Request, Response } from "express";
-// const User = require('../database/userDatabase');
 import { pool } from "../database/userDatabase";
 import bcrypt from 'bcryptjs';
 
@@ -25,9 +24,7 @@ const userController = {
       res: Response, 
       next: NextFunction,
       ): Promise<void> => {
-
         const { username, password } = req.body;
-
         // checking if input fields are empty
         if (!username || !password) {
           return next({
@@ -47,7 +44,7 @@ const userController = {
           );
           if (existingUserResult.rows.length > 0) {
             res.status(409).json({ error: 'Username already exists' });
-            return next();
+            return next()
           }
 
           // create user in database
@@ -67,7 +64,47 @@ const userController = {
           });
         }
       },
-}
 
+      // verify user
+      verifyUser: async (req: Request, res: Response, next: NextFunction): Promise<void> => {       
+        const { username, password } = req.body;
+
+        // Check for missing input fields
+        if (!username || !password) {
+          return next({
+            log: "Error in userController.verifyUser. Missing input fields",
+            status: 400,
+            message: { err: "All fields required" },
+          });
+        }
+      
+        try {
+          // Check if the username exists
+          const existingUsernameQuery = `SELECT * FROM "users" WHERE username = $1`;
+          const userResult = await pool.query(existingUsernameQuery, [req.body.username]);
+      
+          // If no user found by that username
+          if (userResult.rows.length === 0) {
+            res.status(409).json({ error: 'Invalid Username or Password' });
+          }
+
+          // check if password is correct
+          const user = userResult.rows[0];
+          const isPasswordMatch = await bcrypt.compare(password, user.password);
+          if (!isPasswordMatch) {
+            res.status(401).json({ error: 'Invalid Username or Password' });
+          }
+          res.locals.user = user.id;
+          return next()
+        } catch (err) {
+          return next({
+            log: `Error occurred in userController.verifyUser ${err}`,
+            status: 500,
+            message: { err: "Unable to verify user" },
+          });
+        }
+      },
+      
+}
 
 export { userController };
