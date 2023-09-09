@@ -23,7 +23,7 @@ const PORT = process.env.PORT || 4000;
 app.use('/login', loginRouter);
 
 // is this public? 
-// app.use('/', express.static(path.join(__dirname, '../public')));
+app.use('/', express.static(path.join(__dirname, '../public')));
 
 // if env is Production, serve our static bundle
 if (process.env.NODE_ENV === "production") {

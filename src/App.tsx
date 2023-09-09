@@ -4,6 +4,7 @@ import SignIn from "./components/SignIn"
 import SignUp from "./components/SignUp"
 import MainPage from "./containers/MainPage"
 import NotFound from "./components/NotFound"
+import './stylesheets/index.css'
 
 function App() {
   return (
