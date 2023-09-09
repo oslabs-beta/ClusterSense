@@ -8,11 +8,11 @@ const NavBar = () => {
   //navigation paths
   let navigate = useNavigate();
   const toHome = () => {
-    let path: string = '/home';
+    const path: string = '/home';
     navigate(path);
   };
   const signOut = () => {
-    let path: string = '/login';
+    const path: string = '/login';
     navigate(path);
     //need to ensure we end the session here so they actually log out and arent just redirected
   };
@@ -20,10 +20,12 @@ const NavBar = () => {
   const [selectedCluster, setSelectedCluster] = useState(null)
   function handleSelect (event){
     setSelectedCluster(event.target.value)
+    //get rid of form when selected
   }
 
   const clusters = async () => {
     //retreive clusters from user's DB - should be array of objects with value / label keys
+    //fetch to back end useEffect
   };
 
   return (

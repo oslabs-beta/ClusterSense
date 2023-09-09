@@ -33,6 +33,7 @@ const SignIn = () => {
         toHome();
       }
     } catch (err) {
+      //render an error message on the front end screen
       console.log(err);
     }
   };

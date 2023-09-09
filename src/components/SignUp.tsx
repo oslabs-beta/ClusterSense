@@ -11,22 +11,28 @@ const SignUp = () => {
       let path = "/login";
       navigate(path);
     };
+    const toHome = () => {
+      let path = "/home";
+      navigate(path);
+    };
   
     const handleClick = async () => {
+    
       try{
         const body = {
           username: username,
           password: password
         }
-          const data = await fetch(`http://localhost:8080/login/signupRequest`, {
+          const data = await fetch(`http://localhost:4000/login/signupRequest`, {
           method: 'POST',
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(body),
         })
         if (data.ok) {
-          navigate('/home')
+          toHome()
         }
       } catch(err){
+        //render error in front end
         console.log(err);
       }
   
