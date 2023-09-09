@@ -3,43 +3,37 @@ import { Request, Response } from 'express';
 import { userController } from "../controllers/userController";
 const loginRouter = express.Router();
 
-// loginRouter to handle login request
-// loginRouter.post(
-//     "/loginRequest",
-//     userController.verifyUser,
-//     (_req: Request, res: Response) => {
-//       return res.status(200).send("You are logged in");
-//     },
-// );
-//    sessionController.startSession,
-//    cookieController.setSSIDCookie,
-loginRouter.get(
-  "/",() => {
-    console.log('in loginRouter');
-  },
+// sign up request
+loginRouter.post(
+  "/signupRequest",
+  userController.createUser,
   (_req: Request, res: Response) => {
-      console.log('get Request for /');
-      return res.status(201).json({ message: "Regular Login/ get request works!" });
-  }
+    if (res.locals.userId) {
+      return res.status(201).json({ userId: res.locals.userId });
+    } else {
+      return res.status(500).json({ error: 'User ID not found' });
+    }
+  },
 );
 
+// login request
+loginRouter.post(
+    "/loginRequest",
+    userController.verifyUser,
+    (_req: Request, res: Response) => {
+      return res.status(200).send("You are logged in");
+    },
+);
+//    sessionController.startSession,
+//    cookieController.setSSIDCookie
 
+// authorizing user who has already logged in
 // loginRouter.get(
-//   "/signupRequest",
+//   "/isLoggedIn",
 //   (_req: Request, res: Response) => {
 //       console.log('get Request');
-//       return res.status(201).json({ message: "Sign up successful" });
+//       return res.status(201).json({ message: "login successful" });
 //   }
 // );
 
-//Sign up request
-loginRouter.post(
-    "/signupRequest",
-    userController.createUser,
-    (_req: Request, res: Response) => {
-      console.log('post Request')
-      return res.status(201)//.json({ userId: res.locals.userId });
-    },
-);
-//    userController.createUser,
 export { loginRouter };
