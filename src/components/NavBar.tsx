@@ -1,30 +1,54 @@
+import useEffect from 'react';
 import useState from 'react';
 import { useNavigate } from 'react-router-dom';
 import logo from '../assets/ClusterSense.png';
-import AsyncSelect from 'react-select/async';
+import Select from 'react-select/async';
 
+interface NavProps {
+  setPort: (e: number) => void;
+  formSubmission: (e: boolean) => void;
+}
 
-const NavBar = () => {
+const NavBar = ({ setPort, formSubmission }: NavProps) => {
+  const [clustersOptions, setClustersOptions] = useState([]);
+
   //navigation paths
-  let navigate = useNavigate();
+  const navigate = useNavigate();
   const toHome = () => {
-    let path: string = '/home';
+    const path: string = '/home';
     navigate(path);
   };
   const signOut = () => {
-    let path: string = '/login';
+    const path: string = '/login';
     navigate(path);
-    //need to ensure we end the session here so they actually log out and arent just redirected
+    //need to ensure we end the session here so they actually log out and aren't just redirected
   };
 
-  const [selectedCluster, setSelectedCluster] = useState(null)
-  function handleSelect (event){
-    setSelectedCluster(event.target.value)
+  function handleSelect(selectedOption: number) {
+    //uses setPort /formSubmission from props to set port in the mainPage, making form go away
+    const chosenCluster = selectedOption;
+    setPort(chosenCluster);
+    formSubmission(true);
   }
 
-  const clusters = async () => {
-    //retreive clusters from user's DB - should be array of objects with value / label keys
-  };
+  useEffect(() => {
+    const fetchClusters = async () => {
+      try {
+        const response = await fetch('/dropDown', {
+          method: 'GET',
+        });
+        if (response.ok) {
+          const data = await response.json();
+          setClustersOptions(data);
+        } else {
+          console.error('Error fetching clusters');
+        }
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    };
+    fetchClusters();
+  }, []);
 
   return (
     <div className="nav-bar">
@@ -33,11 +57,11 @@ const NavBar = () => {
       </div>
       <div className="clusters">
         Select Cluster:
-      <AsyncSelect
-        value={selectedCluster}
-        onChange={handleSelect}
-        options={clusters}
-      />
+        <Select
+          defaultValue={clustersOptions[0]}
+          onChange={handleSelect}
+          Options={clustersOptions}
+        />
       </div>
       <div>
         <a className="navLinks" onClick={toHome}>
