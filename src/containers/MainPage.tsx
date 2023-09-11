@@ -4,6 +4,7 @@ import MouseEvent from 'react';
 import NavBar from '../components/NavBar';
 
 const MainPage = () => {
+  //need to check if user is logged in
 /*
 There is a bunch of logic in here for dataFromDatabase--this is theory and reflects what might come from the prometheus data scrapper to be manifested as grafana charts
 */
@@ -15,7 +16,7 @@ There is a bunch of logic in here for dataFromDatabase--this is theory and refle
     e.preventDefault();
     try {
       //this will put the cluster into the database
-      const response = await fetch('/cluster', {
+      const response = await fetch('http://localhost:4000/cluster', {
       method: 'POST',
         headers: {
           'Content-Type': 'application/json',

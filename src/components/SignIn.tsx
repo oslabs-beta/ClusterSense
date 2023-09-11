@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { TEInput, TERipple } from 'tw-elements-react';
-import logo from '../assets/ClusterSense.png';
+// import logo from '../assets/ClusterSense.png';
+// import logoTwo from '../assets/CS-outline.png';
+import logoThree from '../assets/ClusterSense.png';
+
 
 const SignIn = () => {
   const [username, setUsername] = useState('');
@@ -24,7 +27,7 @@ const SignIn = () => {
         username: username,
         password: password,
       };
-      const response = await fetch(`http://localhost:4000/login`, {
+      const response = await fetch(`http://localhost:4000/login/loginRequest`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data),
@@ -38,40 +41,51 @@ const SignIn = () => {
     }
   };
   return (
-    <div className="h-screen bg-neutral-200 dark:bg-neutral-700">
+    <div style={{
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      height: '100vh',
+    }}className="h-screen bg-neutral-200 dark:bg-neutral-700">
       <div className="container flex items-center justify-center h-screen p-10">
-        <div className="g-6 flex h-full flex-wrap items-center justify-center text-neutral-800 dark:text-neutral-200">
+        <div className="g-6 flex h-full flex-wrap items-center justify-center text-black">
           <div className="w-full">
-            <div className="block rounded-lg bg-white shadow-lg dark:bg-neutral-800">
+            <div className="block rounded-lg bg-white shadow-lg bg-white0">
               <div className="g-0 lg:flex lg:flex-wrap">
-                {/* <!-- Left column container--> */}
+                {/* //Left column container */}
                 <div className="px-4 md:px-0 lg:w-6/12">
                   <div className="md:mx-6 md:p-12">
                     <div className="text-center">
-                      <img className="mx-auto w-48" src={logo} alt="" />
+                      <img className="mx-auto w-48" src={logoThree} alt="" />
                       <h4 className="mb-12 mt-1 pb-1 text-xl font-semibold">
                         Welcome to ClusterSense
                       </h4>
                     </div>
                     <div className="signInContainer">
                       {/* <h2>Sign In:</h2> */}
-                      <div className="signInBox mb-4">
+                      <div className="signInBox mb-4 ">
                         <TEInput
-                          name="username"
-                          className="mb-4"
+                          // name="username"
+                          // className="mb-4"
                           type="text"
-                          placeholder="username"
+                          label="username"
                           value={username}
+                          // size = "lg"
+                          style={{ color: 'black' }} // This sets the text color
                           onChange={(e) => setUsername(e.target.value)}
                         ></TEInput>
+                        <br></br>
                         <TEInput
                           name="password"
-                          className="mb-4"
+                          // className="mb-4"
                           type="password"
-                          placeholder="password"
+                          label="password"
+                          style={{ color: 'black' }} // This sets the text color
+
                           value={password}
                           onChange={(e) => setPassword(e.target.value)}
                         ></TEInput>
+                        <br></br>
                         <div className="mb-12 pb-1 pt-1 text-center">
                           <TERipple rippleColor="light" className="w-full">
                             <button
@@ -87,10 +101,10 @@ const SignIn = () => {
                             </button>
                           </TERipple>
 
-                          {/* <!--Forgot password link--> */}
+                          {/* //Forgot password link */}
                           <a href="#!">Forgot password?</a>
                         </div>
-                        {/* <!--Register button--> */}
+                        {/* // Register button */}
                         <div className="flex items-center justify-between pb-6">
                           <p className="mb-0 mr-2">Don't have an account?</p>
                           <TERipple rippleColor="light">
@@ -105,13 +119,13 @@ const SignIn = () => {
                         </div>
 
                         {/* <button onClick={Submit}>Sign In</button> */}
-                        {/* <p>Don't have an account?</p>
-                        <button onClick={toSignUp}>Sign Up</button> */}
+                        {/* <p>Don't have an account?</p> */}
+                        {/* <button onClick={toSignUp}>Sign Up</button>  */}
                       </div>
                     </div>
                   </div>
                 </div>
-                {/* <!-- Right column container with background and description--> */}
+                {/* // Right column container with background and description */}
                 <div
                   className="flex items-center rounded-b-lg lg:w-6/12 lg:rounded-r-lg lg:rounded-bl-none"
                   style={{
@@ -120,7 +134,7 @@ const SignIn = () => {
                   }}
                 >
                   <div className="px-4 py-6 text-white md:mx-6 md:p-12">
-                    <img className="mx-auto w-48" src={logo} alt="" />
+                    {/* <img className="mx-auto w-48" src={logo} alt="" /> */}
                     <h4 className="mb-6 text-xl font-semibold">
                       Kafka Cluster Management Tool
                     </h4>
@@ -138,6 +152,7 @@ const SignIn = () => {
         </div>
       </div>
     </div>
+    
   );
 };
 

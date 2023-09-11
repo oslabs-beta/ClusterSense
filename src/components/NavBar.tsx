@@ -34,7 +34,7 @@ const NavBar = ({ setPort, formSubmission }: NavProps) => {
   useEffect(() => {
     const fetchClusters = async () => {
       try {
-        const response = await fetch('/dropDown', {
+        const response = await fetch('http://localhost:4000/cluster/DB', {
           method: 'GET',
         });
         if (response.ok) {

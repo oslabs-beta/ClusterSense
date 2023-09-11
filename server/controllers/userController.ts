@@ -92,7 +92,7 @@ const userController = {
       if (!isPasswordMatch) {
         res.status(401).json({ error: 'Invalid Username or Password' });
       }
-      res.locals.user = user.id;
+      res.locals.user = user.user_id;
       return next()
     } catch (err) {
       return next({
