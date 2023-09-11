@@ -29,10 +29,12 @@ const SignIn = () => {
       };
       const response = await fetch(`http://localhost:4000/login/loginRequest`, {
         method: 'POST',
+        credentials: 'include',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data),
       });
       if (response.ok) {
+        console.log(response);
         toHome();
       }
     } catch (err) {

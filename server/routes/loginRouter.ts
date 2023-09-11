@@ -11,7 +11,7 @@ loginRouter.post(
   userController.createUser,
   (_req: Request, res: Response) => {
     if (res.locals.userId) {
-      return res.status(201).json({ userId: res.locals.userId });
+      return res.status(200).json({ userId: res.locals.userId });
     } else {
       return res.status(500).json({ error: 'User ID not found' });
     }
@@ -25,7 +25,8 @@ loginRouter.post(
   sessionController.startSession,
   cookieController.setSSIDCookie,
   (_req: Request, res: Response) => {
-    return res.status(200).send("You are logged in");
+//    res.redirect('/home')
+ return res.status(200).send("You are logged in");
   },
 );
 
