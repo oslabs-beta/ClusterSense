@@ -24,7 +24,7 @@ const SignIn = () => {
         username: username,
         password: password,
       };
-      const response = await fetch(`http://localhost:3000/login`, {
+      const response = await fetch(`http://localhost:4000/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data),
@@ -33,12 +33,13 @@ const SignIn = () => {
         toHome();
       }
     } catch (err) {
+      //render an error message on the front end screen
       console.log(err);
     }
   };
   return (
-    <section className="signingInPg h-full bg-neutral-200 dark:bg-neutral-700">
-      <div className="container h-full p-10">
+    <div className="h-screen bg-neutral-200 dark:bg-neutral-700">
+      <div className="container flex items-center justify-center h-screen p-10">
         <div className="g-6 flex h-full flex-wrap items-center justify-center text-neutral-800 dark:text-neutral-200">
           <div className="w-full">
             <div className="block rounded-lg bg-white shadow-lg dark:bg-neutral-800">
@@ -47,14 +48,14 @@ const SignIn = () => {
                 <div className="px-4 md:px-0 lg:w-6/12">
                   <div className="md:mx-6 md:p-12">
                     <div className="text-center">
-                    <img className="mx-auto w-48" src={logo} alt="" />
+                      <img className="mx-auto w-48" src={logo} alt="" />
                       <h4 className="mb-12 mt-1 pb-1 text-xl font-semibold">
                         Welcome to ClusterSense
                       </h4>
                     </div>
                     <div className="signInContainer">
                       {/* <h2>Sign In:</h2> */}
-                      <div className="signInBox">
+                      <div className="signInBox mb-4">
                         <TEInput
                           name="username"
                           className="mb-4"
@@ -136,7 +137,7 @@ const SignIn = () => {
           </div>
         </div>
       </div>
-    </section>
+    </div>
   );
 };
 
