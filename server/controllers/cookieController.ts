@@ -5,7 +5,7 @@ const cookieController = {
   setSSIDCookie: (_req: Request, res: Response, next: NextFunction): void => {
     const { user } = res.locals;
     // send an ssid cookie back to client; the cookie will then be stored in browser for future http requests to server
-    res.cookie("ssid", user, { httpOnly: true });
+    res.cookie("ssid", user, { httpOnly: true, secure: true });
     return next();
   },
 };

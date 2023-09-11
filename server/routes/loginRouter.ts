@@ -2,7 +2,7 @@ import express from "express";
 import { Request, Response } from 'express';
 import { userController } from "../controllers/userController";
 import { sessionController } from "../controllers/sessionController";
-//import { cookieController } from "../controllers/cookieController";
+import { cookieController } from "../controllers/cookieController";
 const loginRouter = express.Router();
 
 // sign up request
@@ -22,8 +22,8 @@ loginRouter.post(
 loginRouter.post(
   "/loginRequest",
   userController.verifyUser,
-  //sessionController.startSession,
-  //cookieController.setSSIDCookie,
+  sessionController.startSession,
+  cookieController.setSSIDCookie,
   (_req: Request, res: Response) => {
     return res.status(200).send("You are logged in");
   },
