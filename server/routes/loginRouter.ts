@@ -1,6 +1,8 @@
 import express from "express";
 import { Request, Response } from 'express';
 import { userController } from "../controllers/userController";
+import { sessionController } from "../controllers/sessionController";
+//import { cookieController } from "../controllers/cookieController";
 const loginRouter = express.Router();
 
 // sign up request
@@ -18,22 +20,22 @@ loginRouter.post(
 
 // login request
 loginRouter.post(
-    "/loginRequest",
-    userController.verifyUser,
-    (_req: Request, res: Response) => {
-      return res.status(200).send("You are logged in");
-    },
+  "/loginRequest",
+  userController.verifyUser,
+  //sessionController.startSession,
+  //cookieController.setSSIDCookie,
+  (_req: Request, res: Response) => {
+    return res.status(200).send("You are logged in");
+  },
 );
-//    sessionController.startSession,
-//    cookieController.setSSIDCookie
 
 // authorizing user who has already logged in
-// loginRouter.get(
-//   "/isLoggedIn",
-//   (_req: Request, res: Response) => {
-//       console.log('get Request');
-//       return res.status(201).json({ message: "login successful" });
-//   }
-// );
+loginRouter.get(
+  "/isLoggedIn",
+  sessionController.isLoggedIn,
+  (_req: Request, res: Response) => {
+    return res.status(201).json({ message: "login successful" });
+  }
+);
 
 export { loginRouter };
