@@ -49,6 +49,9 @@ const clusterController = {
                  //.map(row => row.cluster_port);
                 // console.log(result)
                 //add all clusters onto res.locals.clusters
+                // [ { cluster_port: 1010 }, { cluster_port: 2020 } ]
+                // [ { value: 1010, label: 1010 }, { value: 2020, label: 2020 } ] 
+                
                 res.locals.clusters = result;
                 return next();
             } catch (err) {

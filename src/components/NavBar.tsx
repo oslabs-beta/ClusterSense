@@ -1,10 +1,9 @@
 // import useEffect from 'react';
 // import useState from 'react';
 import React, { useState, useEffect } from 'react';
-
 import { useNavigate } from 'react-router-dom';
 import logo from '../assets/ClusterSense.png';
-import Select from 'react-select/async';
+import AsyncSelect from 'react-select/async';
 
 interface NavProps {
   setPort: (e: number) => void;
@@ -29,6 +28,7 @@ const NavBar = ({ setPort, formSubmission }: NavProps) => {
   function handleSelect(selectedOption: number) {
     //uses setPort /formSubmission from props to set port in the mainPage, making form go away
     const chosenCluster = selectedOption;
+    // console.log('chosenCluster')
     setPort(chosenCluster);
     formSubmission(true);
   }
@@ -42,8 +42,14 @@ const NavBar = ({ setPort, formSubmission }: NavProps) => {
         });
         if (response.ok) {
           const data = await response.json();
-          console.log(data)
-          setClustersOptions(data);
+          const convertData=data.map((cluster) => {
+            const value = cluster.cluster_port.toString();
+            const label = cluster.cluster_port.toString()
+            return {value: value, label: label}
+          });
+          console.log(convertData)
+          setClustersOptions(convertData);
+          console.log('state ', clustersOptions)
         } else {
           console.error('Error fetching clusters');
         }
@@ -61,10 +67,9 @@ const NavBar = ({ setPort, formSubmission }: NavProps) => {
       </div>
       <div className="clusters">
         Select Cluster:
-        <Select
-          defaultValue={clustersOptions[0]}
+        <AsyncSelect
           onChange={handleSelect}
-          Options={clustersOptions}
+          options={clustersOptions}
         />
       </div>
       <div>
