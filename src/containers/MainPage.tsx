@@ -1,5 +1,4 @@
-import  useState from 'react';
-import  useEffect from 'react';
+import React, { useState, useEffect } from 'react';
 import MouseEvent from 'react';
 import NavBar from '../components/NavBar';
 
@@ -8,7 +7,7 @@ const MainPage = () => {
 /*
 There is a bunch of logic in here for dataFromDatabase--this is theory and reflects what might come from the prometheus data scrapper to be manifested as grafana charts
 */
-  const [port, setPort] = useState('');
+  const [port, setPort] = useState();
   const [isFormSubmitted, setIsFormSubmitted] = useState(false);
   //const [dataFromDatabase, setDataFromDatabase] = useState([]);
 
@@ -16,12 +15,15 @@ There is a bunch of logic in here for dataFromDatabase--this is theory and refle
     e.preventDefault();
     try {
       //this will put the cluster into the database
+      const numPort=Number(port);
+      const data = {port: numPort}
       const response = await fetch('http://localhost:4000/cluster', {
-      method: 'POST',
+        method: 'POST',
+        credentials: 'include',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(port),
+        body: JSON.stringify(data)
       });
       if (response.ok){
         setIsFormSubmitted(true);

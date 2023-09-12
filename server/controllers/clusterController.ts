@@ -19,13 +19,13 @@ const clusterController = {
         ): Promise<void> => {
           try {
               // need to take port # from req and user ID from cookies and log it into the DB
-              const {cluster_port} = req.body;
-              const user_id = req.cookies.user_id;
+              const {port} = req.body;
+              const user_id = req.cookies.ssid;
               const queryCluster = `INSERT INTO cluster (user_id, cluster_port) VALUES ($1, $2)`;
-              const clusterResult = await pool.query(queryCluster, [user_id, cluster_port]);
+              const clusterResult = await pool.query(queryCluster, [user_id, port]);
               // add prometheus fork request if necessary
               res.locals.clusterResult = clusterResult
-              next();
+              return next();
           } catch (err) {
             return next({
               log: `Error occurred in clusterController.startSession ${err}`,
@@ -41,14 +41,16 @@ const clusterController = {
           ): Promise<void> => {
             try {
                 // need to fetch all clusters from DB associated with userID on cookies and return in res.locals
-                const user_id = req.cookies.user_id;
+                const user_id = req.cookies.ssid;
                 const queryClusters = `SELECT cluster_port FROM "cluster" WHERE user_id = $1`;
-                const clusterResult = await pool.query(queryClusters, [user_id]);
-                console.log(clusterResult)
+                let clusterResult = await pool.query(queryClusters, [user_id]);
                 //want it as an array of cluster numbers
-                const result = clusterResult.rows.map(row => row.cluster_port);
+                 const result = clusterResult.rows
+                 //.map(row => row.cluster_port);
+                // console.log(result)
                 //add all clusters onto res.locals.clusters
                 res.locals.clusters = result;
+                return next();
             } catch (err) {
               return next({
                 log: `Error occurred in clusterController.startSession ${err}`,

@@ -38,9 +38,11 @@ const NavBar = ({ setPort, formSubmission }: NavProps) => {
       try {
         const response = await fetch('http://localhost:4000/cluster/DB', {
           method: 'GET',
+          credentials: 'include',
         });
         if (response.ok) {
           const data = await response.json();
+          console.log(data)
           setClustersOptions(data);
         } else {
           console.error('Error fetching clusters');

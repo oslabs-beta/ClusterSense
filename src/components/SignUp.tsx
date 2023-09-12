@@ -7,13 +7,13 @@ const SignUp = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
   
-    let navigate = useNavigate();
+    const navigate = useNavigate();
     const goLogin = () => {
-      let path = "/login";
+      const path = "/";
       navigate(path);
     };
     const toHome = () => {
-      let path = "/home";
+      const path = "/home";
       navigate(path);
     };
   
@@ -30,6 +30,7 @@ const SignUp = () => {
           body: JSON.stringify(body),
         })
         if (data.ok) {
+          console.log(data)
           toHome()
         }
       } catch(err){

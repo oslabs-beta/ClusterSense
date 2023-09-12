@@ -34,7 +34,6 @@ const SignIn = () => {
         body: JSON.stringify(data),
       });
       if (response.ok) {
-        console.log(response);
         toHome();
       }
     } catch (err) {

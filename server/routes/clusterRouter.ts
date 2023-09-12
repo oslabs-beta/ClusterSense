@@ -14,6 +14,7 @@ clusterRouter.post("/", clusterController.storeCluster, //needs logic for data t
 clusterRouter.get("/DB", clusterController.fetchCluster,
   (_req: Request, res: Response) => {
     const { clusters } = res.locals;
+    // [ { cluster_port: 1010 }, { cluster_port: 2020 } ]
     return res.status(200).json([...clusters]);
   },
 );

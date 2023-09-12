@@ -10,7 +10,7 @@ loginRouter.post(
   "/signupRequest",
   userController.createUser,
   (_req: Request, res: Response) => {
-    if (res.locals.userId) {
+    if (res.locals.user_id) {
       return res.status(200).json({ userId: res.locals.userId });
     } else {
       return res.status(500).json({ error: 'User ID not found' });
