@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import logo from '../assets/ClusterSense.png';
-import AsyncSelect from 'react-select/async';
+import Select from 'react-select/async';
 
 interface NavProps {
   setPort: (e: number) => void;
@@ -11,7 +11,7 @@ interface NavProps {
 }
 
 const NavBar = ({ setPort, formSubmission }: NavProps) => {
-  const [clustersOptions, setClustersOptions] = useState([]);
+  const [clusterOptions, setClustersOptions] = useState([]);
 
   //navigation paths
   const navigate = useNavigate();
@@ -48,7 +48,7 @@ const NavBar = ({ setPort, formSubmission }: NavProps) => {
             return {value: value, label: label}
           });
           console.log(convertData)
-          setClustersOptions(convertData);
+          await setClustersOptions(convertData);
           console.log('state ', clustersOptions)
         } else {
           console.error('Error fetching clusters');
@@ -60,17 +60,28 @@ const NavBar = ({ setPort, formSubmission }: NavProps) => {
     fetchClusters();
   }, []);
 
+
+
+  // Select Cluster:
+  // <Select
+  //   onChange={handleSelect}
+  //   options={clusterOptions}
+
+  // />
+
   return (
     <div className="nav-bar">
       <div className="nav-barLogo">
         <img className="Logo" src={logo} alt="" />
       </div>
       <div className="clusters">
-        Select Cluster:
-        <AsyncSelect
-          onChange={handleSelect}
-          options={clustersOptions}
-        />
+        <select name="cluster" onClick={handleSelect}>
+          {clusterOptions.map((element, index) => (
+            <option key={index} value={element.value}>
+              {element.value}
+            </option>
+          ))}
+        </select>
       </div>
       <div>
         <a className="navLinks" onClick={toHome}>
