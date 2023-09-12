@@ -25,15 +25,16 @@ There is a bunch of logic in here for dataFromDatabase--this is theory and refle
         },
         body: JSON.stringify(data)
       });
-      if (response.ok){
+      if(response.ok){
         setIsFormSubmitted(true);
-      }else{
-        //error handling
       }
-    } catch {
-      console.log('error');
+    } catch (error) {
+      console.log('error: ', error);
     }
   };
+
+
+
 
   //useEffect that will fetch data from prometheus/backend once the form is submitted using the port
   useEffect(() => {
@@ -57,12 +58,10 @@ There is a bunch of logic in here for dataFromDatabase--this is theory and refle
 
   return (
     <div>
-      <NavBar setPort={setPort} formSubmission={isFormSubmitted}/>
+      <NavBar setPort={setPort} formStatus={isFormSubmitted} formSubmission={setIsFormSubmitted}/>
       {isFormSubmitted ? (
         <div>
-           {/*dataFromDatabase.map((item: []) => (
-            <div key={item.id}>{item.name}</div>
-           ))*/}
+           {'hello' /*grafana interface */}
         </div>
       ) : (
         <div className="mainDiv">

@@ -7,7 +7,7 @@ const clusterRouter = express.Router();
 
 clusterRouter.post("/", clusterController.storeCluster, //needs logic for data to stream to grafana here and attaching it to response
   (_req: Request, res: Response) => {
-    return res.status(200);
+    return res.status(200).send();
   },
 );
 

@@ -3,19 +3,22 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import logo from '../assets/ClusterSense.png';
-import Select from 'react-select/async';
+import MouseEvent from 'react';
+
 
 interface NavProps {
   setPort: (e: number) => void;
+  formStatus: (e: boolean) => void;
   formSubmission: (e: boolean) => void;
 }
 
-const NavBar = ({ setPort, formSubmission }: NavProps) => {
+  const NavBar = ({ setPort, formStatus, formSubmission }: NavProps) => {
   const [clusterOptions, setClustersOptions] = useState([]);
 
   //navigation paths
   const navigate = useNavigate();
   const toHome = () => {
+    formSubmission(false)
     const path: string = '/home';
     navigate(path);
   };
@@ -25,13 +28,14 @@ const NavBar = ({ setPort, formSubmission }: NavProps) => {
     //need to ensure we end the session here so they actually log out and aren't just redirected
   };
 
-  function handleSelect(selectedOption: number) {
+  function handleSelect(e: MouseEvent) {
     //uses setPort /formSubmission from props to set port in the mainPage, making form go away
-    const chosenCluster = selectedOption;
-    // console.log('chosenCluster')
+    const chosenCluster = e.target.value;
     setPort(chosenCluster);
     formSubmission(true);
   }
+
+
 
   useEffect(() => {
     const fetchClusters = async () => {
@@ -47,9 +51,7 @@ const NavBar = ({ setPort, formSubmission }: NavProps) => {
             const label = cluster.cluster_port.toString()
             return {value: value, label: label}
           });
-          console.log(convertData)
           await setClustersOptions(convertData);
-          console.log('state ', clustersOptions)
         } else {
           console.error('Error fetching clusters');
         }
@@ -61,21 +63,14 @@ const NavBar = ({ setPort, formSubmission }: NavProps) => {
   }, []);
 
 
-
-  // Select Cluster:
-  // <Select
-  //   onChange={handleSelect}
-  //   options={clusterOptions}
-
-  // />
-
   return (
     <div className="nav-bar">
       <div className="nav-barLogo">
         <img className="Logo" src={logo} alt="" />
       </div>
       <div className="clusters">
-        <select name="cluster" onClick={handleSelect}>
+        <select name="cluster" onChange={handleSelect}>
+        <option value="" disabled selected hidden>Choose a Cluster</option>
           {clusterOptions.map((element, index) => (
             <option key={index} value={element.value}>
               {element.value}
