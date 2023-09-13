@@ -43,7 +43,7 @@ const clusterController = {
                 // need to fetch all clusters from DB associated with userID on cookies and return in res.locals
                 const user_id = req.cookies.ssid;
                 const queryClusters = `SELECT cluster_port FROM "cluster" WHERE user_id = $1`;
-                let clusterResult = await pool.query(queryClusters, [user_id]);
+                const clusterResult = await pool.query(queryClusters, [user_id]);
                 //want it as an array of cluster numbers
                  const result = clusterResult.rows
                  //.map(row => row.cluster_port);
@@ -51,7 +51,7 @@ const clusterController = {
                 //add all clusters onto res.locals.clusters
                 // [ { cluster_port: 1010 }, { cluster_port: 2020 } ]
                 // [ { value: 1010, label: 1010 }, { value: 2020, label: 2020 } ] 
-                
+
                 res.locals.clusters = result;
                 return next();
             } catch (err) {
