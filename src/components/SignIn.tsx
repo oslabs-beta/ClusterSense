@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { TEInput, TERipple } from 'tw-elements-react';
+import TextField from '@mui/material/TextField';
+
 // import logo from '../assets/ClusterSense.png';
 // import logoTwo from '../assets/CS-outline.png';
 import logoThree from '../assets/ClusterSense.png';
@@ -57,35 +59,41 @@ const SignIn = () => {
                 <div className="px-4 md:px-0 lg:w-6/12">
                   <div className="md:mx-6 md:p-12">
                     <div className="text-center">
-                      <img className="mx-auto w-48" src={logoThree} alt="" />
-                      <h4 className="mb-12 mt-1 pb-1 text-xl font-semibold">
+                      <img className="mx-auto w-48" style={{width: '70%'}} src={logoThree} alt="" />
+                      {/* <h4 className="mb-12 mt-1 pb-1 text-xl font-semibold">
                         Welcome to ClusterSense
-                      </h4>
+                      </h4> */}
                     </div>
                     <div className="signInContainer">
                       {/* <h2>Sign In:</h2> */}
                       <div className="signInBox mb-4 ">
-                        <TEInput
+                        <TextField id="outlined-basic" sx={{width: '100%'}} label="username" variant="outlined" type="text" value={username} onChange={(e) => setUsername(e.target.value)}/>
+                        <br></br>
+                        <br></br>
+                        <TextField id="outlined-basic" sx={{width: '100%'}} label="password" variant="outlined" type = "password" value={password} onChange={(e) => setPassword(e.target.value)}/>
+
+                        {/* <Input
                           // name="username"
                           // className="mb-4"
                           type="text"
                           label="username"
                           value={username}
                           // size = "lg"
-                          style={{ color: 'black' }} // This sets the text color
+                          // style={{ color: 'black' }} // This sets the text color
                           onChange={(e) => setUsername(e.target.value)}
-                        ></TEInput>
+                        ></Input>
                         <br></br>
-                        <TEInput
+                        <Input
                           name="password"
                           // className="mb-4"
                           type="password"
                           label="password"
-                          style={{ color: 'black' }} // This sets the text color
+                          // style={{ color: 'black' }} // This sets the text color
 
                           value={password}
                           onChange={(e) => setPassword(e.target.value)}
-                        ></TEInput>
+                        ></Input> */}
+                        <br></br>
                         <br></br>
                         <div className="mb-12 pb-1 pt-1 text-center">
                           <TERipple rippleColor="light" className="w-full">
@@ -103,7 +111,7 @@ const SignIn = () => {
                           </TERipple>
 
                           {/* //Forgot password link */}
-                          <a href="#!">Forgot password?</a>
+                          {/* <a href="#!">Forgot password?</a> */}
                         </div>
                         {/* // Register button */}
                         <div className="flex items-center justify-between pb-6">
@@ -140,10 +148,7 @@ const SignIn = () => {
                       Kafka Cluster Management Tool
                     </h4>
                     <p className="text-sm">
-                      Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                      sed do eiusmod tempor incididunt ut labore et dolore magna
-                      aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                      ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                    An intuitive and feature-rich GUI that simplifies Kafka cluster management, monitoring, and interaction to streamline operations and efficiency when working with Kafka clusters.
                     </p>
                   </div>
                 </div>
