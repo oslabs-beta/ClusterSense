@@ -52,7 +52,7 @@ const userController = {
       const insertValues = [username, hashedPassword];
       const createUser = await pool.query(insertQuery, insertValues);
       //save the user's id to res.locals
-      res.locals.userId = createUser.rows[0].user_id;
+      res.locals.user_id = createUser.rows[0].user_id;
       return next();
     } catch (err) {
       return next({
@@ -88,11 +88,12 @@ const userController = {
 
       // check if password is correct
       const user = userResult.rows[0];
+      console.log(user);
       const isPasswordMatch = await bcrypt.compare(password, user.password);
       if (!isPasswordMatch) {
         res.status(401).json({ error: 'Invalid Username or Password' });
       }
-      res.locals.user = user.id;
+      res.locals.user_id = user.user_id;
       return next()
     } catch (err) {
       return next({

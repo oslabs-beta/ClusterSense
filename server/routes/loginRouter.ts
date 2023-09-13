@@ -2,7 +2,7 @@ import express from "express";
 import { Request, Response } from 'express';
 import { userController } from "../controllers/userController";
 import { sessionController } from "../controllers/sessionController";
-//import { cookieController } from "../controllers/cookieController";
+import { cookieController } from "../controllers/cookieController";
 const loginRouter = express.Router();
 
 // sign up request
@@ -10,8 +10,8 @@ loginRouter.post(
   "/signupRequest",
   userController.createUser,
   (_req: Request, res: Response) => {
-    if (res.locals.userId) {
-      return res.status(201).json({ userId: res.locals.userId });
+    if (res.locals.user_id) {
+      return res.status(200).json({ userId: res.locals.userId });
     } else {
       return res.status(500).json({ error: 'User ID not found' });
     }
@@ -22,10 +22,11 @@ loginRouter.post(
 loginRouter.post(
   "/loginRequest",
   userController.verifyUser,
-  //sessionController.startSession,
-  //cookieController.setSSIDCookie,
+  sessionController.startSession,
+  cookieController.setSSIDCookie,
   (_req: Request, res: Response) => {
-    return res.status(200).send("You are logged in");
+//    res.redirect('/home')
+ return res.status(200).send("You are logged in");
   },
 );
 

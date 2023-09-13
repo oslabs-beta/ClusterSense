@@ -17,22 +17,25 @@ const sessionController = {
     res: Response,
     next: NextFunction,
   ): Promise<void> => {
-    
-    const { user } = res.locals;
-    console.log(`a new session created for user ${user}}`)
+
+    const { user_id } = res.locals;
+    console.log(`a new session created for user ${user_id}`)
     // check if session already exists for user
     try {
       // check if session already exists for user
       const existingSessionQuery = `SELECT * FROM sessions WHERE cookieId = $1`;
-      const sessionResult = await pool.query(existingSessionQuery, [user]);
+      const sessionResult = await pool.query(existingSessionQuery, [user_id]);
       if (sessionResult.rows.length > 0) {
         // Session already exists, move on.
+        console.log('session exists')
         return next();
       } else {
         // No session exists, create one.
         const createSessionQuery = `INSERT INTO sessions (cookieId) VALUES ($1)`;
-        await pool.query(createSessionQuery, [user]);
+        await pool.query(createSessionQuery, [user_id]);
+        console.log('session created')
         return next();
+
       }
     } catch (err) {
       return next({
@@ -50,11 +53,11 @@ const sessionController = {
     next: NextFunction,
   ): Promise<void> => {
     const { ssid } = req.cookies;
-  
+
     try {
       // Use the pg pool to query the sessions table and find a session with the matching cookieId
       const result = await pool.query('SELECT * FROM sessions WHERE cookieId = $1', [ssid]);
-  
+
       // If session is not found, send a status code 303 to the front-end
       if (result.rows.length === 0) {
         res.status(303).json("No active session exists");
@@ -71,5 +74,7 @@ const sessionController = {
       });
     }
   },
+
+  // delete session from db when user log out
 };
 export { sessionController };

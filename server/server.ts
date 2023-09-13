@@ -2,11 +2,12 @@ import express, { Request, Response } from 'express';
 import dotenv from 'dotenv';
 import path from 'path';
 import cors from 'cors';
-// import cookieParser from 'cookie-parser';
+import cookieParser from 'cookie-parser';
 // import passport from 'passport';
 // import "./passport-config"; // Import the Passport configuration
 import { ServerError } from '../types';
 import { loginRouter } from "./routes/loginRouter";
+import { clusterRouter } from "./routes/clusterRouter";
 
 // require .env files
 dotenv.config();
@@ -15,12 +16,17 @@ dotenv.config();
 const app = express();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+  origin: 'http://localhost:3000',
+  credentials: true
+}));
+app.use(cookieParser());
 
 const PORT = process.env.PORT || 4000;
 
 // route handlers
 app.use('/login', loginRouter);
+app.use('/cluster', clusterRouter)
 
 // is this public? 
 //app.use('/', express.static(path.join(__dirname, '../public')));
