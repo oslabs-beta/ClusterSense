@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import MouseEvent from 'react';
 import NavBar from '../components/NavBar';
 import TextField from '@mui/material/TextField';
-// import Button from 
+import Button from '@mui/material/Button';
+import { Container } from '@mui/material';
 const MainPage = () => {
   //**** */
   const [clusterOptions, setClustersOptions] = useState([]);
@@ -30,6 +31,8 @@ There is a bunch of logic in here for dataFromDatabase--this is theory and refle
       });
       if(response.ok){
         setIsFormSubmitted(true);
+        const updatedClusters = [...clusterOptions, { value: port.toString(), label: port.toString() }];
+        setClustersOptions(updatedClusters);
       }
     } catch (error) {
       console.log('error: ', error);
@@ -71,43 +74,31 @@ There is a bunch of logic in here for dataFromDatabase--this is theory and refle
               {'hello' /*grafana interface */}
             </div>
           ) : (
-            // <div style={{
-            //   display: 'flex',
-            //   justifyContent: 'center',
-            //   alignItems: 'center',
-            //   height: '100vh',
-            // }}className="h-screen bg-neutral-200">
-              <div className="clusterForm flex items-center justify-center h-screen p-10">
-              <div className="g-6 flex h-full flex-wrap items-center justify-center text-black">
-                <div className="w-full">
-                  <div className="block rounded-lg bg-white shadow-lg bg-white0">
-                    <div className="g-0 lg:flex lg:flex-wrap">
-                      <div className="px-4 md:px-0">
-                        <form onSubmit={handleSubmission}>
-                          <div className="flex items-center justify-between pb-6">
-                            <p className="mb-0 mr-2">Enter your JMX port for your Kafka Cluster: </p>
+            <Container maxWidth="md" style={{ backgroundColor: 'white', margin : '2rem', padding: '2rem', borderRadius: '8px', boxShadow: '0 2px 12px rgba(0, 0, 0, 0.1)' }}>
+              <h1 style={{ fontWeight: 'bold', fontSize: '1.5rem' }}> Welcome to your ClusterSense Dashboard!</h1>
+              <br></br>
+              <form onSubmit={handleSubmission}>
+                  <div className="flex flex-direction= row items-center pb-6">
+                    <p className="mb-0 mr-2" style={{ fontSize: '1.2rem' }}>Enter your JMX port for your Kafka Cluster: </p>
                             {/* <span>Enter your JMX port for you Kafka Cluster: </span> */}
-                            <TextField
-                              className="port"
-                              type="text"
-                              value={port}
-                              onChange={(e) => setPort(e.target.value)}
-                            />
-                          </div>
-                          <div>
-                            <button type="submit">Submit</button>
-                          </div>
-                        </form>
-                      </div>
-                    </div>
+                    <TextField
+                      className="port"
+                      type="text"
+                      value={port}
+                      onChange={(e) => setPort(e.target.value)}
+                    />
                   </div>
-                </div>
-              </div>
-            </div>
+                  <div>
+                    <Button variant="contained" type="submit">Submit</Button>
+                  {/* <button type="submit">Submit</button> */}
+                  </div>
+              </form>
+            </Container>
           )
         }
         </div>
     </div>
+    // </Container>
   );
 };
 

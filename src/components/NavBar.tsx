@@ -19,11 +19,10 @@ interface NavProps {
   formSubmission: (e: boolean) => void;
 }
 
-const NavBar = ({ setPort, formStatus, formSubmission }: NavProps) => {
-  const [clusterOptions, setClustersOptions] = useState([]);
+const NavBar = ({ setPort, formStatus, formSubmission, clusterOptions, setClustersOptions }: NavProps) => {
+  // const [clusterOptions, setClustersOptions] = useState([]);
   const [menuAnchorEl, setMenuAnchorEl] = useState<null | HTMLElement>(null);
   const [clusterMenuAnchorEl, setClusterMenuAnchorEl] = useState<null | HTMLElement>(null);
-
 
   const navigate = useNavigate();
 
@@ -71,7 +70,7 @@ const NavBar = ({ setPort, formStatus, formSubmission }: NavProps) => {
       }
     };
     fetchClusters();
-  }, []);
+  }, [formStatus]);
 
   const handleMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
     setMenuAnchorEl(event.currentTarget);

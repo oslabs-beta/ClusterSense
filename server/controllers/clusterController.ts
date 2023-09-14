@@ -21,11 +21,15 @@ const clusterController = {
               // need to take port # from req and user ID from cookies and log it into the DB
               const {port} = req.body;
               const user_id = req.cookies.ssid;
-              const queryCluster = `INSERT INTO cluster (user_id, cluster_port) VALUES ($1, $2)`;
-              const clusterResult = await pool.query(queryCluster, [user_id, port]);
-              // add prometheus fork request if necessary
-              res.locals.clusterResult = clusterResult
-              return next();
+              const checkExisting = `SELECT * FROM cluster WHERE user_id=$1 AND cluster_port=$2`;
+              const existingEntry = await pool.query(checkExisting, [user_id, port]);
+              if (existingEntry.rows.length === 0) {
+                const queryCluster = `INSERT INTO cluster (user_id, cluster_port) VALUES ($1, $2)`;
+                const clusterResult = await pool.query(queryCluster, [user_id, port]);
+                // add prometheus fork request if necessary
+                res.locals.clusterResult = clusterResult
+                return next();
+              }
           } catch (err) {
             return next({
               log: `Error occurred in clusterController.startSession ${err}`,
