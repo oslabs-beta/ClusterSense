@@ -60,7 +60,7 @@ interface NavProps {
       }
     };
     fetchClusters();
-  }, []);
+  }, [formStatus]);
 
 
   return (

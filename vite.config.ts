@@ -5,7 +5,7 @@ import react from '@vitejs/plugin-react-swc';
 export default defineConfig({
   plugins: [react()],
   server: {
-    port: 3000,
+    port: 3030,
     proxy: {
       "/cluster": "http://localhost:4000/cluster",
       "/login": "http://localhost:4000",
