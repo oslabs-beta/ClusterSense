@@ -23,12 +23,18 @@ const clusterController = {
               const user_id = req.cookies.ssid;
               const checkExisting = `SELECT * FROM cluster WHERE user_id=$1 AND cluster_port=$2`;
               const existingEntry = await pool.query(checkExisting, [user_id, port]);
+              // if port num from user input is not in the db
               if (existingEntry.rows.length === 0) {
                 const queryCluster = `INSERT INTO cluster (user_id, cluster_port) VALUES ($1, $2)`;
                 const clusterResult = await pool.query(queryCluster, [user_id, port]);
                 // add prometheus fork request if necessary
                 res.locals.clusterResult = clusterResult
                 return next();
+                // if port num is already in the db, return the current port numbers from database back to the frontend
+              } else {
+                // const clusterResult = await pool.query(queryCluster, [user_id, port]);
+                // res.locals.clusterResult = clusterResult
+                // return next();
               }
           } catch (err) {
             return next({
