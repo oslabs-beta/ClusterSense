@@ -39,6 +39,7 @@ const NavBar = ({ setPort, formStatus, formSubmission, clusterOptions, setCluste
 
   function handleSelect(e: MouseEvent) {
     const chosenCluster = e.target.value;
+    console.log('chosen', chosenCluster)
     setPort(chosenCluster);
     formSubmission(true);
   }
@@ -121,7 +122,7 @@ const NavBar = ({ setPort, formStatus, formSubmission, clusterOptions, setCluste
               anchorEl={clusterMenuAnchorEl}
               open={Boolean(clusterMenuAnchorEl)}
               onClose={handleClusterMenuClose}
-              onChange={handleSelect}
+              onClick={handleSelect}
             >
               {clusterOptions.map((element, index) => (
                       <MenuItem key={index} value={element.value}>

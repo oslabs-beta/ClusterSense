@@ -72,6 +72,9 @@ There is a bunch of logic in here for dataFromDatabase--this is theory and refle
           {isFormSubmitted ? (
             <div>
               {'hello' /*grafana interface */}
+              <iframe
+                src = 'http://localhost:3000/d/ac9c08ef-7fb3-4c79-8215-e3f569941533/kafka-metrics?orgId=1&from=1694685520064&to=1694707120064'
+              ></iframe>
             </div>
           ) : (
             <Container maxWidth="md" style={{ backgroundColor: 'white', margin : '2rem', padding: '2rem', borderRadius: '8px', boxShadow: '0 2px 12px rgba(0, 0, 0, 0.1)' }}>
