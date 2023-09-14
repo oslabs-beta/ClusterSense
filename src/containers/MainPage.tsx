@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import MouseEvent from 'react';
 import NavBar from '../components/NavBar';
-
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
+import { Container } from '@mui/material';
 const MainPage = () => {
+  //**** */
+  const [clusterOptions, setClustersOptions] = useState([]);
   //need to check if user is logged in
 /*
 There is a bunch of logic in here for dataFromDatabase--this is theory and reflects what might come from the prometheus data scrapper to be manifested as grafana charts
@@ -27,14 +31,13 @@ There is a bunch of logic in here for dataFromDatabase--this is theory and refle
       });
       if(response.ok){
         setIsFormSubmitted(true);
+        const updatedClusters = [...clusterOptions, { value: port.toString(), label: port.toString() }];
+        setClustersOptions(updatedClusters);
       }
     } catch (error) {
       console.log('error: ', error);
     }
   };
-
-
-
 
   //useEffect that will fetch data from prometheus/backend once the form is submitted using the port
   useEffect(() => {
@@ -58,33 +61,44 @@ There is a bunch of logic in here for dataFromDatabase--this is theory and refle
 
   return (
     <div>
-      <NavBar setPort={setPort} formStatus={isFormSubmitted} formSubmission={setIsFormSubmitted}/>
-      {isFormSubmitted ? (
-        <div>
-           {'hello' /*grafana interface */}
+      <NavBar setPort={setPort} formStatus={isFormSubmitted} formSubmission={setIsFormSubmitted} clusterOptions={clusterOptions}
+  setClustersOptions={setClustersOptions}/>
+        <div style={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          height: '100vh',
+        }}className="h-screen bg-neutral-200">
+          {isFormSubmitted ? (
+            <div>
+              {'hello' /*grafana interface */}
+            </div>
+          ) : (
+            <Container maxWidth="md" style={{ backgroundColor: 'white', margin : '2rem', padding: '2rem', borderRadius: '8px', boxShadow: '0 2px 12px rgba(0, 0, 0, 0.1)' }}>
+              <h1 style={{ fontWeight: 'bold', fontSize: '1.5rem' }}> Welcome to your ClusterSense Dashboard!</h1>
+              <br></br>
+              <form onSubmit={handleSubmission}>
+                  <div className="flex flex-direction= row items-center pb-6">
+                    <p className="mb-0 mr-2" style={{ fontSize: '1.2rem' }}>Enter your JMX port for your Kafka Cluster: </p>
+                            {/* <span>Enter your JMX port for you Kafka Cluster: </span> */}
+                    <TextField
+                      className="port"
+                      type="text"
+                      value={port}
+                      onChange={(e) => setPort(e.target.value)}
+                    />
+                  </div>
+                  <div>
+                    <Button variant="contained" type="submit">Submit</Button>
+                  {/* <button type="submit">Submit</button> */}
+                  </div>
+              </form>
+            </Container>
+          )
+        }
         </div>
-      ) : (
-        <div className="mainDiv">
-        <div className="clusterForm">
-      <form onSubmit={handleSubmission}>
-        <div className="createLabels">
-          <span>Enter your JMX port for you Kafka Cluster: </span>
-          <input
-            className="port"
-            type="text"
-            value={port}
-            onChange={(e) => setPort(e.target.value)}
-          />
-        </div>
-        <div>
-          <button type="submit">Submit</button>
-        </div>
-      </form>
-      </div>
     </div>
-      )
-      }
-    </div>
+    // </Container>
   );
 };
 

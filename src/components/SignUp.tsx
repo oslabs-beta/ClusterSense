@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { TEInput, TERipple } from 'tw-elements-react';
 import logo from '../assets/ClusterSense.png';
+import logoFour from '../assets/ClusterSenseBigger.png';
+import TextField from '@mui/material/TextField';
 
 const SignUp = () => {
     const [username, setUsername] = useState('');
@@ -48,23 +50,28 @@ const SignUp = () => {
         height: '100vh',
       }}className="h-screen bg-neutral-200 dark:bg-neutral-700">
         <div className="container flex items-center justify-center h-screen p-10">
-          <div className="g-6 flex h-full flex-wrap items-center justify-center text-neutral-800 dark:text-neutral-200">
+          <div className="g-6 flex h-full flex-wrap items-center justify-center text-black">
             <div className="w-full">
-              <div className="block rounded-lg bg-white shadow-lg dark:bg-neutral-800">
+              <div className="block rounded-lg bg-white shadow-lg bg-white0">
                 <div className="g-0 lg:flex lg:flex-wrap">
                   {/* //Left column container */}
                   <div className="px-4 md:px-0 lg:w-6/12">
                     <div className="md:mx-6 md:p-12">
                       <div className="text-center">
-                        <img className="mx-auto w-48" src={logo} alt="" />
-                        <h4 className="mb-12 mt-1 pb-1 text-xl font-semibold">
+                      <img className="mx-auto w-48" style={{width: '60%'}} src={logoFour} alt="" />
+                        {/* <h4 className="mb-12 mt-1 pb-1 text-xl font-semibold">
                           Welcome to ClusterSense
-                        </h4>
+                        </h4> */}
                       </div>
                       <div className="signInContainer">
                         {/* <h2>Sign In:</h2> */}
                         <div className="signInBox mb-4 ">
-                          <TEInput
+                          <TextField id="outlined-basic" sx={{width: '100%'}} label="username" variant="outlined" type="text" value={username} onChange={(e) => setUsername(e.target.value)}/>
+                          <br></br>
+                          <br></br>
+                          <TextField id="outlined-basic" sx={{width: '100%'}} label="password" variant="outlined" type = "password" value={password} onChange={(e) => setPassword(e.target.value)}/>
+
+                          {/* <TEInput
                             // name="username"
                             // className="mb-4"
                             type="text"
@@ -81,7 +88,8 @@ const SignUp = () => {
                             label="password"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
-                          ></TEInput>
+                          ></TEInput> */}
+                          <br></br>
                           <br></br>
                           <div className="mb-12 pb-1 pt-1 text-center">
                             <TERipple rippleColor="light" className="w-full">
@@ -90,7 +98,7 @@ const SignUp = () => {
                                 type="button"
                                 style={{
                                   background:
-                                    'linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593)',
+                                    'linear-gradient(to left, #3D2F91, #89278D)',
                                 }}
                                 onClick={handleClick}
                               >
@@ -127,7 +135,7 @@ const SignUp = () => {
                     className="flex items-center rounded-b-lg lg:w-6/12 lg:rounded-r-lg lg:rounded-bl-none"
                     style={{
                       background:
-                        'linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593)',
+                        'linear-gradient(to left, #3D2F91, #89278D)',
                     }}
                   >
                     <div className="px-4 py-6 text-white md:mx-6 md:p-12">
@@ -136,10 +144,7 @@ const SignUp = () => {
                         Kafka Cluster Management Tool
                       </h4>
                       <p className="text-sm">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                        sed do eiusmod tempor incididunt ut labore et dolore magna
-                        aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                        ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                      An intuitive and feature-rich GUI that simplifies Kafka cluster management, monitoring, and interaction to streamline operations and efficiency when working with Kafka clusters.
                       </p>
                     </div>
                   </div>
