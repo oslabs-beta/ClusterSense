@@ -33,8 +33,8 @@ const clusterController = {
                 // if port num is already in the db, return the current port numbers from database back to the frontend
               } else {
                 // const clusterResult = await pool.query(queryCluster, [user_id, port]);
-                // res.locals.clusterResult = clusterResult
-                // return next();
+                res.locals.clusterResult = 'it exists'
+                return next();
               }
           } catch (err) {
             return next({
@@ -57,7 +57,6 @@ const clusterController = {
                 //want it as an array of cluster numbers
                  const result = clusterResult.rows
                  //.map(row => row.cluster_port);
-                // console.log(result)
                 //add all clusters onto res.locals.clusters
                 // [ { cluster_port: 1010 }, { cluster_port: 2020 } ]
                 // [ { value: 1010, label: 1010 }, { value: 2020, label: 2020 } ] 

@@ -75,6 +75,20 @@ const sessionController = {
     }
   },
 
-  // delete session from db when user log out
+  
+  // old session verification 
+// loginRouter.get(
+//   "/isLoggedIn",
+//   sessionController.isLoggedIn,
+//   (_req: Request, res: Response) => {
+//     return res.status(201).json({ message: "login successful" });
+//   }
+// );
+
+
+
+
+
+
 };
 export { sessionController };

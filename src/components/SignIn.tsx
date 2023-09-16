@@ -12,6 +12,7 @@ import logoFour from '../assets/ClusterSenseBigger.png';
 const SignIn = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
 
   //navigation paths
   const navigate = useNavigate();
@@ -38,10 +39,21 @@ const SignIn = () => {
       });
       if (response.ok) {
         toHome();
+      } else if (response.status === 400) {
+        // Display a user-friendly error message here
+        setError('All fields are required');
+      } else if (response.status === 409 || response.status === 401) {
+        // Display a user-friendly error message here
+        setError('Invalid username or password');
+      } else {
+        // Handle other error cases
+        console.log(response)
+        setError('An error occurred.');
       }
     } catch (err) {
-      //render an error message on the front end screen
-      console.log(err);
+      // Handle network errors or other unexpected issues
+      console.error(err);
+      setError('An error occurred.');
     }
   };
   return (
@@ -114,6 +126,8 @@ const SignIn = () => {
                           {/* //Forgot password link */}
                           {/* <a href="#!">Forgot password?</a> */}
                         </div>
+                        {error && <div className="error-message" style={{ color: 'red', fontStyle: 'italic' }}>{error}</div>}
+
                         {/* // Register button */}
                         <div className="flex items-center justify-between pb-6">
                           <p className="mb-0 mr-2">Don't have an account?</p>
