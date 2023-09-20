@@ -19,10 +19,17 @@ interface NavProps {
   formSubmission: (e: boolean) => void;
 }
 
-const NavBar = ({ setPort, formStatus, formSubmission, clusterOptions, setClustersOptions }: NavProps) => {
+const NavBar = ({
+  setPort,
+  formStatus,
+  formSubmission,
+  clusterOptions,
+  setClustersOptions,
+}: NavProps) => {
   // const [clusterOptions, setClustersOptions] = useState([]);
   const [menuAnchorEl, setMenuAnchorEl] = useState<null | HTMLElement>(null);
-  const [clusterMenuAnchorEl, setClusterMenuAnchorEl] = useState<null | HTMLElement>(null);
+  const [clusterMenuAnchorEl, setClusterMenuAnchorEl] =
+    useState<null | HTMLElement>(null);
 
   const navigate = useNavigate();
 
@@ -32,16 +39,31 @@ const NavBar = ({ setPort, formStatus, formSubmission, clusterOptions, setCluste
     navigate(path);
   };
 
-  const signOut = () => {
-    const path: string = '/';
-    navigate(path);
+  const signOut = async () => {
+    try {
+      const response = await fetch('http://localhost:4000/logout', {
+        method: 'GET',
+        credentials: 'include',
+        headers: { 'Content-Type': 'application/json' },
+      });
+      if (response.ok) {
+        const path: string = '/';
+        navigate(path);
+      } else {
+        console.error('Error deleting session');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+    }
   };
 
   function handleSelect(e: MouseEvent) {
     const chosenCluster = e.target.value;
-    console.log('chosen', chosenCluster)
-    setPort(chosenCluster);
-    formSubmission(true);
+    console.log('chosen', chosenCluster);
+    if (chosenCluster !== undefined) {
+      setPort(chosenCluster);
+      formSubmission(true);
+    }
   }
 
   useEffect(() => {
@@ -56,13 +78,13 @@ const NavBar = ({ setPort, formStatus, formSubmission, clusterOptions, setCluste
           if (!data.length) {
             setClustersOptions([{ value: '', label: 'Empty' }]);
           } else {
-          const convertData = data.map((cluster) => {
-            const value = cluster.cluster_port.toString();
-            const label = cluster.cluster_port.toString();
-            return { value: value, label: label };
-          });
-          await setClustersOptions(convertData);
-        }
+            const convertData = data.map((cluster) => {
+              const value = cluster.cluster_port.toString();
+              const label = cluster.cluster_port.toString();
+              return { value: value, label: label };
+            });
+            await setClustersOptions(convertData);
+          }
         } else {
           console.error('Error fetching clusters');
         }
@@ -93,31 +115,31 @@ const NavBar = ({ setPort, formStatus, formSubmission, clusterOptions, setCluste
       <AppBar position="static">
         <Toolbar style={{ justifyContent: 'space-between' }}>
           {/* <div className="nav-barLeft"> */}
-            <div style={{display: 'flex', alignItems: 'center'}}>
-              <Menu
-                anchorEl={menuAnchorEl}
-                open={Boolean(menuAnchorEl)}
-                onClose={handleMenuClose}
-              >
-                {/* <MenuItem onClick={toHome}>Home</MenuItem> */}
-                <MenuItem onClick={signOut}>Sign Out</MenuItem>
-              </Menu>
-              <Box
-                component="img"
-                sx={{ height: 54 }}
-                alt="Logo"
-                src={logo}
-                onClick={toHome}
-              />
-              
-              <Typography variant="h6" component="div" onClick={toHome}>
-                ClusterSense
-              </Typography>
-              {/* <img className="Logo" src={logo} alt="" /> */}
-              </div>
+          <div style={{ display: 'flex', alignItems: 'center' }}>
+            <Menu
+              anchorEl={menuAnchorEl}
+              open={Boolean(menuAnchorEl)}
+              onClose={handleMenuClose}
+            >
+              {/* <MenuItem onClick={toHome}>Home</MenuItem> */}
+              <MenuItem onClick={signOut}>Sign Out</MenuItem>
+            </Menu>
+            <Box
+              component="img"
+              sx={{ height: 54 }}
+              alt="Logo"
+              src={logo}
+              onClick={toHome}
+            />
+
+            <Typography variant="h6" component="div" onClick={toHome}>
+              ClusterSense
+            </Typography>
+            {/* <img className="Logo" src={logo} alt="" /> */}
+          </div>
           {/* </div> */}
-          <Stack direction = 'row' spacing= {2}>
-          {/* <div className="nav-barRight"> */}
+          <Stack direction="row" spacing={2}>
+            {/* <div className="nav-barRight"> */}
             <Menu
               anchorEl={clusterMenuAnchorEl}
               open={Boolean(clusterMenuAnchorEl)}
@@ -125,11 +147,11 @@ const NavBar = ({ setPort, formStatus, formSubmission, clusterOptions, setCluste
               onClick={handleSelect}
             >
               {clusterOptions.map((element, index) => (
-                      <MenuItem key={index} value={element.value}>
-                        {element.label}
-                      </MenuItem>
-                    ))}
-              </Menu>
+                <MenuItem key={index} value={element.value}>
+                  {element.label}
+                </MenuItem>
+              ))}
+            </Menu>
 
             <IconButton
               size="large"
@@ -137,7 +159,7 @@ const NavBar = ({ setPort, formStatus, formSubmission, clusterOptions, setCluste
               aria-haspopup="true"
               onClick={handleClusterMenuOpen}
               color="inherit"
-            > 
+            >
               <BubbleChartIcon sx={{ color: 'white' }} />
             </IconButton>
 
@@ -150,7 +172,7 @@ const NavBar = ({ setPort, formStatus, formSubmission, clusterOptions, setCluste
             >
               <AccountCircle />
             </IconButton>
-          {/* </div> */}
+            {/* </div> */}
           </Stack>
         </Toolbar>
       </AppBar>
@@ -160,27 +182,26 @@ const NavBar = ({ setPort, formStatus, formSubmission, clusterOptions, setCluste
 
 export default NavBar;
 
-
-  // <div className="nav-bar">
-    //   <div className="nav-barLogo">
-    //     <img className="Logo" src={logo} alt="" />
-    //   </div>
-    //   <div className="clusters">
-    //     <select name="cluster" onChange={handleSelect}>
-    //     <option value="" disabled selected hidden>Choose a Cluster</option>
-    //       {clusterOptions.map((element, index) => (
-    //         <option key={index} value={element.value}>
-    //           {element.value}
-    //         </option>
-    //       ))}
-    //     </select>
-    //   </div>
-    //   <div>
-    //     <a className="navLinks" onClick={toHome}>
-    //       Home
-    //     </a>
-    //     <a className="navLinks" onClick={signOut}>
-    //       Sign Out
-    //     </a>
-    //   </div>
-    // </div>
+// <div className="nav-bar">
+//   <div className="nav-barLogo">
+//     <img className="Logo" src={logo} alt="" />
+//   </div>
+//   <div className="clusters">
+//     <select name="cluster" onChange={handleSelect}>
+//     <option value="" disabled selected hidden>Choose a Cluster</option>
+//       {clusterOptions.map((element, index) => (
+//         <option key={index} value={element.value}>
+//           {element.value}
+//         </option>
+//       ))}
+//     </select>
+//   </div>
+//   <div>
+//     <a className="navLinks" onClick={toHome}>
+//       Home
+//     </a>
+//     <a className="navLinks" onClick={signOut}>
+//       Sign Out
+//     </a>
+//   </div>
+// </div>

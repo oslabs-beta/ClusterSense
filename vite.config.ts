@@ -9,6 +9,7 @@ export default defineConfig({
     proxy: {
       "/cluster": "http://localhost:4000/cluster",
       "/login": "http://localhost:4000",
+      "/logout": "http://localhost:4000",
     }
   },
   optimizeDeps: {
