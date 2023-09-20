@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
 import logo from '../assets/ClusterSenseNode.png';
 import MeetTeam from '../components/MeetTeam';
-import WelcomeNavBar from '../components/WelcomeNavBar';
 import SignIn from '../components/SignIn';
 import SignUp from '../components/SignUp';
-import { Container, Typography, Box, Grid } from '@mui/material';
+import { AppBar, Toolbar, Container, Typography, Button, Box, Grid } from '@mui/material';
 
 const WelcomePage = () => {  
 
@@ -26,7 +25,27 @@ const WelcomePage = () => {
     return (
         <div>
             {/* Navigation bar */}
-            <WelcomeNavBar />
+            <AppBar position="sticky">
+            <Toolbar>
+                {/* Logo Display */}
+                <Typography variant="h6" style={{ flexGrow: 1 }}>
+                    <Box
+                        component="img"
+                        sx={{ height: 54 }}
+                        alt="Logo"
+                        src={logo}
+                    />
+                </Typography>
+                
+                {/* Navigation Buttons */}
+                <Box display="flex">
+                    <Button href="#signup-login" color="inherit">Log in/Sign up</Button>
+                    <Button href="#get-started" color="inherit">Get Started</Button>
+                    <Button href="#demo" color="inherit">Demo</Button>
+                    <Button href="#team" color="inherit">Team</Button>
+                </Box>
+            </Toolbar>
+        </AppBar>
     
             {/* Section for SignUp and SignIn */}
             <Container id="signup-login" style={{ marginBottom: '4rem', backgroundColor: 'white' }}>
