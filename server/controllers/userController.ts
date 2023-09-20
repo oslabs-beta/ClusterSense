@@ -88,7 +88,6 @@ const userController = {
 
       // check if password is correct
       const user = userResult.rows[0];
-      console.log(user);
       const isPasswordMatch = await bcrypt.compare(password, user.password);
       if (!isPasswordMatch) {
         res.status(401).json({ error: 'Invalid Username or Password' });

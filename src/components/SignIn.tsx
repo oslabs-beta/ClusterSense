@@ -1,14 +1,18 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { TEInput, TERipple } from 'tw-elements-react';
+import TextField from '@mui/material/TextField';
+
 // import logo from '../assets/ClusterSense.png';
 // import logoTwo from '../assets/CS-outline.png';
 import logoThree from '../assets/ClusterSense.png';
+import logoFour from '../assets/ClusterSenseBigger.png';
 
 
 const SignIn = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
 
   //navigation paths
   const navigate = useNavigate();
@@ -35,10 +39,21 @@ const SignIn = () => {
       });
       if (response.ok) {
         toHome();
+      } else if (response.status === 400) {
+        // Display a user-friendly error message here
+        setError('All fields are required');
+      } else if (response.status === 409 || response.status === 401) {
+        // Display a user-friendly error message here
+        setError('Invalid username or password');
+      } else {
+        // Handle other error cases
+        console.log(response)
+        setError('An error occurred.');
       }
     } catch (err) {
-      //render an error message on the front end screen
-      console.log(err);
+      // Handle network errors or other unexpected issues
+      console.error(err);
+      setError('An error occurred.');
     }
   };
   return (
@@ -57,35 +72,41 @@ const SignIn = () => {
                 <div className="px-4 md:px-0 lg:w-6/12">
                   <div className="md:mx-6 md:p-12">
                     <div className="text-center">
-                      <img className="mx-auto w-48" src={logoThree} alt="" />
-                      <h4 className="mb-12 mt-1 pb-1 text-xl font-semibold">
+                      <img className="mx-auto w-48" style={{width: '60%'}} src={logoFour} alt="" />
+                      {/* <h4 className="mb-12 mt-1 pb-1 text-xl font-semibold">
                         Welcome to ClusterSense
-                      </h4>
+                      </h4> */}
                     </div>
                     <div className="signInContainer">
                       {/* <h2>Sign In:</h2> */}
                       <div className="signInBox mb-4 ">
-                        <TEInput
+                        <TextField id="outlined-basic" sx={{width: '100%'}} label="username" variant="outlined" type="text" value={username} onChange={(e) => setUsername(e.target.value)}/>
+                        <br></br>
+                        <br></br>
+                        <TextField id="outlined-basic" sx={{width: '100%'}} label="password" variant="outlined" type = "password" value={password} onChange={(e) => setPassword(e.target.value)}/>
+
+                        {/* <Input
                           // name="username"
                           // className="mb-4"
                           type="text"
                           label="username"
                           value={username}
                           // size = "lg"
-                          style={{ color: 'black' }} // This sets the text color
+                          // style={{ color: 'black' }} // This sets the text color
                           onChange={(e) => setUsername(e.target.value)}
-                        ></TEInput>
+                        ></Input>
                         <br></br>
-                        <TEInput
+                        <Input
                           name="password"
                           // className="mb-4"
                           type="password"
                           label="password"
-                          style={{ color: 'black' }} // This sets the text color
+                          // style={{ color: 'black' }} // This sets the text color
 
                           value={password}
                           onChange={(e) => setPassword(e.target.value)}
-                        ></TEInput>
+                        ></Input> */}
+                        <br></br>
                         <br></br>
                         <div className="mb-12 pb-1 pt-1 text-center">
                           <TERipple rippleColor="light" className="w-full">
@@ -94,7 +115,7 @@ const SignIn = () => {
                               type="button"
                               style={{
                                 background:
-                                  'linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593)',
+                                  'linear-gradient(to left, #3D2F91, #89278D)',
                               }}
                               onClick={Submit}
                             >
@@ -103,8 +124,10 @@ const SignIn = () => {
                           </TERipple>
 
                           {/* //Forgot password link */}
-                          <a href="#!">Forgot password?</a>
+                          {/* <a href="#!">Forgot password?</a> */}
                         </div>
+                        {error && <div className="error-message" style={{ color: 'red', fontStyle: 'italic' }}>{error}</div>}
+
                         {/* // Register button */}
                         <div className="flex items-center justify-between pb-6">
                           <p className="mb-0 mr-2">Don't have an account?</p>
@@ -131,7 +154,7 @@ const SignIn = () => {
                   className="flex items-center rounded-b-lg lg:w-6/12 lg:rounded-r-lg lg:rounded-bl-none"
                   style={{
                     background:
-                      'linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593)',
+                      'linear-gradient(to left, #3D2F91, #89278D)',
                   }}
                 >
                   <div className="px-4 py-6 text-white md:mx-6 md:p-12">
@@ -140,10 +163,7 @@ const SignIn = () => {
                       Kafka Cluster Management Tool
                     </h4>
                     <p className="text-sm">
-                      Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                      sed do eiusmod tempor incididunt ut labore et dolore magna
-                      aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                      ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                    An intuitive and feature-rich GUI that simplifies Kafka cluster management, monitoring, and interaction to streamline operations and efficiency when working with Kafka clusters.
                     </p>
                   </div>
                 </div>

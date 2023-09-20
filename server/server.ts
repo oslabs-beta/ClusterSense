@@ -27,6 +27,10 @@ const PORT = process.env.PORT || 4000;
 // route handlers
 app.use('/login', loginRouter);
 app.use('/cluster', clusterRouter)
+app.get('/logout', (_req: Request, res: Response) => {
+  return res.cookie('ssid', '', {expires: new Date(0), httpOnly: true, sameSite: 'none', secure: true } ).status(200).send('session ended');
+});
+
 
 // is this public? 
 //app.use('/', express.static(path.join(__dirname, '../public')));
