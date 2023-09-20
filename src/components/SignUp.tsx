@@ -5,15 +5,16 @@ import logo from '../assets/ClusterSense.png';
 import logoFour from '../assets/ClusterSenseBigger.png';
 import TextField from '@mui/material/TextField';
 
-const SignUp = () => {
+const SignUp = ({ showSignIn }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
 
   const navigate = useNavigate();
   const goLogin = () => {
-    const path = '/';
-    navigate(path);
+    // const path = '/';
+    // navigate(path);
+    showSignIn();
   };
   const toHome = () => {
     const path = '/home';
