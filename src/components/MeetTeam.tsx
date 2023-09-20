@@ -9,14 +9,14 @@ const teamMembers = [
   {
     name: "Allen Hui",
     photo: teamPhoto,
-    email: "allen@example.com",
+    email: "huiallen92@gmail.com",
     linkedin: "https://www.linkedin.com/in/allen-hui-7b590b9a/",
     github: "https://github.com/Ahuim8",
   },
   {
     name: "Daniel Lee",
     photo: teamPhoto,
-    email: "allen@example.com",
+    email: "jungtaelee0128@gmail.com",
     linkedin: "https://www.linkedin.com/in/jungtaelee/",
     github: "https://github.com/jungtaelee0128",
   },
@@ -31,7 +31,7 @@ const teamMembers = [
     name: "Wanlu Ding",
     photo: teamPhoto,
     email: "wanlu.ding@gmail.com",
-    linkedin: "https://linkedin.com/in/wanlu-ding-382669289",
+    linkedin: "https://www.linkedin.com/in/wanlu-ding/",
     github: "https://github.com/WanluD",
   },
 ];
