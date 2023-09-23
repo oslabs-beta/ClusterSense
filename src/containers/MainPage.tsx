@@ -5,7 +5,9 @@ import NavBar from '../components/NavBar';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import { Container } from '@mui/material';
-import Iframe from 'react-iframe';
+// import Iframe from 'react-iframe';
+import Chart from '../components/Chart.tsx';
+
 const MainPage = () => {
   const navigate = useNavigate();
 
@@ -18,7 +20,6 @@ const MainPage = () => {
   const [clusterOptions, setClustersOptions] = useState([]);
   const [port, setPort] = useState();
   const [isFormSubmitted, setIsFormSubmitted] = useState(false);
-  //const [dataFromDatabase, setDataFromDatabase] = useState([]);
 
   const handleSubmission = async (e: MouseEvent) => {
     e.preventDefault();
@@ -48,24 +49,18 @@ const MainPage = () => {
   };
 
   // useEffect that will fetch data from prometheus/backend once the form is submitted using the port
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       let response = await fetch('/data');
-  //       if (response.ok) {
-  //         response = await response.json();
-  //         //setDataFromDatabase(response);
-  //       } else {
-  //         //error fetching data
-  //       }
-  //     } catch (error) {
-  //       // network error
-  //     }
-  //   };
-  //   if (isFormSubmitted) {
-  //     fetchData();
-  //   }
-  // }, [isFormSubmitted]);
+
+  const getMetricData = async (metric: string) => {
+    if (!metricList.includes(metric)) return setMetricData([]);
+    try {
+      const response = await axios.get(
+        `http://${server}/api/v1/query?query=${metric}`
+      );
+      setMetricData(response.data.data.result);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   //useEffect to check if cookies exist
   useEffect(() => {
@@ -102,50 +97,36 @@ const MainPage = () => {
         className="h-full bg-neutral-200"
       >
         {isFormSubmitted ? (
-          <div className="flex flex-col items-center align-content p-20 gap-y-200">
-            <div className="flex items-center justify-center gap-x-20">
+          <div className="flex flex-col items-center align-content p-25 gap-y-200">
+            <div className="flex items-center justify-center gap-x-20 bg-neutral-100">
               <div>
-                <Iframe
-                  src="http://localhost:3000/d-solo/df922d9d-6417-4611-8f4d-03e7172488c8/kafka2?orgId=1&refresh=10s&panelId=1"
-                  width="450"
-                  height="450"
-                  margin="200"
-                  frameborder="0"
-                ></Iframe>
+                <Chart
+                  port={port}
+                  query="kafka_server_replicamanager_underreplicatedpartitions"
+                />
               </div>
               <div>
-                <Iframe
-                  src="http://localhost:3000/d-solo/df922d9d-6417-4611-8f4d-03e7172488c8/kafka2?orgId=1&refresh=10s&panelId=2"
-                  width="450"
-                  height="450"
-                  frameborder="0"
-                ></Iframe>
+                <Chart
+                  port={port}
+                  query="kafka_controller_kafkacontroller_globaltopiccount"
+                />
               </div>
               <div>
-                <Iframe
-                  src="http://localhost:3000/d-solo/df922d9d-6417-4611-8f4d-03e7172488c8/kafka2?orgId=1&refresh=10s&panelId=5"
-                  width="450"
-                  height="450"
-                  frameborder="0"
-                ></Iframe>
+                <Chart port={port} query="process_cpu_seconds_total" />
               </div>
             </div>
             <div className="flex items-center justify-center gap-x-20 p-20 mt-200">
               <div>
-                <Iframe
-                  src="http://localhost:3000/d-solo/df922d9d-6417-4611-8f4d-03e7172488c8/kafka2?orgId=1&refresh=10s&panelId=3"
-                  width="1100"
-                  height="450"
-                  frameborder="0"
-                ></Iframe>
+                <Chart
+                  port={port}
+                  query="kafka_server_brokertopicmetrics_bytesin_total"
+                />
               </div>
               <div>
-                <Iframe
-                  src="http://localhost:3000/d-solo/df922d9d-6417-4611-8f4d-03e7172488c8/kafka2?orgId=1&refresh=10s&panelId=4"
-                  width="1100"
-                  height="450"
-                  frameborder="0"
-                ></Iframe>
+                <Chart
+                  port={port}
+                  query="kafka_server_brokertopicmetrics_bytesout_total"
+                />
               </div>
             </div>
           </div>
