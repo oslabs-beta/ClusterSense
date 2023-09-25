@@ -92,37 +92,40 @@ const MainPage = () => {
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
-          height: '100vh',
+          // height: '100vh',
         }}
-        className="h-full bg-neutral-200"
+        className="h-screen bg-neutral-200"
       >
         {isFormSubmitted ? (
-          <div className="flex flex-col items-center align-content p-25 gap-y-200">
-            <div className="flex items-center justify-center gap-x-20 bg-neutral-100">
-              <div>
+          <div className="flex flex-col justify-center items-center align-content p-20">
+            <div className="flex justify-center gap-x-20 flex-wrap w-screen p-30">
+              <div className="w-1/4 h-1/3">
                 <Chart
                   port={port}
                   query="kafka_server_replicamanager_underreplicatedpartitions"
                 />
               </div>
-              <div>
+              <div className="w-1/4 h-1/3">
                 <Chart
                   port={port}
                   query="kafka_controller_kafkacontroller_globaltopiccount"
                 />
               </div>
-              <div>
+              <div className="w-1/4 h-1/3">
                 <Chart port={port} query="process_cpu_seconds_total" />
               </div>
             </div>
-            <div className="flex items-center justify-center gap-x-20 p-20 mt-200">
-              <div>
+            <div
+              className="flex items-center justify-evenly
+             gap-x-20 p-24 mt-300 flex-wrap w-screen"
+            >
+              <div className="w-1/4 h-1/4">
                 <Chart
                   port={port}
                   query="kafka_server_brokertopicmetrics_bytesin_total"
                 />
               </div>
-              <div>
+              <div className="w-1/4 h-1/4">
                 <Chart
                   port={port}
                   query="kafka_server_brokertopicmetrics_bytesout_total"
@@ -134,6 +137,10 @@ const MainPage = () => {
           <Container
             maxWidth="md"
             style={{
+              // display: 'flex',
+              // justifyContent: 'center',
+              // alignItems: 'center',
+              // height: '100vh',
               backgroundColor: 'white',
               margin: '2rem',
               padding: '2rem',

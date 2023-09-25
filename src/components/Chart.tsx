@@ -31,41 +31,26 @@ const loading = {
   ],
 };
 
+//rounds the value to 4 decimals and returns values for Charts.js to use
 const organizeData = (array) => {
-  const time = [];
+  //const time = [];
   const value = [];
-//   console.log(array);
 
   array.forEach((el) => {
     if (el[1].length > 5 && el[1].includes('.')) {
       el[1] = el[1].slice(0, 5);
     }
-    time.push(new Date(el[0] * 1000).toLocaleTimeString()); //el[0] is the time
-    value.push(el[1]); //el[1] is the val
+    //time.push(new Date(el[0] * 1000).toLocaleTimeString());
+    value.push(el[1]);
   });
 
   const newChartData = {
     labels: [
-      'T-5:00',
-      '',
-      'T-4:30',
-      '',
-      'T-4:00',
-      '',
-      'T-3:30',
-      '',
-      'T-3:00',
-      '',
       'T-2:30',
-      '',
       'T-2:00',
-      '',
-      'T-2:30',
-      '',
-      'T-1:00',
-      '',
       'T-1:30',
-      '',
+      'T-1:00',
+      'T-0:30',
       'T-0:00',
     ],
     datasets: [
@@ -93,7 +78,7 @@ const Chart: React.FC<ChartProps> = ({ port, query }): ReactElement => {
   );
   const [data, setData] = useState(loading);
 
-  const url = `http://localhost:${port}/api/v1/query?query=${query}[20m]`;
+  const url = `http://localhost:${port}/api/v1/query?query=${query}[1m]`;
 
   useEffect(() => {
     if (!port || !data) return undefined;
@@ -102,12 +87,6 @@ const Chart: React.FC<ChartProps> = ({ port, query }): ReactElement => {
         const response = await axios.get(url);
         if (response.data.data.result[0].values) {
           const array = response.data.data.result[0].values;
-          // we can push to an array here (and it doesnt exceed 20 data points and if it does take the first element out and push new element in)
-        //   let newarray=[...data, array[0][1]]
-        //   if (newarray.length>20){
-        //     newarray = newarray.slice(1)
-        //   }
-        //   console.log('newarr',newarray)
           setData(organizeData(array));
         }
       } catch (err) {
@@ -118,7 +97,7 @@ const Chart: React.FC<ChartProps> = ({ port, query }): ReactElement => {
     fetchData();
     const interval = setInterval(fetchData, 3000);
     return () => clearInterval(interval);
-  }, [data]);
+  }, [data, port]);
 
   const options = {
     maintainAspectRatio: false,
