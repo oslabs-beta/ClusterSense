@@ -56,11 +56,11 @@ const SignUp = ({ showSignIn }) => {
     <div
       style={{
         display: 'flex',
-        justifyContent: 'center',
+        justifyContent: 'left',
         alignItems: 'center',
         height: '100vh',
       }}
-      className="h-screen bg-neutral-200 dark:bg-neutral-700"
+      // className="magic"
     >
       <div className="container flex items-center justify-center h-screen p-10">
         <div className="g-6 flex h-full flex-wrap items-center justify-center text-black">
@@ -104,25 +104,6 @@ const SignUp = ({ showSignIn }) => {
                           value={password}
                           onChange={(e) => setPassword(e.target.value)}
                         />
-
-                        {/* <TEInput
-                            // name="username"
-                            // className="mb-4"
-                            type="text"
-                            label="username"
-                            value={username}
-                            // size = "lg"
-                            onChange={(e) => setUsername(e.target.value)}
-                          ></TEInput>
-                          <br></br>
-                          <TEInput
-                            name="password"
-                            // className="mb-4"
-                            type="password"
-                            label="password"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                          ></TEInput> */}
                         <br></br>
                         <br></br>
                         <div className="mb-12 pb-1 pt-1 text-center">
@@ -140,8 +121,6 @@ const SignUp = ({ showSignIn }) => {
                             </button>
                           </TERipple>
 
-                          {/* //Forgot password link */}
-                          {/* <a href="#!">Forgot password?</a> */}
                         </div>
                         {error && (
                           <div
@@ -159,7 +138,7 @@ const SignUp = ({ showSignIn }) => {
                             <button
                               type="button"
                               onClick={goLogin}
-                              className="inline-block rounded border-2 border-danger px-6 pb-[6px] pt-2 text-xs font-medium uppercase leading-normal text-danger transition duration-150 ease-in-out hover:border-danger-600 hover:bg-neutral-500 hover:bg-opacity-10 hover:text-danger-600 focus:border-danger-600 focus:text-danger-600 focus:outline-none focus:ring-0 active:border-danger-700 active:text-danger-700 dark:hover:bg-neutral-100 dark:hover:bg-opacity-10"
+                              className="inline-block rounded border-2 border-danger px-6 pb-[6px] pt-2 text-xs font-medium uppercase leading-normal text-danger transition duration-150 ease-in-out hover:border-danger-600 hover:bg-neutral-500 hover:bg-opacity-10 hover:text-danger-600 focus:border-danger-600 focus:text-danger-600 focus:outline-none focus:ring-0 active:border-danger-700 active:text-danger-700 dark:hover:bg-neutral-100 dark:hover:bg-opacity-10 "
                             >
                               Login
                             </button>
@@ -171,26 +150,6 @@ const SignUp = ({ showSignIn }) => {
                         {/* <button onClick={toSignUp}>Sign Up</button>  */}
                       </div>
                     </div>
-                  </div>
-                </div>
-                {/* // Right column container with background and description */}
-                <div
-                  className="flex items-center rounded-b-lg lg:w-6/12 lg:rounded-r-lg lg:rounded-bl-none"
-                  style={{
-                    background: 'linear-gradient(to left, #3D2F91, #89278D)',
-                  }}
-                >
-                  <div className="px-4 py-6 text-white md:mx-6 md:p-12">
-                    {/* <img className="mx-auto w-48" src={logo} alt="" /> */}
-                    <h4 className="mb-6 text-xl font-semibold">
-                      Kafka Cluster Management Tool
-                    </h4>
-                    <p className="text-sm">
-                      An intuitive and feature-rich GUI that simplifies Kafka
-                      cluster management, monitoring, and interaction to
-                      streamline operations and efficiency when working with
-                      Kafka clusters.
-                    </p>
                   </div>
                 </div>
               </div>

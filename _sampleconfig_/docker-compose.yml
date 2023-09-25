@@ -1,0 +1,56 @@
+version: "3"
+services:
+  prometheus:
+    image: "prom/prometheus:latest"
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus.yml:/prometheus.yml
+    command: "--config.file=/prometheus.yml"
+    container_name: prometheus
+
+
+  jmx-kafka:
+    image: "sscaling/jmx-prometheus-exporter"
+    ports:
+    - "5556:5556"
+    environment:
+      CONFIG_YML : "./config.yml"
+    volumes:
+    - ./config.yml:/config.yml
+    container_name: jmx_kafka
+    depends_on:
+    - kafka
+
+  zookeeper:
+    image: confluentinc/cp-zookeeper:7.3.2
+    container_name: zookeeper
+    ports:
+      - '2181:2181'
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+
+  kafka:
+    image: confluentinc/cp-kafka:7.3.2
+    container_name: kafka
+    ports:
+      - '9092:9092'
+    environment:
+      KAFKA_ADVERTISED_HOST_NAME: kafka
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT, PLAINTEXT_HOST:PLAINTEXT
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:29092, PLAINTEXT_HOST://localhost:9092
+      KAFKA_INTER_BROKER_LISTENERS_NAME: PLAINTEXT
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
+      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
+      KAFKA_JMX_PORT: 9991
+      CONFLUENT_METRICS_REPORTER_BOOTSTRAP_SERVER: kafka:29092
+      CONFLUENT_METRICS_REPORTER_ZOOKEEPER_CONNECT: zookeeper1:2181
+      CONFLUENT_METRICS_REPORTER_TOPIC_REPLICAS: 1
+      CONFLUENT_METRICS_ENABLE: 'false'
+    depends_on:
+      - zookeeper
+    command: sh -c "((sleep 15 && kafka-topics --create replication-factor 1 --partitions 3 --topic topic-test --bootstrap-server kafka:29092)&) && /etc/confluent/docker/run">

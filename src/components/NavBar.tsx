@@ -12,6 +12,7 @@ import MouseEvent from 'react';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import Box from '@mui/material/Box';
 import BubbleChartIcon from '@mui/icons-material/BubbleChart';
+import { styled } from '@mui/system';
 
 interface NavProps {
   setPort: (e: number) => void;
@@ -110,9 +111,18 @@ const NavBar = ({
   const handleClusterMenuClose = () => {
     setClusterMenuAnchorEl(null);
   };
+
+  const CustomAppBar = styled(AppBar)({
+    //backgroundColor: '#4CAF50',  // Use your desired hex color here
+    // backgroundColor: 'transparent',
+    // backgroundImage: 'linear-gradient(to left, #3D2F91, #89278D)',
+    backgroundImage: 'linear-gradient(to bottom, #3D2F91, white)',
+    boxShadow: 'none',
+  });
+
   return (
     <div className="nav-bar">
-      <AppBar position="static">
+      <CustomAppBar position="static">
         <Toolbar style={{ justifyContent: 'space-between' }}>
           {/* <div className="nav-barLeft"> */}
           <div style={{ display: 'flex', alignItems: 'center' }}>
@@ -175,7 +185,7 @@ const NavBar = ({
             {/* </div> */}
           </Stack>
         </Toolbar>
-      </AppBar>
+        </CustomAppBar>
     </div>
   );
 };

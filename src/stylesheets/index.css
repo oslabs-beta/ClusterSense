@@ -1,4 +1,6 @@
-@tailwind base;
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
 
 @layer base {
     html {
@@ -11,5 +13,35 @@
     }
 }
 
-@tailwind components;
-@tailwind utilities;
+/*gradient setting add to class*/
+.gradient-background {
+    background: linear-gradient(to left, #3D2F91, #89278D);
+}
+
+.transparent{ 
+    background: 'transparent',
+}
+
+.border{
+    border: #89278D;
+}
+
+.right{
+    @apply flex justify-end;
+}
+
+.signIn{
+    @apply h-screen bg-white flex items-center 
+    justify-center h-full;
+    @apply flex w-full h-full text-black
+    rounded-lg
+    lg:w-4/12 p-6
+}
+
+.login{
+    @apply h-screen bg-white flex items-center 
+    justify-center h-full;
+    @apply flex w-full h-full text-black
+    rounded-lg
+    lg:w-4/12 p-6
+}

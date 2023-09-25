@@ -1,22 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 import MouseEvent from 'react';
 import NavBar from '../components/NavBar';
-import MeetTeam from '../components/MeetTeam';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import { Container } from '@mui/material';
 const MainPage = () => {
-
-  const navigate = useNavigate();
-
-  const toLogin = () => {
-    const path: string = '/';
-    navigate(path);
-  }
-
   //**** */
   const [clusterOptions, setClustersOptions] = useState([]);
+  //need to check if user is logged in
+/*
+There is a bunch of logic in here for dataFromDatabase--this is theory and reflects what might come from the prometheus data scrapper to be manifested as grafana charts
+*/
   const [port, setPort] = useState();
   const [isFormSubmitted, setIsFormSubmitted] = useState(false);
   //const [dataFromDatabase, setDataFromDatabase] = useState([]);
@@ -45,48 +39,31 @@ const MainPage = () => {
     }
   };
 
-  // useEffect that will fetch data from prometheus/backend once the form is submitted using the port
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       let response = await fetch('/data');
-  //       if (response.ok) {
-  //         response = await response.json();
-  //         //setDataFromDatabase(response);
-  //       } else {
-  //         //error fetching data
-  //       }
-  //     } catch (error) {
-  //       // network error
-  //     }
-  //   };
-  //   if (isFormSubmitted) {
-  //     fetchData();
-  //   }
-  // }, [isFormSubmitted]);
-
-  //useEffect to check if cookies exist
+  //useEffect that will fetch data from prometheus/backend once the form is submitted using the port
   useEffect(() => {
-    const checkSession = async () => {
+    const fetchData = async () => {
       try {
-        const isAuthenticated = await fetch('/login/verify')
-        const status=await isAuthenticated.json()
-        if (status.status===false) {
-          toLogin()
-        } 
+        let response = await fetch('/data');
+        if (response.ok) {
+          response = await response.json();
+          //setDataFromDatabase(response);
+        } else {
+          //error fetching data
+        }
       } catch (error) {
-        console.error('Error checking session:', error);
+        // network error
       }
     };
-    checkSession();
-  }, []);
-
-
+    if (isFormSubmitted) {
+      fetchData();
+    }
+  }, [isFormSubmitted]);
 
   return (
     <div>
       <NavBar setPort={setPort} formStatus={isFormSubmitted} formSubmission={setIsFormSubmitted} clusterOptions={clusterOptions}
   setClustersOptions={setClustersOptions}/>
+    
         <div style={{
           display: 'flex',
           justifyContent: 'center',
@@ -95,9 +72,10 @@ const MainPage = () => {
         }}className="h-screen bg-neutral-200">
           {isFormSubmitted ? (
             <div>
-              <iframe
-                src = 'http://localhost:3000/d/df922d9d-6417-4611-8f4d-03e7172488c8/kafka2?orgId=1&from=1694722915484&to=1694723215484'
-              ></iframe>
+              {/* <iframe
+                src = 'http://localhost:3000/d/ac9c08ef-7fb3-4c79-8215-e3f569941533/kafka-metrics?orgId=1&from=1694685520064&to=1694707120064'
+              ></iframe> */}
+              
             </div>
           ) : (
             <Container maxWidth="md" style={{ backgroundColor: 'white', margin : '2rem', padding: '2rem', borderRadius: '8px', boxShadow: '0 2px 12px rgba(0, 0, 0, 0.1)' }}>
