@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import MouseEvent from 'react';
 import NavBar from '../components/NavBar';
+import MeetTeam from '../components/MeetTeam';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import { Container } from '@mui/material';
@@ -17,10 +19,6 @@ const MainPage = () => {
 
   //**** */
   const [clusterOptions, setClustersOptions] = useState([]);
-  //need to check if user is logged in
-/*
-There is a bunch of logic in here for dataFromDatabase--this is theory and reflects what might come from the prometheus data scrapper to be manifested as grafana charts
-*/
   const [port, setPort] = useState();
   const [isFormSubmitted, setIsFormSubmitted] = useState(false);
 
@@ -67,7 +65,7 @@ There is a bunch of logic in here for dataFromDatabase--this is theory and refle
 
   //useEffect to check if cookies exist
   useEffect(() => {
-    const fetchData = async () => {
+    const checkSession = async () => {
       try {
         const isAuthenticated = await fetch('/login/verify');
         const status = await isAuthenticated.json();
@@ -75,7 +73,7 @@ There is a bunch of logic in here for dataFromDatabase--this is theory and refle
           toLogin();
         }
       } catch (error) {
-        // network error
+        console.error('Error checking session:', error);
       }
     };
     checkSession();
