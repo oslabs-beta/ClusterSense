@@ -63,44 +63,55 @@ const toSignUp = () => {
 
 return (
 <div>
-      <div className="signIn" style={{ boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)'}}>
-        <div className="signInBox mb-4" >
-                    <TextField id="outlined-basic" sx={{width: '100%'}} label="username" variant="outlined" type="text" value={username} onChange={(e) => setUsername(e.target.value)}/>
-                    <br></br>
-                    <br></br>
-                    <TextField id="outlined-basic" sx={{width: '100%'}} label="password" variant="outlined" type = "password" value={password} onChange={(e) => setPassword(e.target.value)}/>
-                    <br></br>
-                    <br></br>
-                    <div className="mb-12 pb-1 pt-1 text-center">
-                      <TERipple rippleColor="light" className="w-full">
-                        <button
-                          className="mb-3 inline-block w-full rounded px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_rgba(0,0,0,0.2)] transition duration-150 ease-in-out hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.1),0_4px_18px_0_rgba(0,0,0,0.2)] focus:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.1),0_4px_18px_0_rgba(0,0,0,0.2)] focus:outline-none focus:ring-0 active:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.1),0_4px_18px_0_rgba(0,0,0,0.2)] gradient-background"
-                          type="button"
-                        
-                          onClick={Submit}
-                        >
-                          Log in
-                        </button>
-                      </TERipple>
-
-                    </div>
-                    {error && <div className="error-message" style={{ color: 'red', fontStyle: 'italic' }}>{error}</div>}
-
-                    {/* // Register button */}
-                    <div className="flex items-center justify-between pb-6">
-                      <p className="mb-0 mr-2">Don't have an account?</p>
-                      <TERipple rippleColor="light">
-                        <button
-                          type="button"
-                          onClick={toSignUp}
-                          className="inline-block rounded border-2 border-danger px-6 pb-[6px] pt-2 text-xs font-medium uppercase leading-normal text-danger transition duration-150 ease-in-out hover:border-danger-600 hover:bg-neutral-500 hover:bg-opacity-10 hover:text-danger-600 focus:border-danger-600 focus:text-danger-600 focus:outline-none focus:ring-0 active:border-danger-700 active:text-danger-700 dark:hover:bg-neutral-100 dark:hover:bg-opacity-10"
-                        >
-                          Register
-                        </button>
-                      </TERipple>
-                    </div>                  
-                  </div>
+<div style={{ display: 'flex', justifyContent: 'flex-end', width: '100%' }}>
+    <div className="signIn-up" style={{ maxWidth: '400px', boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)'}}>
+    <img
+      className="mx-auto w-48 "
+      style={{ width: '60%' }}
+      src={logoFour}
+      alt=""
+    />
+      <TextField id="outlined-basic" 
+        sx={{width: '100%', mb: 4}} 
+        label="username" 
+        variant="outlined" 
+        type="text" 
+        value={username} onChange={(e) => setUsername(e.target.value)}/>
+  
+      <TextField id="outlined-basic" 
+       sx={{width: '100%', mb: 4}}  
+      label="password" 
+      variant="outlined" 
+      type = "password" 
+      value={password} onChange={(e) => setPassword(e.target.value)}/>
+      <div className="mb-12 pb-1 pt-1 text-center">
+        <TERipple rippleColor="light" className="w-full">
+          <button
+            className="mb-3 inline-block w-full rounded px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_rgba(0,0,0,0.2)] transition duration-150 ease-in-out hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.1),0_4px_18px_0_rgba(0,0,0,0.2)] focus:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.1),0_4px_18px_0_rgba(0,0,0,0.2)] focus:outline-none focus:ring-0 active:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.1),0_4px_18px_0_rgba(0,0,0,0.2)] gradient-background"
+            type="button"
+            onClick={Submit}
+          >
+            Log in
+          </button>
+        </TERipple>
       </div>
+      {error && <div className="error-message" style={{ color: 'red', fontStyle: 'italic' }}>{error}</div>}
+
+      {/* // Register button */}
+      <div className="flex items-center justify-between pb-6">
+        <p className="mb-0 mr-2">Don't have an account?</p>
+        <TERipple rippleColor="light">
+          <button
+            type="button"
+            onClick={toSignUp}
+            className="button-color"
+          >
+            Register
+          </button>
+        </TERipple>
+      </div>                  
+    </div>
+  </div>
 </div>
 );
 };

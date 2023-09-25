@@ -18,6 +18,27 @@
     background: linear-gradient(to left, #3D2F91, #89278D);
 }
 
+/* button format */
+.button-color {
+    display: inline-block;
+    padding: 6px 12px; /* You can adjust the padding as needed */
+    font-size: 0.875rem; /* Equivalent to text-xs in Tailwind CSS */
+    font-weight: 500; /* Equivalent to font-medium in Tailwind CSS */
+    text-transform: uppercase;
+    text-align: center;
+    vertical-align: middle;
+    border-width: 2px;
+    border-style: solid;
+    border-radius: 0.25rem; /* Equivalent to rounded in Tailwind CSS */
+    transition: all 150ms ease-in-out;
+  }
+ 
+.button-color {
+    border-color: #89278D; /* Equivalent to border-danger in Tailwind CSS */
+    color: #89278D; /* Equivalent to text-danger in Tailwind CSS */
+    background-color: transparent; /* Equivalent to bg-transparent in Tailwind CSS */
+}
+
 .transparent{ 
     background: 'transparent',
 }
@@ -30,18 +51,13 @@
     @apply flex justify-end;
 }
 
-.signIn{
-    @apply h-screen bg-white flex items-center 
-    justify-center h-full;
-    @apply flex w-full h-full text-black
+.signIn-up{
+    @apply justify-end h-screen bg-white flex-col items-center w-full h-full text-black
     rounded-lg
     lg:w-4/12 p-6
 }
 
-.login{
-    @apply h-screen bg-white flex items-center 
-    justify-center h-full;
-    @apply flex w-full h-full text-black
-    rounded-lg
-    lg:w-4/12 p-6
-}
+
+.font {
+    font-family: 'Cabin', 'Libre Franklin', 'Oswald', sans-serif;
+  }
