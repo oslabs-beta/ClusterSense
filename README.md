@@ -28,6 +28,8 @@ Cluster Sense is an open-source product dedicated to developing a Kafka cluster 
 
 
 ## Contributors
+<div align='center'>
+
   <table>
   <tr>
     <td align="center">
@@ -64,3 +66,4 @@ Cluster Sense is an open-source product dedicated to developing a Kafka cluster 
       <a href="https://github.com/natalie-klein">🐙</a>
     </td>
 </table>
+</div>
