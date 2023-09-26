@@ -60,6 +60,10 @@ const WelcomePage = () => {
             </Toolbar>
             </CustomAppBar>
         <div className = "gradient-background flex " >
+            <div className="flex-1 text-center flex flex-col justify-center items-center mt- pl-">
+                <h1 className="text-4xl font-bold text-white">ClusterSense</h1>
+                <p className="text-lg text-white">An intuitive and feature-rich GUI that simplifies Kafka cluster management, monitoring, and interaction to streamline operations and efficiency when working with Kafka clusters.</p>
+            </div>
             {/* Section for SignUp and SignIn */}
             <Container id="signup-login" style={{ marginBottom: '4rem', background: 'transparent' }}>
                 {showSignUp ? <SignUp showSignIn={handleShowSignIn} /> : <SignIn showSignUp={handleShowSignUp} />}
@@ -70,7 +74,7 @@ const WelcomePage = () => {
             <Container id="get-started" maxWidth="sm">
                 <Box my={4} textAlign="center">
                     <Typography variant="body1">
-                        <h2>Get Started:</h2>{loremParagraph1}
+                        <h2>Welcome!</h2>{loremParagraph1}
                     </Typography>
                 </Box>
             </Container>

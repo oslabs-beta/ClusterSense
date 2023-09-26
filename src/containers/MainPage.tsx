@@ -100,20 +100,26 @@ const MainPage = () => {
         {isFormSubmitted ? (
           <div className="flex flex-col justify-center items-center align-content p-20">
             <div className="flex justify-center gap-x-20 flex-wrap w-screen p-30">
-              <div className="w-1/4 h-1/3">
+              <div className="w-1/4 h-1/3" >
+                {/* <h2>Under Replicated Partitions</h2> */}
                 <Chart
                   port={port}
                   query="kafka_server_replicamanager_underreplicatedpartitions"
+                  title={"Under Replicated Partitions"}
                 />
               </div>
               <div className="w-1/4 h-1/3">
                 <Chart
                   port={port}
                   query="kafka_controller_kafkacontroller_globaltopiccount"
+                  title={"Topics"}
                 />
               </div>
               <div className="w-1/4 h-1/3">
-                <Chart port={port} query="process_cpu_seconds_total" />
+                <Chart port={port} 
+                query="process_cpu_seconds_total" 
+                title={"CPU Usage"}
+                />
               </div>
             </div>
             <div
@@ -124,12 +130,14 @@ const MainPage = () => {
                 <Chart
                   port={port}
                   query="kafka_server_brokertopicmetrics_bytesin_total"
+                  title={"Bytes In"}
                 />
               </div>
-              <div className="w-1/4 h-1/4">
+              <div className="w-1/4 h-1/4 ">
                 <Chart
                   port={port}
                   query="kafka_server_brokertopicmetrics_bytesout_total"
+                  title={"Bytes Out"}
                 />
               </div>
             </div>

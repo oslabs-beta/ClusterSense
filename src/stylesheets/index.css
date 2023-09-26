@@ -57,6 +57,15 @@
     lg:w-4/12 p-6
 }
 
+.chart-dots {
+    display: none;
+  }
+
+  .chart-line {
+    stroke:  #3D2F91; /* Change to the desired line color */
+    stroke-width: 2px; /* Adjust line thickness as needed */
+  }
+  
 
 .font {
     font-family: 'Cabin', 'Libre Franklin', 'Oswald', sans-serif;
