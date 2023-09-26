@@ -1,4 +1,10 @@
-# Tech Stack
+![](https://hackmd.io/_uploads/HJtzS2el6.png)
+# Cluster Sense - Kafka Cluster Management Tool
+
+Cluster Sense is an open-source product dedicated to developing a Kafka cluster visualization tool. Our tool is designed with a containerized Kafka cluster in mind. Our tool is designed with developers in mind. We want to help our users visualize their metrics to prevent bottlenecks. 
+
+
+## Tech Stack
 
 <div align='center'>
 
@@ -20,3 +26,41 @@
 ![AWS](https://img.shields.io/badge/AWS-%23FF9900.svg?style=for-the-badge&logo=amazon-aws&logoColor=white)
 </div>
 
+
+## Contributors
+  <table>
+  <tr>
+    <td align="center">
+      <img src="https://avatars.githubusercontent.com/u/47452487?s=64&v=4" width="140px;" alt=""/>
+      <br />
+      <sub><b>Wanlu Ding</b></sub>
+      <br />
+      <a href="https://www.linkedin.com/search/results/all/?fetchDeterministicClustersOnly=false&heroEntityKey=urn%3Ali%3Afsd_profile%3AACoAABKxIR0BLV8OyI1zzVgyL3KR2K0ePJ7tQS4&keywords=allison%20pratt&origin=RICH_QUERY_SUGGESTION&position=0&searchId=81cd2d60-188d-44c9-99ce-acff05157dc7&sid=~xo">🖇️</a>
+      <a href="https://github.com/allisons11">🐙</a>
+    </td>
+    <td align="center">
+      <img src="https://avatars.githubusercontent.com/u/69995214?v=4" width="140px;" alt=""/>
+      <br />
+      <sub><b>Allen Hui</b></sub>
+      <br />
+      <a href="https://www.linkedin.com/search/results/all/?fetchDeterministicClustersOnly=false&heroEntityKey=urn%3Ali%3Afsd_profile%3AACoAAA4wGg4B94KTig7u7BXG-d_hbiDT6_INpB8&keywords=katrina%20villanueva&origin=RICH_QUERY_SUGGESTION&position=0&searchId=61fd3f0e-8949-4718-a772-d24f2617e726&sid=Zr~">🖇️</a>
+      <a href="https://github.com/klgvillanueva">🐙</a>
+    </td>
+    <td align="center">
+      <img src="https://avatars.githubusercontent.com/u/22311749?v=4" width="140px;" alt=""/>
+      <br />
+      <sub><b>Sam Johnson</b></sub>
+      <br />
+      <a href="http://www.philliptroutman.info">💻</a>
+      <a href="https://www.linkedin.com/in/phillip-troutman/">🖇️</a>
+      <a href="https://github.com/troutman21">🐙</a>
+    </td>
+     <td align="center">
+      <img src="https://avatars.githubusercontent.com/u/26197909?v=4" width="140px;" alt=""/>
+      <br />
+      <sub><b>Daniel (Jung Tae) Lee</b></sub>
+      <br />
+      <a href="https://www.linkedin.com/search/results/all/?fetchDeterministicClustersOnly=false&heroEntityKey=urn%3Ali%3Afsd_profile%3AACoAABxBUMYBYh3jl6z8XMVs4D1VjdqU-oastdc&keywords=natalie%20klein&origin=RICH_QUERY_SUGGESTION&position=0&searchId=7ca29d7e-56b5-4dce-a2a1-f9d9e5594052&sid=XY8">🖇️</a>
+      <a href="https://github.com/natalie-klein">🐙</a>
+    </td>
+</table>
