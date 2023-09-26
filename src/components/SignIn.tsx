@@ -63,14 +63,9 @@ const toSignUp = () => {
 
 return (
 <div>
-<div style={{ display: 'flex', justifyContent: 'flex-end', width: '100%' }}>
-    <div className="signIn-up" style={{ maxWidth: '400px', boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)'}}>
-    <img
-      className="mx-auto w-48 "
-      style={{ width: '60%' }}
-      src={logoFour}
-      alt=""
-    />
+<div className = "flex justify-center items-center" style={{ width: '100%'}}>
+    <div className="signIn-up" style={{ maxWidth: '1000px', boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)'}}>
+    <h2 className = "font-bold pb-4" >Login</h2>
       <TextField id="outlined-basic" 
         sx={{width: '100%', mb: 4}} 
         label="username" 

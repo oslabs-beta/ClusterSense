@@ -54,15 +54,10 @@ const SignUp = ({ showSignIn }) => {
 
   return (
 
-    <div style={{ display: 'flex', justifyContent: 'flex-end', width: '100%' }}>
-      <div className="signIn-up" style={{ boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)'}}>
+  <div className = "flex justify-center items-center" style={{ width: '100%'}}>
+      <div className="signIn-up pr-20" style={{ boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)'}}>
       {/* <div className="signInContainer mb-4"> */}
-        <img
-          className="mx-auto w-48"
-          style={{ width: '60%' }}
-          src={logoFour}
-          alt=""
-        />
+        <h2 className= "font-bold pb-4" >Sign Up</h2>
         <div className="signInBox mb-4 ">
           <TextField
             id="outlined-basic"

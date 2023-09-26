@@ -1,6 +1,7 @@
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
+@import url('https://fonts.googleapis.com/css2?family=Cabin:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap');
 
 @layer base {
     html {
@@ -43,18 +44,11 @@
     background: 'transparent',
 }
 
-.border{
-    border: #89278D;
-}
-
-.right{
-    @apply flex justify-end;
-}
 
 .signIn-up{
-    @apply justify-end h-screen bg-white flex-col items-center w-full h-full text-black
+    @apply h-screen bg-white flex-col items-center w-full h-full text-black
     rounded-lg
-    lg:w-4/12 p-6
+    lg:w-5/12 p-6
 }
 
 .chart-dots {
@@ -67,6 +61,11 @@
   }
   
 
-.font {
-    font-family: 'Cabin', 'Libre Franklin', 'Oswald', sans-serif;
+.fontStyling {
+    font-family: 'DM Sans', sans-serif;
+    font: bold;
+  }
+
+  .text-custom {
+    font-size: 20px;
   }

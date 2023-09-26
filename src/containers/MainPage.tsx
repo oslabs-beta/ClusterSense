@@ -176,7 +176,7 @@ const MainPage = () => {
                 />
               </div>
               <div>
-                <Button variant="contained" type="submit">
+                <Button variant="contained" type="submit" className='gradient-background'>
                   Submit
                 </Button>
                 {/* <button type="submit">Submit</button> */}
