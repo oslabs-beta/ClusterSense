@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { TERipple } from 'tw-elements-react';
 import TextField from '@mui/material/TextField';
@@ -7,7 +7,7 @@ interface SignUpProps {
   showSignIn: () => void;
 }
 
-const SignUp: React.FC<SignUpProps> = ({ showSignIn }) => {
+const SignUp: React.FC = ({ showSignIn }: SignUpProps) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
