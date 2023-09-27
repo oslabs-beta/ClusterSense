@@ -39,6 +39,7 @@
     "react-iframe": "^1.8.5",
     "react-router-dom": "^6.15.0",
     "react-select": "^5.7.4",
+    "react-type-animation": "^3.1.0",
     "tw-elements": "^1.0.0",
     "tw-elements-react": "^1.0.0-alpha1"
   },

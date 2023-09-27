@@ -1,0 +1,14 @@
+#scrape time
+global:
+  scrape_interval: 5s
+  evaluation_interval: 30s
+
+#dictionaries for prometheus and the exporter
+scrape_configs:
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['localhost:9090']
+
+  - job_name: 'jmx-kafka'
+    static_configs:
+      - targets: ['jmx-kafka:5556']
