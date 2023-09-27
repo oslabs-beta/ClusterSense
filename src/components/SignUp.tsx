@@ -1,11 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { TEInput, TERipple } from 'tw-elements-react';
-import logo from '../assets/ClusterSense.png';
-import logoFour from '../assets/ClusterSenseBigger.png';
+import { TERipple } from 'tw-elements-react';
 import TextField from '@mui/material/TextField';
 
-const SignUp = ({ showSignIn }) => {
+interface SignUpProps {
+  showSignIn: () => void;
+}
+
+const SignUp: React.FC<SignUpProps> = ({ showSignIn }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -66,7 +68,7 @@ const SignUp = ({ showSignIn }) => {
             variant="outlined"
             type="text"
             value={username}
-            onChange={(e) => setUsername(e.target.value)}
+            onChange={(e:React.ChangeEvent<HTMLInputElement>) => setUsername(e.target.value)}
           />
           <TextField
             id="outlined-basic"
@@ -75,7 +77,7 @@ const SignUp = ({ showSignIn }) => {
             variant="outlined"
             type="password"
             value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={(e:React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
           />
           <div className="mb-12 pb-1 pt-1 text-center">
             <TERipple rippleColor="light" className="w-full">

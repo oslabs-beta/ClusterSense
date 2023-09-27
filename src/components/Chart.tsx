@@ -1,4 +1,5 @@
-import { ReactElement, useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import ReactElement from 'react';
 import {
   Chart as ChartJS,
   LineElement,
@@ -8,7 +9,6 @@ import {
   Title,
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
-import React from 'react';
 import axios from 'axios';
 
 type ChartProps = {
@@ -31,13 +31,14 @@ const loading = {
     },
   ],
 };
+type DataPoint = string[][];
+type Data = string[]
 
 //rounds the value to 4 decimals and returns values for Charts.js to use
-const organizeData = (array) => {
+const organizeData = (array: DataPoint) => {
   //const time = [];
-  const value = [];
-
-  array.forEach((el) => {
+  const value: string[] = [];
+  array.forEach((el: Data) => {
     if (el[1].length > 5 && el[1].includes('.')) {
       el[1] = el[1].slice(0, 5);
     }
@@ -69,7 +70,7 @@ const organizeData = (array) => {
   return newChartData;
 };
 
-const Chart: React.FC<ChartProps> = ({ port, query, title }): ReactElement => {
+const Chart: React.FC<ChartProps> = ({ port, query, title }: ChartProps): ReactElement => {
   ChartJS.register(
     CategoryScale,
     LinearScale,
@@ -141,4 +142,3 @@ const Chart: React.FC<ChartProps> = ({ port, query, title }): ReactElement => {
 };
 
 export default Chart;
-export { organizeData };

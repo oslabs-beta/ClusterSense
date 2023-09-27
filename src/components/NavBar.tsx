@@ -13,12 +13,16 @@ import MouseEvent from 'react';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import Box from '@mui/material/Box';
 import BubbleChartIcon from '@mui/icons-material/BubbleChart';
-import { styled } from '@mui/system';
+// import { styled } from '@mui/system';
+
+type cluster = {value: string, label: string}
 
 interface NavProps {
   setPort: (e: number) => void;
-  formStatus: (e: boolean) => void;
+  formStatus: boolean;
   formSubmission: (e: boolean) => void;
+  clusterOptions: cluster[];
+  setClustersOptions: (e: cluster[]) => void;
 }
 
 const NavBar = ({
@@ -68,6 +72,9 @@ const NavBar = ({
     }
   }
 
+  interface clusterType {
+    cluster_port: number;
+  }
   useEffect(() => {
     const fetchClusters = async () => {
       try {
@@ -80,7 +87,7 @@ const NavBar = ({
           if (!data.length) {
             setClustersOptions([{ value: '', label: 'Empty' }]);
           } else {
-            const convertData = data.map((cluster) => {
+            const convertData = data.map((cluster: clusterType) => {
               const value = cluster.cluster_port.toString();
               const label = cluster.cluster_port.toString();
               return { value: value, label: label };
@@ -153,7 +160,7 @@ const NavBar = ({
               onClose={handleClusterMenuClose}
               onClick={handleSelect}
             >
-              {clusterOptions.map((element, index) => (
+              {clusterOptions.map((element: cluster, index : number) => (
                 <MenuItem key={index} value={element.value}>
                   {element.label}
                 </MenuItem>
