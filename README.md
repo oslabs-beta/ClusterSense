@@ -99,43 +99,40 @@ Some of our planned features for ClusterSense include:
 
 <table align="center">
   <tr>
-    <td align="center">
-      <img src="https://avatars.githubusercontent.com/u/47452487?s=64&v=4" width="140px;" alt=""/>
-      <br />
-      <sub><b>Wanlu Ding</b></sub>
-      <br />
-      <a href="https://github.com/WanluD"><img src="https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white" width="20px;" alt="Github"/></a>
-      <a href="https://www.linkedin.com/in/wanlu-ding/"><img src="https://img.shields.io/badge/LinkedIn-%230077B5.svg?logo=linkedin&logoColor=white" width="20px;" alt=""/></a>
-      <br />
-    </td>
-    <td align="center">
+ <td align="center">
       <img src="https://avatars.githubusercontent.com/u/128261732?v=4" width="140px;" alt=""/>
       <br />
       <sub><b>Allen Hui</b></sub>
       <br />
-      [![LinkedIn](https://img.shields.io/badge/LinkedIn-%230077B5.svg?logo=linkedin&logoColor=white)](https://www.linkedin.com/in/allen-hui-7b590b9a/)
-      <br />
-      [![Github](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://www.linkedin.com/in/allen-hui-7b590b9a/)
+      <a href="https://www.linkedin.com/in/allen-hui-7b590b9a/"><img src="https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white" alt=""/></a>
+      <a href="https://www.linkedin.com/in/allen-hui-7b590b9a/"><img src="https://img.shields.io/badge/LinkedIn-%230077B5.svg?logo=linkedin&logoColor=white"  alt=""/></a>
       <br />
     </td>
-    <td align="center">
+ <td align="center">
       <img src="https://media.licdn.com/dms/image/D4E03AQEnHhBIgWgE-w/profile-displayphoto-shrink_200_200/0/1695831173465?e=1701302400&v=beta&t=ftTIheSq1xHOdx-89QXwlEq0r-Lzz6PlZUlkYhmDpmo" width="140px;" alt=""/>
       <br />
       <sub><b>Sam Johnson</b></sub>
       <br />
-      [![LinkedIn](https://img.shields.io/badge/LinkedIn-%230077B5.svg?logo=linkedin&logoColor=white)](https://www.linkedin.com/in/samuel-johnson-dpt/)
-      <br />
-      [![Github](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/SFJohnson24)
+      <a href="https://github.com/SFJohnson24"><img src="https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white" alt=""/></a>
+      <a href="https://www.linkedin.com/in/samuel-johnson-dpt/"><img src="https://img.shields.io/badge/LinkedIn-%230077B5.svg?logo=linkedin&logoColor=white" alt=""/></a>
       <br />
     </td>
-     <td align="center">
+    <td align="center">
+      <img src="https://avatars.githubusercontent.com/u/47452487?s=64&v=4](https://www.linkedin.com/in/allen-hui-7b590b9a/" width="140px;" alt=""/>
+      <br />
+      <sub><b>Wanlu Ding</b></sub>
+      <br />
+      <a href="https://github.com/WanluD"><img src="https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white" alt=""/></a>
+      <a href="https://www.linkedin.com/in/wanlu-ding/"><img src="https://img.shields.io/badge/LinkedIn-%230077B5.svg?logo=linkedin&logoColor=white" alt=""/></a>
+      <br />
+    </td>
+ <td align="center">
       <img src="https://avatars.githubusercontent.com/u/30169238?v=4" width="140px;" alt=""/>
       <br />
       <sub><b>Daniel (Jung Tae) Lee</b></sub>
-        <br />
-      [![LinkedIn](https://img.shields.io/badge/LinkedIn-%230077B5.svg?logo=linkedin&logoColor=white)](https://www.linkedin.com/in/jungtaelee/)
       <br />
-      [![Github](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/jungtaelee0128")
+      <a href="https://github.com/jungtaelee0128"><img src="https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white" alt=""/></a>
+      <a href="https://www.linkedin.com/in/jungtaelee/"><img src="https://img.shields.io/badge/LinkedIn-%230077B5.svg?logo=linkedin&logoColor=white" alt=""/></a>
       <br />
     </td>
 </table>
