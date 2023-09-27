@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import MouseEvent from 'react';
 import NavBar from '../components/NavBar';
-import MeetTeam from '../components/MeetTeam';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import { Container } from '@mui/material';
@@ -46,20 +45,6 @@ const MainPage = () => {
       }
     } catch (error) {
       console.log('error: ', error);
-    }
-  };
-
-  // useEffect that will fetch data from prometheus/backend once the form is submitted using the port
-
-  const getMetricData = async (metric: string) => {
-    if (!metricList.includes(metric)) return setMetricData([]);
-    try {
-      const response = await axios.get(
-        `http://${server}/api/v1/query?query=${metric}`
-      );
-      setMetricData(response.data.data.result);
-    } catch (err) {
-      console.log(err);
     }
   };
 
@@ -172,7 +157,7 @@ const MainPage = () => {
                   className="port"
                   type="text"
                   value={port}
-                  onChange={(e) => setPort(e.target.value)}
+                  onChange={(e:React.ChangeEvent<HTMLInputElement>) => setPort(e.target.value)}
                 />
               </div>
               <div>

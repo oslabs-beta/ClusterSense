@@ -1,10 +1,10 @@
 {
   "name": "clustersense",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "build": "tsc && vite build",
+    "build": "cross-env NODE_ENV=production vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "start": "cross-env NODE_ENV=production tsx server/server.ts",
@@ -19,7 +19,7 @@
     "@fortawesome/free-brands-svg-icons": "^6.4.2",
     "@fortawesome/react-fontawesome": "^0.2.0",
     "@mui/icons-material": "^5.14.9",
-    "@mui/material": "^5.14.9",
+    "@mui/material": "^5.14.11",
     "@mui/x-date-pickers": "^6.13.0",
     "axios": "^1.5.0",
     "bcryptjs": "^2.4.3",

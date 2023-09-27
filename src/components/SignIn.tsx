@@ -1,15 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { TEInput, TERipple } from 'tw-elements-react';
+import { TERipple } from 'tw-elements-react';
 import TextField from '@mui/material/TextField';
 
-// import logo from '../assets/ClusterSense.png';
-// import logoTwo from '../assets/CS-outline.png';
-import logoThree from '../assets/ClusterSense.png';
-import logoFour from '../assets/ClusterSenseBigger.png';
+interface SignUpProps {
+  showSignUp: () => void;
+}
 
-
-const SignIn = ({ showSignUp }) => {
+const SignIn = ({
+  showSignUp,
+}: SignUpProps) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -71,14 +71,14 @@ return (
         label="username" 
         variant="outlined" 
         type="text" 
-        value={username} onChange={(e) => setUsername(e.target.value)}/>
+        value={username} onChange={(e:React.ChangeEvent<HTMLInputElement>) => setUsername(e.target.value)}/>
   
       <TextField id="outlined-basic" 
        sx={{width: '100%', mb: 4}}  
       label="password" 
       variant="outlined" 
       type = "password" 
-      value={password} onChange={(e) => setPassword(e.target.value)}/>
+      value={password} onChange={(e:React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}/>
       <div className="mb-12 pb-1 pt-1 text-center">
         <TERipple rippleColor="light" className="w-full">
           <button

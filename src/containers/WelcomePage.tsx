@@ -1,45 +1,42 @@
+import ReactElement from 'react';
 import React, { useState, useEffect } from 'react';
-import logo from '../assets/ClusterSenseNode.png';
 import logo2 from '../assets/logo2.png';
 import MeetTeam from '../components/MeetTeam';
 import SignIn from '../components/SignIn';
 import SignUp from '../components/SignUp';
 import { AppBar, Toolbar, Container, Typography, Button, Box, Grid } from '@mui/material';
-import { styled } from '@mui/system';
-import logoFour from '../assets/ClusterSenseBigger.png';
+// import { styled } from '@mui/system';
+import styled from '@emotion/styled';
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { TypeAnimation } from 'react-type-animation';
 import IconButton from '@mui/material/IconButton';
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 import RepoSection from '../components/RepoSection';
-import LocalInstall from '../components/LocalInstall'; 
-// import Box from '@mui/material/Box';
 import TimelineIcon from '@mui/icons-material/Timeline';
-import TimelineOutlinedIcon from '@mui/icons-material/TimelineOutlined';
 import VerifiedUserIcon from '@mui/icons-material/VerifiedUser';
 import CableIcon from '@mui/icons-material/Cable';
 
-const WelcomePage = () => {  
+const WelcomePage = (): ReactElement => {  
 
     // State to toggle between SignUp and SignIn components
     const [showSignUp, setShowSignUp] = useState(false);
     const [showScrollTopButton, setShowScrollTopButton] = useState(false);
 
     // Handlers to toggle visibility of SignUp and SignIn components
-    const handleShowSignIn = () => {
+    const handleShowSignIn = ():void => {
         setShowSignUp(false);
     };
   
-    const handleShowSignUp = () => {
+    const handleShowSignUp = ():void => {
         setShowSignUp(true);
     };
 
     useEffect(() => {
-        const handleScroll = () => {
+        const handleScroll = ():void => {
             const meetTeamElem = document.getElementById("team");
-            const rect = meetTeamElem.getBoundingClientRect();
-            if (rect.top <= window.innerHeight) {
+            const rect = meetTeamElem?.getBoundingClientRect();
+            if (rect && rect.top <= window.innerHeight) {
                 setShowScrollTopButton(true);
             } else {
                 setShowScrollTopButton(false);
@@ -56,12 +53,17 @@ const WelcomePage = () => {
     const loremParagraph1 = `An intuitive and feature-rich GUI that simplifies Kafka cluster management, monitoring, and interaction to streamline operations and efficiency when working with Kafka clusters.`;
     const loremParagraph2 = `ClusterSense provides pre-built charts for the most important metrics in your Kafka Application.
     User port numbers are saved and available with our drop own menu.`
-    const loremParagraph3 = "Port information of existing users are stored in our database for immediate access to their metrics. Metrics are not stored in our database.";
+    // const loremParagraph3 = "Port information of existing users are stored in our database for immediate access to their metrics. Metrics are not stored in our database.";
 
-    const CustomAppBar = styled(AppBar)({
-        backgroundColor: 'transparent',
-        boxShadow: 'none',
-      });
+    // const CustomAppBar = styled(AppBar)({
+    //     backgroundColor: 'transparent',
+    //     boxShadow: 'none',
+    //   });
+    const CustomAppBar = styled(AppBar)`
+    background-color: transparent;
+    box-shadow: none;
+  ` as unknown as typeof AppBar;
+    
       const theme = useTheme();
       const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
   
@@ -73,7 +75,7 @@ const WelcomePage = () => {
     return (
         <div>
             {/* Navigation bar */}
-            <CustomAppBar position="sticky" className = "bg-gradient-to-r from-[#3D2F91] to-[#89278D] background-animate " sx={{ fontFamily: 'dm-sans' , backgroundColor: 'transparent', }}>
+            <CustomAppBar position="sticky" className = "bg-gradient-to-r from-[#3D2F91] to-[#89278D] background-animate " sx={{ fontFamily: 'dm-sans' }}>
                 <Toolbar>
                     {/* Logo Display */}
                     <Typography variant="h6" style={{ flexGrow: 1 }}>
