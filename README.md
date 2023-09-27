@@ -118,7 +118,7 @@ Some of our planned features for ClusterSense include:
       <br />
     </td>
     <td align="center">
-      <img src="https://avatars.githubusercontent.com/u/47452487?s=64&v=4](https://www.linkedin.com/in/allen-hui-7b590b9a/" width="140px;" alt=""/>
+      <img src="https://media.licdn.com/dms/image/D4D03AQEywFli_PzOPA/profile-displayphoto-shrink_200_200/0/1695832198433?e=1701302400&v=beta&t=DyJpcY0cURzUj3D7ISpqoGvWFDGD_mg9VvkOidkCqsw" width="140px;" alt=""/>
       <br />
       <sub><b>Wanlu Ding</b></sub>
       <br />
