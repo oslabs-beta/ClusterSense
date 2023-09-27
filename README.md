@@ -1,8 +1,27 @@
 ![](https://hackmd.io/_uploads/HJtzS2el6.png)
-# Cluster Sense - Kafka Cluster Management Tool
+# ClusterSense - Kafka Cluster Management Tool
 
-Cluster Sense is an open-source product dedicated to developing a Kafka cluster visualization tool. Our tool is designed with a containerized Kafka cluster in mind. Our tool is designed with developers in mind. We want to help our users visualize their metrics to prevent bottlenecks. 
+---
+## Table of Contents
 
+- [Product Description](#product-description)
+- [Web App](#Web-App)
+- [Install Locally](#install-locally)
+- [Contribute](#contribute)
+- [Our Team](#Contributors)
+- [License](#license)
+
+---
+## Product Description
+
+Cluster Sense is an open-source product dedicated to developing a Kafka cluster visualization tool. Our tool is designed with developers in mind, to help our users visualize their metrics and have an understanding of their clusters' health. 
+
+# Features
+Real-time Metrics and Charts: ClusterSense provides a GUI with important metrics, updated in real-time for insights into your Kafka clusters' health and performance through visually appealing charts.
+
+Seamless Prometheus Integration: Setting up Prometheus to scrape Kafka metrics has never been easier. View our sample YML file to guide you through the prometheus configuration, ensuring that the process is a smooth experience.
+
+Profile Port Selection: The application's top navbar has a dropdown that stores your previous port selections for easy navigation between seperate Kafka Instances for seamless monitoring of multiple brokers or clusters.
 
 ## Tech Stack
 
@@ -26,6 +45,54 @@ Cluster Sense is an open-source product dedicated to developing a Kafka cluster 
 ![AWS](https://img.shields.io/badge/AWS-%23FF9900.svg?style=for-the-badge&logo=amazon-aws&logoColor=white)
 </div>
 
+---
+
+## Web App
+
+To begin using ClusterSense, navigate to <a href="http://www.ClusterSense.org">ClusterSense.org</a> and create an account.
+
+- Ensure prometheus is running and connected with your broker/cluster
+- Enter the port prometheus is currently occupying into the form and hit submit; we have included a sample prometheus.yml file in the _sampleconfig_ directory to streamline your prometheus configuration.
+- View real-time data of your Apache-Kafka instance
+
+
+### Install Locally
+
+Alternatively, if you would prefer to run ClusterSense locally, you may fork and clone our Github repository.
+
+- Create a .env file in the main directory and create a variable PG_URL set equal to your PostgreSQL server instance URI
+- Instantiate the database using the CLI with these table formats:
+  - `CREATE TABLE "users" (
+   user_id serial PRIMARY KEY,
+   username varchar(50) NOT NULL,
+   password varchar(255),
+   oauth_provider varchar(255),
+   oauth_id varchar(255),
+   oauth_access_token varchar(255),
+   oauth_refresh_token varchar(255),
+   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+   updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP);`
+  - `CREATE TABLE cluster(
+   id SERIAL PRIMARY KEY,
+   user_id SERIAL REFERENCES users(user_id),
+   cluster_port INTEGER NOT NULL,
+   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP)`
+- In the terminal run:
+  - `npm install`
+  - `npm run dev`
+- Once the application is running, navigate to localhost:3030, create an account, and input the port of your Prometheus server.
+
+---
+
+## Contribute
+If you would like to contribute to this product and improve upon it's current functionality or add a feature, please fork the repository and submit a pull request.
+Some of our planned features for ClusterSense include:
+- Open Authorization
+- Light/Dark Mode
+- Adding User-Defined Charts to GUI
+- Alerting with user-defined service level indicators
+
+---
 
 ## Contributors
 <div align='center'>
@@ -37,33 +104,45 @@ Cluster Sense is an open-source product dedicated to developing a Kafka cluster 
       <br />
       <sub><b>Wanlu Ding</b></sub>
       <br />
-      <a href="https://www.linkedin.com/search/results/all/?fetchDeterministicClustersOnly=false&heroEntityKey=urn%3Ali%3Afsd_profile%3AACoAABKxIR0BLV8OyI1zzVgyL3KR2K0ePJ7tQS4&keywords=allison%20pratt&origin=RICH_QUERY_SUGGESTION&position=0&searchId=81cd2d60-188d-44c9-99ce-acff05157dc7&sid=~xo">🖇️</a>
-      <a href="https://github.com/allisons11">🐙</a>
+      [![LinkedIn](https://img.shields.io/badge/LinkedIn-%230077B5.svg?logo=linkedin&logoColor=white)](https://www.linkedin.com/in/wanlu-ding/)
+      <br />
+      ![Github](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/WanluD)</a>
+      <br />
     </td>
     <td align="center">
       <img src="https://avatars.githubusercontent.com/u/69995214?v=4" width="140px;" alt=""/>
       <br />
       <sub><b>Allen Hui</b></sub>
       <br />
-      <a href="https://www.linkedin.com/search/results/all/?fetchDeterministicClustersOnly=false&heroEntityKey=urn%3Ali%3Afsd_profile%3AACoAAA4wGg4B94KTig7u7BXG-d_hbiDT6_INpB8&keywords=katrina%20villanueva&origin=RICH_QUERY_SUGGESTION&position=0&searchId=61fd3f0e-8949-4718-a772-d24f2617e726&sid=Zr~">🖇️</a>
-      <a href="https://github.com/klgvillanueva">🐙</a>
+      [![LinkedIn](https://img.shields.io/badge/LinkedIn-%230077B5.svg?logo=linkedin&logoColor=white)](https://www.linkedin.com/in/allen-hui-7b590b9a/)
+      <br />
+      ![Github](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://www.linkedin.com/in/allen-hui-7b590b9a/)
+      <br />
     </td>
     <td align="center">
       <img src="https://avatars.githubusercontent.com/u/22311749?v=4" width="140px;" alt=""/>
       <br />
       <sub><b>Sam Johnson</b></sub>
       <br />
-      <a href="http://www.philliptroutman.info">💻</a>
-      <a href="https://www.linkedin.com/in/phillip-troutman/">🖇️</a>
-      <a href="https://github.com/troutman21">🐙</a>
+      [![LinkedIn](https://img.shields.io/badge/LinkedIn-%230077B5.svg?logo=linkedin&logoColor=white)](https://www.linkedin.com/in/samuel-johnson-dpt/)
+      <br />
+      ![Github](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/SFJohnson24)</a>
+      <br />
     </td>
      <td align="center">
       <img src="https://avatars.githubusercontent.com/u/26197909?v=4" width="140px;" alt=""/>
       <br />
       <sub><b>Daniel (Jung Tae) Lee</b></sub>
+        <br />
+      [![LinkedIn](https://img.shields.io/badge/LinkedIn-%230077B5.svg?logo=linkedin&logoColor=white)](https://www.linkedin.com/in/jungtaelee/)
       <br />
-      <a href="https://www.linkedin.com/search/results/all/?fetchDeterministicClustersOnly=false&heroEntityKey=urn%3Ali%3Afsd_profile%3AACoAABxBUMYBYh3jl6z8XMVs4D1VjdqU-oastdc&keywords=natalie%20klein&origin=RICH_QUERY_SUGGESTION&position=0&searchId=7ca29d7e-56b5-4dce-a2a1-f9d9e5594052&sid=XY8">🖇️</a>
-      <a href="https://github.com/natalie-klein">🐙</a>
+      ![Github](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/jungtaelee0128")
+      <br />
     </td>
 </table>
 </div>
+
+---
+
+# License
+This project is licensed under the [**MIT License**](https://choosealicense.com/licenses/mit/)
