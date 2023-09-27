@@ -7,11 +7,13 @@ import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
-import logo from '../assets/ClusterSenseNode.png';
+import logo2 from '../assets/logo2.png';
+// import logo2 from '../assets/cluster_logo_trans.png';
 import MouseEvent from 'react';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import Box from '@mui/material/Box';
 import BubbleChartIcon from '@mui/icons-material/BubbleChart';
+import { styled } from '@mui/system';
 
 interface NavProps {
   setPort: (e: number) => void;
@@ -110,9 +112,14 @@ const NavBar = ({
   const handleClusterMenuClose = () => {
     setClusterMenuAnchorEl(null);
   };
+
   return (
     <div className="nav-bar">
-      <AppBar position="static">
+      <AppBar position="static"  
+      style={{ //linear-gradient(to left, #3D2F91, #89278D);
+            backgroundImage: 'linear-gradient(to left, #3D2F91, #89278D)',
+          }}
+        >
         <Toolbar style={{ justifyContent: 'space-between' }}>
           {/* <div className="nav-barLeft"> */}
           <div style={{ display: 'flex', alignItems: 'center' }}>
@@ -127,12 +134,12 @@ const NavBar = ({
             <Box
               component="img"
               sx={{ height: 54 }}
-              alt="Logo"
-              src={logo}
+              alt="Logo2"
+              src={logo2}
               onClick={toHome}
             />
 
-            <Typography variant="h6" component="div" onClick={toHome}>
+            <Typography variant="h5"  component="div" onClick={toHome} style={{ margin: '10px' }}>
               ClusterSense
             </Typography>
             {/* <img className="Logo" src={logo} alt="" /> */}
@@ -175,7 +182,7 @@ const NavBar = ({
             {/* </div> */}
           </Stack>
         </Toolbar>
-      </AppBar>
+        </AppBar>
     </div>
   );
 };

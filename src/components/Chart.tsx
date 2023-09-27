@@ -14,6 +14,7 @@ import axios from 'axios';
 type ChartProps = {
   port: number;
   query: string;
+  title: string;
 };
 
 const loading = {
@@ -68,7 +69,7 @@ const organizeData = (array) => {
   return newChartData;
 };
 
-const Chart: React.FC<ChartProps> = ({ port, query }): ReactElement => {
+const Chart: React.FC<ChartProps> = ({ port, query, title }): ReactElement => {
   ChartJS.register(
     CategoryScale,
     LinearScale,
@@ -103,7 +104,7 @@ const Chart: React.FC<ChartProps> = ({ port, query }): ReactElement => {
     maintainAspectRatio: false,
     responsive: true,
     animation: {
-      duration: 0,
+      duration: 1000,
     },
     scales: {
       y: {
@@ -121,7 +122,7 @@ const Chart: React.FC<ChartProps> = ({ port, query }): ReactElement => {
       title: {
         display: true,
         position: 'top' as const,
-        text: `${query}`,
+        text: `${title}`,
         color: '#black',
         align: 'start' as const,
         padding: {
