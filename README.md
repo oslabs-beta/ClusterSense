@@ -106,7 +106,7 @@ Some of our planned features for ClusterSense include:
       <br />
       [![LinkedIn](https://img.shields.io/badge/LinkedIn-%230077B5.svg?logo=linkedin&logoColor=white)](https://www.linkedin.com/in/wanlu-ding/)
       <br />
-      ![Github](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/WanluD)</a>
+      [![Github](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/WanluD)
       <br />
     </td>
     <td align="center">
@@ -116,17 +116,17 @@ Some of our planned features for ClusterSense include:
       <br />
       [![LinkedIn](https://img.shields.io/badge/LinkedIn-%230077B5.svg?logo=linkedin&logoColor=white)](https://www.linkedin.com/in/allen-hui-7b590b9a/)
       <br />
-      ![Github](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://www.linkedin.com/in/allen-hui-7b590b9a/)
+      [![Github](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://www.linkedin.com/in/allen-hui-7b590b9a/)
       <br />
     </td>
     <td align="center">
-      <img src="https://avatars.githubusercontent.com/u/22311749?v=4" width="140px;" alt=""/>
+      <img src="https://media.licdn.com/dms/image/D4E03AQEnHhBIgWgE-w/profile-displayphoto-shrink_200_200/0/1695831173465?e=1701302400&v=beta&t=ftTIheSq1xHOdx-89QXwlEq0r-Lzz6PlZUlkYhmDpmo" width="140px;" alt=""/>
       <br />
       <sub><b>Sam Johnson</b></sub>
       <br />
       [![LinkedIn](https://img.shields.io/badge/LinkedIn-%230077B5.svg?logo=linkedin&logoColor=white)](https://www.linkedin.com/in/samuel-johnson-dpt/)
       <br />
-      ![Github](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/SFJohnson24)</a>
+      [![Github](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/SFJohnson24)
       <br />
     </td>
      <td align="center">
@@ -136,7 +136,7 @@ Some of our planned features for ClusterSense include:
         <br />
       [![LinkedIn](https://img.shields.io/badge/LinkedIn-%230077B5.svg?logo=linkedin&logoColor=white)](https://www.linkedin.com/in/jungtaelee/)
       <br />
-      ![Github](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/jungtaelee0128")
+      [![Github](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/jungtaelee0128")
       <br />
     </td>
 </table>
