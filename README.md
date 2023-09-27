@@ -97,20 +97,19 @@ Some of our planned features for ClusterSense include:
 ## Contributors
 <div align='center'>
 
-  <table>
+<table align="center">
   <tr>
     <td align="center">
       <img src="https://avatars.githubusercontent.com/u/47452487?s=64&v=4" width="140px;" alt=""/>
       <br />
       <sub><b>Wanlu Ding</b></sub>
       <br />
-      [![LinkedIn](https://img.shields.io/badge/LinkedIn-%230077B5.svg?logo=linkedin&logoColor=white)](https://www.linkedin.com/in/wanlu-ding/)
-      <br />
-      [![Github](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/WanluD)
+      <a href="https://github.com/WanluD"><img src="https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white" width="20px;" alt="Github"/></a>
+      <a href="https://www.linkedin.com/in/wanlu-ding/"><img src="https://img.shields.io/badge/LinkedIn-%230077B5.svg?logo=linkedin&logoColor=white" width="20px;" alt=""/></a>
       <br />
     </td>
     <td align="center">
-      <img src="https://avatars.githubusercontent.com/u/69995214?v=4" width="140px;" alt=""/>
+      <img src="https://avatars.githubusercontent.com/u/128261732?v=4" width="140px;" alt=""/>
       <br />
       <sub><b>Allen Hui</b></sub>
       <br />
@@ -130,7 +129,7 @@ Some of our planned features for ClusterSense include:
       <br />
     </td>
      <td align="center">
-      <img src="https://avatars.githubusercontent.com/u/26197909?v=4" width="140px;" alt=""/>
+      <img src="https://avatars.githubusercontent.com/u/30169238?v=4" width="140px;" alt=""/>
       <br />
       <sub><b>Daniel (Jung Tae) Lee</b></sub>
         <br />
