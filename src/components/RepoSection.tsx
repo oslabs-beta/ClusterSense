@@ -21,7 +21,7 @@ const RepoSection: React.FC = () => (
       </h2>
       <h2 style={{ marginBottom: '20px', fontFamily: 'Arial, sans-serif', fontSize: '24px', display: 'flex', justifyContent: 'center', alignItems: 'center',  }}>
         <span>Check our LinkedIn </span>
-        <a href="https://github.com/oslabs-beta/ClusterSense" target="_blank" rel="noopener noreferrer" style={{ marginLeft: '10px', marginBottom: '2px',justifyContent: 'center', alignItems :'center'}}>
+        <a href="https://www.linkedin.com/company/clustersense/" target="_blank" rel="noopener noreferrer" style={{ marginLeft: '10px', marginBottom: '2px',justifyContent: 'center', alignItems :'center'}}>
           <img src={linkedinIcon} alt="LinkedIn Logo" style={{ width: '30px', height: '30px' }} />
         </a>
       </h2>
