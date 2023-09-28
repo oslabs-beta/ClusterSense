@@ -17,6 +17,7 @@ import RepoSection from '../components/RepoSection';
 import TimelineIcon from '@mui/icons-material/Timeline';
 import VerifiedUserIcon from '@mui/icons-material/VerifiedUser';
 import CableIcon from '@mui/icons-material/Cable';
+import chartsVisual from '../assets/Charts.gif'
 
 const WelcomePage = (): ReactElement => {  
 
@@ -91,8 +92,8 @@ const WelcomePage = (): ReactElement => {
                     {/* Navigation Buttons */}
                     <Box display="flex">
                         {/* <Button href="#signup-login" color="inherit">Log in/Sign up</Button> */}
-                        <Button href="#get-started" color="inherit">Get Started</Button>
-                        <Button href="#demo" color="inherit">Demo</Button>
+                        <Button href="#get-started" color="inherit">Features</Button>
+                        <Button href="#demo" color="inherit">Get Started</Button>
                         <Button href="#team" color="inherit">Team</Button>
                     </Box>
                 </Toolbar>
@@ -167,12 +168,14 @@ const WelcomePage = (): ReactElement => {
             {/* <LocalInstall /> */}
 
             {/* Section showcasing the product demo */}
-            <h2 className = "text-xl font-bold pb-4" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', textAlign: "center", marginTop: '20px'}}
+            <div id = "get-started" style={{ marginTop : '100px', marginBottom : '100px'}}>
+                <h2 className = "text-xl font-bold pb-4" style={{ display: 'flex', justifyContent: 'center', textAlign: "center"}}
                         // style={{ font-size: '20px' }}
                 >Welcome to ClusterSense!</h2>
                 <Typography variant="body1" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', textAlign: "center", marginBottom: '30px', marginLeft: '500px', marginRight: '500px'}}>
                         {loremParagraph1}
                 </Typography>
+            </div>
             <Container id="demo">
                 <Typography variant="h4" sx={{ marginTop: '20px', display: 'flex', justifyContent: 'center', alignItems: 'center', textAlign: 'center',}}>
                         Core Features
@@ -274,18 +277,18 @@ const WelcomePage = (): ReactElement => {
                     </Typography> */}
 
                     {/* Description followed by demo */}
-                    <Grid item xs={6} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+                    <Grid item xs={6} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', marginTop : '100px'}}>
                     {/* <Typography variant="body1">
                         <h2 className = "text-xl font-bold pb-4"
                         // style={{ font-size: '20px' }}
                         >Welcome!</h2>{loremParagraph1}
                     </Typography> */}
                         <Typography variant="body1">
-                        <h2 className = 'ext-xl font-bold pb-4'>Getting Started</h2>{loremParagraph2}
+                        <h2 className = 'text-xl font-bold pb-4'>Getting Started</h2>{loremParagraph2}
                         </Typography>
                     </Grid>
-                    <Grid item xs={6}>
-                        <img src="/src/assets/Charts.gif" alt="Demo GIF" />
+                    <Grid item xs={6} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', marginTop : '100px' }}>
+                        <img src={chartsVisual} alt="Demo GIF" />
                     </Grid>
                 </Grid>
             </Container>
