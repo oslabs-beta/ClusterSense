@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { TERipple } from 'tw-elements-react';
 import TextField from '@mui/material/TextField';
@@ -31,7 +31,7 @@ const SignIn = ({
         username: username,
         password: password,
       };
-      const response = await fetch(`http://localhost:4000/login/loginRequest`, {
+      const response = await fetch(`/login/loginRequest`, {
         method: 'POST',
         credentials: 'include',
         headers: { 'Content-Type': 'application/json' },

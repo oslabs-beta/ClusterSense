@@ -1,5 +1,6 @@
 import ReactElement from 'react';
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
+// import useEffect from 'react';
 import logo2 from '../assets/logo2.png';
 import MeetTeam from '../components/MeetTeam';
 import SignIn from '../components/SignIn';
