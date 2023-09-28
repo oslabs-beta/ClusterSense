@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import  { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
@@ -47,7 +47,7 @@ const NavBar = ({
 
   const signOut = async () => {
     try {
-      const response = await fetch('http://localhost:4000/logout', {
+      const response = await fetch('/logout', {
         method: 'GET',
         credentials: 'include',
         headers: { 'Content-Type': 'application/json' },
@@ -78,7 +78,7 @@ const NavBar = ({
   useEffect(() => {
     const fetchClusters = async () => {
       try {
-        const response = await fetch('http://localhost:4000/cluster/DB', {
+        const response = await fetch('/cluster/DB', {
           method: 'GET',
           credentials: 'include',
         });

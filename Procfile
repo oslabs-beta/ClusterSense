@@ -1,0 +1,1 @@
+web: tsx server/server.ts

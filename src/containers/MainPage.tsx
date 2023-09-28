@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
+// import  useEffect from 'react';
 import { useNavigate } from 'react-router-dom';
 import MouseEvent from 'react';
 import NavBar from '../components/NavBar';
@@ -27,7 +28,7 @@ const MainPage = () => {
       //this will put the cluster into the database
       const numPort = Number(port);
       const data = { port: numPort };
-      const response = await fetch('http://localhost:4000/cluster', {
+      const response = await fetch('/cluster', {
         method: 'POST',
         credentials: 'include',
         headers: {
