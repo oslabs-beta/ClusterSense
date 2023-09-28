@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import  { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { TERipple } from 'tw-elements-react';
 import TextField from '@mui/material/TextField';
@@ -7,7 +7,7 @@ interface SignUpProps {
   showSignIn: () => void;
 }
 
-const SignUp: React.FC = ({ showSignIn }: SignUpProps) => {
+const SignUp: React.FC<SignUpProps> = ({ showSignIn }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -29,7 +29,7 @@ const SignUp: React.FC = ({ showSignIn }: SignUpProps) => {
         username: username,
         password: password,
       };
-      const data = await fetch(`http://localhost:4000/login/signupRequest`, {
+      const data = await fetch(`/login/signupRequest`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(body),

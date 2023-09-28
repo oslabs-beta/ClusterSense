@@ -14,7 +14,8 @@ export default defineConfig({
   server: {
     port: 3030,
     proxy: {
-      "/cluster": "http://localhost:4000/cluster",
+      "/cluster/DB" : "http://localhost:4000",
+      "/cluster": "http://localhost:4000",
       "/login": "http://localhost:4000",
       "/logout": "http://localhost:4000",
     }
