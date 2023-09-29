@@ -14,15 +14,13 @@ const SignUp: React.FC<SignUpProps> = ({ showSignIn }) => {
 
   const navigate = useNavigate();
   const goLogin = () => {
-    // const path = '/';
-    // navigate(path);
     showSignIn();
   };
   const toHome = () => {
     const path = '/home';
     navigate(path);
   };
-
+  //
   const handleClick = async () => {
     try {
       const body = {
@@ -37,18 +35,14 @@ const SignUp: React.FC<SignUpProps> = ({ showSignIn }) => {
       if (data.ok) {
         toHome();
       } else if (data.status === 400) {
-        // Display a user-friendly error message here
         setError('All fields are required');
       } else if (data.status === 409) {
-        // Display a user-friendly error message here
         setError('Username already exists!');
       } else {
-        // Handle other error cases
         console.log(data);
         setError('Unable to create user. Please try again!');
       }
     } catch (err) {
-      //render error in front end
       console.log(err);
       setError('An error occurred.');
     }
@@ -58,7 +52,6 @@ const SignUp: React.FC<SignUpProps> = ({ showSignIn }) => {
 
   <div className = "flex justify-center items-center" style={{ width: '100%'}}>
       <div className="signIn-up pr-20" style={{ boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)'}}>
-      {/* <div className="signInContainer mb-4"> */}
         <h2 className= "font-bold pb-4" >Sign Up</h2>
         <div className="signInBox mb-4 ">
           <TextField
@@ -98,7 +91,6 @@ const SignUp: React.FC<SignUpProps> = ({ showSignIn }) => {
               {error}
             </div>
           )}
-          {/* // Register button */}
           <div className="flex items-center justify-between pb-6">
             <p className="mb-0 mr-2">Have an account?</p>
             <TERipple rippleColor="light">
@@ -112,7 +104,6 @@ const SignUp: React.FC<SignUpProps> = ({ showSignIn }) => {
             </TERipple>
           </div>
         </div>
-      {/* </div> */}
     </div>
   </div>
   );

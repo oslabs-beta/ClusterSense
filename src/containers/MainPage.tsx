@@ -1,12 +1,10 @@
 import { useState, useEffect } from 'react';
-// import  useEffect from 'react';
 import { useNavigate } from 'react-router-dom';
 import MouseEvent from 'react';
 import NavBar from '../components/NavBar';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import { Container } from '@mui/material';
-// import Iframe from 'react-iframe';
 import Chart from '../components/Chart.tsx';
 
 const MainPage = () => {
@@ -17,7 +15,6 @@ const MainPage = () => {
     navigate(path);
   };
 
-  //**** */
   const [clusterOptions, setClustersOptions] = useState([]);
   const [port, setPort] = useState();
   const [isFormSubmitted, setIsFormSubmitted] = useState(false);
@@ -79,7 +76,6 @@ const MainPage = () => {
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
-          // height: '100vh',
         }}
         className="h-screen bg-neutral-200"
       >
@@ -87,7 +83,6 @@ const MainPage = () => {
           <div className="flex flex-col justify-center items-center align-content p-20">
             <div className="flex justify-center gap-x-20 flex-wrap w-screen p-30">
               <div className="w-1/4 h-1/3" >
-                {/* <h2>Under Replicated Partitions</h2> */}
                 <Chart
                   port={port}
                   query="kafka_server_replicamanager_underreplicatedpartitions"
@@ -132,10 +127,6 @@ const MainPage = () => {
           <Container
             maxWidth="md"
             style={{
-              // display: 'flex',
-              // justifyContent: 'center',
-              // alignItems: 'center',
-              // height: '100vh',
               backgroundColor: 'white',
               margin: '2rem',
               padding: '2rem',
@@ -153,7 +144,6 @@ const MainPage = () => {
                 <p className="mb-0 mr-2" style={{ fontSize: '1.2rem' }}>
                   Enter your JMX port for your Kafka Cluster:{' '}
                 </p>
-                {/* <span>Enter your JMX port for you Kafka Cluster: </span> */}
                 <TextField
                   className="port"
                   type="text"
@@ -165,14 +155,12 @@ const MainPage = () => {
                 <Button variant="contained" type="submit" className='gradient-background'>
                   Submit
                 </Button>
-                {/* <button type="submit">Submit</button> */}
               </div>
             </form>
           </Container>
         )}
       </div>
     </div>
-    // </Container>
   );
 };
 

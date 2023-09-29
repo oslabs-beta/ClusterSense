@@ -1,5 +1,4 @@
 import React from 'react';
-// import teamPhoto from '../assets/team.png';
 import DanielLee from '../assets/DanielLee.jpeg';
 import WanluDing from '../assets/WanluDing.jpeg';
 import SamJohnson from '../assets/SamJohnson.png';
@@ -63,18 +62,6 @@ const MeetTeam: React.FC = () => {
         Meet the Team
       </h2>
 
-      {/* Project repositories links */}
-      {/* <div style={{ marginBottom: '20px', textAlign: 'center' }}>
-        <p>Check out our:</p>
-        <a href="https://github.com/SFJohnson24/Mock_Kafka" target="_blank" rel="noopener noreferrer" style={{ marginRight: '15px' }}>
-          <FontAwesomeIcon icon={faGithub} /> Demo App
-        </a>
-        <a href="https://github.com/oslabs-beta/ClusterSense" target="_blank" rel="noopener noreferrer">
-          <FontAwesomeIcon icon={faGithub} /> Product GitHub
-        </a>
-      </div> */}
-
-      {/* List of team members */}
       <div style={{
         display: 'flex',
         flexWrap: 'wrap',
@@ -95,16 +82,12 @@ const MeetTeam: React.FC = () => {
             boxShadow: '0px 0px 5px rgba(0, 0, 0, 0.1)',
             backgroundColor: '#f5f5f5'
           }}>
-            {/* Member's photo */}
             <img src={member.photo} alt={member.name} style={{ width: '100px', height: '100px', borderRadius: '50%', objectFit: 'cover', marginBottom: '10px' }} />
 
-            {/* Member's name */}
             <h3 style={{ fontWeight: 'bold', marginBottom: '5px' }}>{member.name}</h3>
 
-            {/* Member's email */}
             <p style={{ fontSize: '0.8rem', marginBottom: '10px' }}>{member.email}</p>
 
-            {/* Member's LinkedIn and GitHub links */}
             <div>
               <a href={member.linkedin} target="_blank" rel="noopener noreferrer" style={{ marginRight: '10px' }}>
                 <FontAwesomeIcon icon={faLinkedin} />
