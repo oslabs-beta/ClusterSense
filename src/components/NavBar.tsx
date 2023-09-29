@@ -8,12 +8,10 @@ import Typography from '@mui/material/Typography';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import logo2 from '../assets/logo2.png';
-// import logo2 from '../assets/cluster_logo_trans.png';
 import MouseEvent from 'react';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import Box from '@mui/material/Box';
 import BubbleChartIcon from '@mui/icons-material/BubbleChart';
-// import { styled } from '@mui/system';
 
 type cluster = {value: string, label: string}
 
@@ -32,7 +30,6 @@ const NavBar = ({
   clusterOptions,
   setClustersOptions,
 }: NavProps) => {
-  // const [clusterOptions, setClustersOptions] = useState([]);
   const [menuAnchorEl, setMenuAnchorEl] = useState<null | HTMLElement>(null);
   const [clusterMenuAnchorEl, setClusterMenuAnchorEl] =
     useState<null | HTMLElement>(null);
@@ -123,19 +120,17 @@ const NavBar = ({
   return (
     <div className="nav-bar">
       <AppBar position="static"  
-      style={{ //linear-gradient(to left, #3D2F91, #89278D);
+      style={{ 
             backgroundImage: 'linear-gradient(to left, #3D2F91, #89278D)',
           }}
         >
         <Toolbar style={{ justifyContent: 'space-between' }}>
-          {/* <div className="nav-barLeft"> */}
           <div style={{ display: 'flex', alignItems: 'center' }}>
             <Menu
               anchorEl={menuAnchorEl}
               open={Boolean(menuAnchorEl)}
               onClose={handleMenuClose}
             >
-              {/* <MenuItem onClick={toHome}>Home</MenuItem> */}
               <MenuItem onClick={signOut}>Sign Out</MenuItem>
             </Menu>
             <Box
@@ -149,11 +144,8 @@ const NavBar = ({
             <Typography variant="h5"  component="div" onClick={toHome} style={{ margin: '10px' }}>
               ClusterSense
             </Typography>
-            {/* <img className="Logo" src={logo} alt="" /> */}
           </div>
-          {/* </div> */}
           <Stack direction="row" spacing={2}>
-            {/* <div className="nav-barRight"> */}
             <Menu
               anchorEl={clusterMenuAnchorEl}
               open={Boolean(clusterMenuAnchorEl)}
@@ -186,36 +178,10 @@ const NavBar = ({
             >
               <AccountCircle />
             </IconButton>
-            {/* </div> */}
           </Stack>
         </Toolbar>
         </AppBar>
     </div>
   );
 };
-
 export default NavBar;
-
-// <div className="nav-bar">
-//   <div className="nav-barLogo">
-//     <img className="Logo" src={logo} alt="" />
-//   </div>
-//   <div className="clusters">
-//     <select name="cluster" onChange={handleSelect}>
-//     <option value="" disabled selected hidden>Choose a Cluster</option>
-//       {clusterOptions.map((element, index) => (
-//         <option key={index} value={element.value}>
-//           {element.value}
-//         </option>
-//       ))}
-//     </select>
-//   </div>
-//   <div>
-//     <a className="navLinks" onClick={toHome}>
-//       Home
-//     </a>
-//     <a className="navLinks" onClick={signOut}>
-//       Sign Out
-//     </a>
-//   </div>
-// </div>

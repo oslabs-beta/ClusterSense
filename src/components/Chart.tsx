@@ -36,13 +36,11 @@ type Data = string[]
 
 //rounds the value to 4 decimals and returns values for Charts.js to use
 const organizeData = (array: DataPoint) => {
-  //const time = [];
   const value: string[] = [];
   array.forEach((el: Data) => {
     if (el[1].length > 5 && el[1].includes('.')) {
       el[1] = el[1].slice(0, 5);
     }
-    //time.push(new Date(el[0] * 1000).toLocaleTimeString());
     value.push(el[1]);
   });
 

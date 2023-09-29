@@ -1,12 +1,10 @@
 import ReactElement from 'react';
 import { useState, useEffect } from 'react';
-// import useEffect from 'react';
 import logo2 from '../assets/logo2.png';
 import MeetTeam from '../components/MeetTeam';
 import SignIn from '../components/SignIn';
 import SignUp from '../components/SignUp';
 import { AppBar, Toolbar, Container, Typography, Button, Box, Grid } from '@mui/material';
-// import { styled } from '@mui/system';
 import styled from '@emotion/styled';
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
@@ -52,15 +50,11 @@ const WelcomePage = (): ReactElement => {
     }, []);
 
     // Sample text for demonstration
-    const loremParagraph1 = `An intuitive and feature-rich GUI that simplifies Kafka cluster management, monitoring, and interaction to streamline operations and efficiency when working with Kafka clusters.`;
-    const loremParagraph2 = `ClusterSense provides pre-built charts for the most important metrics in your Kafka Application.
+    const appIntro = `An intuitive and feature-rich GUI that simplifies Kafka cluster management, monitoring, and interaction to streamline operations and efficiency when working with Kafka clusters.`;
+    const ourApp = `ClusterSense provides pre-built charts for the most important metrics in your Kafka Application.
     User port numbers are saved and available with our drop own menu.`
     // const loremParagraph3 = "Port information of existing users are stored in our database for immediate access to their metrics. Metrics are not stored in our database.";
 
-    // const CustomAppBar = styled(AppBar)({
-    //     backgroundColor: 'transparent',
-    //     boxShadow: 'none',
-    //   });
     const CustomAppBar = styled(AppBar)`
     background-color: transparent;
     box-shadow: none;
@@ -91,7 +85,6 @@ const WelcomePage = (): ReactElement => {
                     
                     {/* Navigation Buttons */}
                     <Box display="flex">
-                        {/* <Button href="#signup-login" color="inherit">Log in/Sign up</Button> */}
                         <Button href="#get-started" color="inherit">Features</Button>
                         <Button href="#demo" color="inherit">Get Started</Button>
                         <Button href="#team" color="inherit">Team</Button>
@@ -101,79 +94,40 @@ const WelcomePage = (): ReactElement => {
             <div className="bg-gradient-to-r from-[#3D2F91] to-[#89278D] background-animate flex items-center">
                 <div className = "flex flex-wrap justify-center w-1/2 my-28">
                     <div className="flex text-white items-center justify-center text-center text-8xl pl-20">
-                        {/* <div className = "flex justify-center"> */}
                             <img
-                                // className="mx-auto"
                                 style={{ width: '8%', margin: '10px'}}
                                 src={logo2}
                                 alt=""
                             />
                             <h1>ClusterSense</h1>
-                        {/* </div> */}
-                    {/* </div> */}
-                        {/* <div className = "flex justify-center"> */}
-                        {/* </div> */}
+    
                     </div>
                     <div className="flex text-white items-center justify-center text-center text-1xl pl-20">
-                        {/* <div className = "flex justify-center"> */}
-                            {/* <h2>Kafka Cluster Management Tool</h2> */}
                             <TypeAnimation
                                 preRenderFirstString={true}
                                 sequence={[
                                 500,
-                                '  Kafka Cluster Management Tool', // initially rendered starting point
+                                '  Kafka Cluster Management Tool', 
                                 1000,
                                 'View your metrics',
-                                // 1000,
-                                // 'We produce food for Guinea Pigs',
-                                // 1000,
-                                // 'We produce food for Chinchillas',
-                                // 500,
                                 ]}
                                 speed={50}
                                 style={{ fontSize: '2em' }}
                                 repeat={Infinity}
                             />
-                        {/* </div> */}
-                    {/* </div> */}
-                        {/* <div className = "flex justify-center"> */}
-                        {/* </div> */}
                     </div>
                 </div>
-                {/* Section for SignUp and SignIn */}
-                {/* {marginBottom: '4rem',
-          background: 'transparent'} */}
                 <div className = "flex grow justify-center items-center w-1/2 my-28">
                     <Container id="signup-login" style={containerStyle}>
                         {showSignUp ? <SignUp showSignIn={handleShowSignIn} /> : <SignIn showSignUp={handleShowSignUp} />}
                     </Container>
                 </div>
             </div>
-
-            {/* Introduction or "Get Started" section */}
-            {/* <Container id="get-started" maxWidth="sm">
-                <Box my={4} textAlign="center">
-                    <Typography variant="body1">
-                        <h2 className = "text-xl font-bold pb-4"
-                        // style={{ font-size: '20px' }}
-                        >Welcome!</h2>{loremParagraph1}
-                    </Typography>
-                </Box>
-            </Container> */}
-
-            {/* Section checkout our github */}
-            {/* <RepoSection /> */}
-
-            {/* Section local installation */}
-            {/* <LocalInstall /> */}
-
-            {/* Section showcasing the product demo */}
             <div id = "get-started" style={{ marginTop : '100px', marginBottom : '100px'}}>
-                <h2 className = "text-xl font-bold pb-4" style={{ display: 'flex', justifyContent: 'center', textAlign: "center"}}
-                        // style={{ font-size: '20px' }}
+                <h2 className = "text-3xl font-bold pb-4" style={{ display: 'flex', justifyContent: 'center', textAlign: "center"}}
                 >Welcome to ClusterSense!</h2>
                 <Typography variant="body1" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', textAlign: "center", marginBottom: '30px', marginLeft: '500px', marginRight: '500px'}}>
-                        {loremParagraph1}
+                        {appIntro}
                 </Typography>
             </div>
             <Container id="demo">
@@ -189,7 +143,7 @@ const WelcomePage = (): ReactElement => {
                                 height: 300,
                                 backgroundColor: '#3D2F91',
                                 display: 'flex',
-                                flexDirection: 'column', // Change the flex direction to column
+                                flexDirection: 'column', 
                                 alignItems: 'center',
                                 justifyContent: 'center',
                                 borderRadius: 8,
@@ -213,7 +167,7 @@ const WelcomePage = (): ReactElement => {
                                 height: 300,
                                 backgroundColor: '#3D2F91',
                                 display: 'flex',
-                                flexDirection: 'column', // Change the flex direction to column
+                                flexDirection: 'column', 
                                 alignItems: 'center',
                                 justifyContent: 'center',
                                 borderRadius: 8,
@@ -237,7 +191,7 @@ const WelcomePage = (): ReactElement => {
                                 height: 300,
                                 backgroundColor: '#3D2F91',
                                 display: 'flex',
-                                flexDirection: 'column', // Change the flex direction to column
+                                flexDirection: 'column', 
                                 alignItems: 'center',
                                 justifyContent: 'center',
                                 borderRadius: 8,
@@ -253,38 +207,10 @@ const WelcomePage = (): ReactElement => {
                                 Revisit previous ports
                             </Typography>
                         </Box>
-                    </Grid>
-                    {/* <Grid item xs={3} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                    <Box
-                            sx={{
-                                width: 300,
-                                height: 300,
-                                backgroundColor: 'primary.dark',
-                                '&:hover': {
-                                backgroundColor: 'primary.main',
-                                opacity: [0.9, 0.8, 0.7],
-                                },
-                            }}
-                        />
-                    </Grid> */}
-                    {/* </Grid>
-                    <RepoSection />
-                <Grid container spacing={3}> */}
-                    {/* <Typography variant="body1" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', textAlign: "center"}}>
-                        <h2 className = "text-xl font-bold pb-4"
-                        // style={{ font-size: '20px' }}
-                        >Welcome!</h2><br></br>{loremParagraph1}
-                    </Typography> */}
-
-                    {/* Description followed by demo */}
+                    </Grid>    
                     <Grid item xs={6} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', marginTop : '100px'}}>
-                    {/* <Typography variant="body1">
-                        <h2 className = "text-xl font-bold pb-4"
-                        // style={{ font-size: '20px' }}
-                        >Welcome!</h2>{loremParagraph1}
-                    </Typography> */}
                         <Typography variant="body1">
-                        <h2 className = 'text-xl font-bold pb-4'>Getting Started</h2>{loremParagraph2}
+                        <h2 className = 'text-xl font-bold pb-4'>Getting Started</h2>{ourApp}
                         </Typography>
                     </Grid>
                     <Grid item xs={6} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', marginTop : '100px' }}>
@@ -294,8 +220,6 @@ const WelcomePage = (): ReactElement => {
             </Container>
             <br></br>
             <RepoSection />
-
-            {/* "Meet the Team" section */}
             <Container id="team">
                 <MeetTeam />
             </Container>
