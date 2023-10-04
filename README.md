@@ -87,6 +87,7 @@ Alternatively, if you would prefer to run ClusterSense locally, you may fork and
 ## Contribute
 If you would like to contribute to this product and improve upon it's current functionality or add a feature, please fork the repository and submit a pull request.
 Some of our planned features for ClusterSense include:
+- Transition to Websockets for Real-Time Prometheus Data
 - Open Authorization
 - Light/Dark Mode
 - Adding User-Defined Charts to GUI
