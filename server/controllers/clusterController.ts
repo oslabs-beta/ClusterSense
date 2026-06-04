@@ -63,8 +63,10 @@ const clusterController = {
   ): Promise<void> => {
     try {
       const user_id = req.cookies.ssid;
-      const queryClusters = `SELECT cluster_port FROM "cluster" WHERE user_id = $1`;
-      const clusterResult = await pool.query(queryClusters, [user_id]);
+      const clusterResult = await pool.query(
+        `SELECT cluster_port FROM "cluster" WHERE user_id = $1`,
+        [user_id]
+        );
 
       res.locals.clusters = clusterResult.rows;
       return next();
