@@ -1,5 +1,4 @@
-import express from "express";
-import { Request, Response } from 'express';
+import express, { Request, Response } from 'express';
 import { userController } from "../controllers/userController";
 import { cookieController } from "../controllers/cookieController";
 
@@ -32,7 +31,7 @@ loginRouter.post(
 loginRouter.get(
   "/verify",
   (_req: Request, res: Response) => {
-    const loggedIn = _req.cookies.ssid ? true : false;
+    const loggedIn = Boolean(_req.cookies.ssid);
     return res.status(200).json({ status: loggedIn });
   },
 );
@@ -47,8 +46,12 @@ loginRouter.post(
   userController.verifyUser,              
   cookieController.setSSIDCookie,          
   (_req: Request, res: Response) => {
-    return res.status(200).send("You are logged in");
-  },
+    if (res.locals.user_id){
+      return res.status(200).send('You are logged in');
+    } else {
+      return res.status(500).json({ error: 'Authentication failed'})
+    }
+  }
 );
 
 export { loginRouter };
