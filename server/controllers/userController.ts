@@ -2,22 +2,6 @@ import { NextFunction, Request, Response } from "express";
 import { pool } from "../database/userDatabase";
 import bcrypt from 'bcryptjs';
 
-/**
- * Database table structure:
- *
- *  CREATE TABLE "users" (
- *    user_id serial PRIMARY KEY,
- *    username varchar(50) NOT NULL,
- *    password varchar(255), 
- *    oauth_provider varchar(255),
- *    oauth_id varchar(255),
- *    oauth_access_token varchar(255),
- *    oauth_refresh_token varchar(255),
- *    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, 
- *    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
- *  );
- */
-
 const userController = {
   
   /**
@@ -26,13 +10,13 @@ const userController = {
    * @param res - Express response object
    * @param next - Express next function
    * @returns Promise<void>
-   */
+  */
+
   createUser: async (
     req: Request, res: Response, next: NextFunction
   ): Promise<void> => {
     const { username, password } = req.body;
 
-    // Validate input fields
     if (!username || !password) {
       return next({
         log: "Error in userController.createUser: Missing input fields",
@@ -42,12 +26,9 @@ const userController = {
     }
 
     try {
-      // Query to check if the username already exists in the database
-      const existingUserQuery = `SELECT * FROM "users" WHERE username = $1`;
-      const existingUserValues = [req.body.username];
       const existingUserResult = await pool.query(
-        existingUserQuery,
-        existingUserValues
+        `SELECT * FROM "users" WHERE username = $1`,
+        [username]
       );
 
       // If user exists, send an error response
