@@ -53,9 +53,9 @@ const MainPage = () => {
   useEffect(() => {
     const checkSession = async () => {
       try {
-        const isAuthenticated = await fetch('/login/verify');
-        const status = await isAuthenticated.json();
-        if (status.status === false) {
+        const response = await fetch('/login/verify');
+        const { status } = await response.json();
+        if (status === false) {
           toLogin();
         }
       } catch (error) {
@@ -63,7 +63,7 @@ const MainPage = () => {
       }
     };
     checkSession();
-  }, []);
+  }, [navigate]);
 
   return (
     <div>
@@ -75,16 +75,11 @@ const MainPage = () => {
         setClustersOptions={setClustersOptions}
       />
       <div
-        style={{
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}
-        className="h-screen bg-neutral-200"
+        className="flex justify-center items-center h-screen bg-neutral-200"
       >
         {isFormSubmitted ? (
-          <div className="flex flex-col justify-center items-center align-content p-20">
-            <div className="flex justify-center gap-x-20 flex-wrap w-screen p-30">
+          <div className="flex flex-col justify-center items-center content-center p-20">
+            <div className="flex justify-center gap-x-20 flex-wrap w-screen p-8">
               <div className="w-1/4 h-1/3" >
                 <Chart
                   port={port}
@@ -107,8 +102,7 @@ const MainPage = () => {
               </div>
             </div>
             <div
-              className="flex items-center justify-evenly
-             gap-x-20 p-24 mt-300 flex-wrap w-screen"
+              className="flex items-center justify-evenly gap-x-20 p-24 mt-10 flex-wrap w-screen"
             >
               <div className="w-1/4 h-1/4">
                 <Chart
@@ -141,9 +135,9 @@ const MainPage = () => {
               {' '}
               Welcome to your ClusterSense Dashboard!
             </h1>
-            <br></br>
-            <form onSubmit={handleSubmission}>
-              <div className="flex flex-direction= row items-center pb-6">
+            <h1 className="mb-4">...</h1>
+            <form onSubmit={handlePortSubmit}>
+              <div className="flex flex-row items-center pb-6">
                 <p className="mb-0 mr-2" style={{ fontSize: '1.2rem' }}>
                   Enter your JMX port for your Kafka Cluster:{' '}
                 </p>
