@@ -1,4 +1,4 @@
-import express, { Request, Response } from 'express';
+import express, { Request, Response, NextFunction } from 'express';
 import dotenv from 'dotenv';
 import path from 'path';
 import cors from 'cors';
@@ -46,7 +46,7 @@ app.use((_req: Request, res: Response) => {
   return res.status(404).send("Invalid endpoint");
 });
 
-app.use((err: ServerError, _req: Request, res: Response) => {
+app.use((err: ServerError, _req: Request, res: Response, _next: NextFunction) => {
   const defaultErr: ServerError = {
     log: "Express error handler caught unknown middleware error",
     status: 500,
