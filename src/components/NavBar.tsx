@@ -1,4 +1,4 @@
-import  { useState, useEffect } from 'react';
+import  { useState, useEffect, MouseEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
@@ -8,19 +8,18 @@ import Typography from '@mui/material/Typography';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import logo2 from '../assets/logo2.png';
-import MouseEvent from 'react';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import Box from '@mui/material/Box';
 import BubbleChartIcon from '@mui/icons-material/BubbleChart';
 
-type cluster = {value: string, label: string}
+type Cluster = {value: string, label: string}
 
 interface NavProps {
-  setPort: (e: number) => void;
+  setPort: (port: number) => void;
   formStatus: boolean;
-  formSubmission: (e: boolean) => void;
-  clusterOptions: cluster[];
-  setClustersOptions: (e: cluster[]) => void;
+  formSubmission: (status: boolean) => void;
+  clusterOptions: Cluster[];
+  setClustersOptions: (clusters: Cluster[]) => void;
 }
 
 const NavBar = ({
@@ -38,8 +37,7 @@ const NavBar = ({
 
   const toHome = () => {
     formSubmission(false);
-    const path: string = '/home';
-    navigate(path);
+    navigate('/home')
   };
 
   const signOut = async () => {
@@ -50,8 +48,7 @@ const NavBar = ({
         headers: { 'Content-Type': 'application/json' },
       });
       if (response.ok) {
-        const path: string = '/';
-        navigate(path);
+        navigate('/');
       } else {
         console.error('Error deleting session');
       }
@@ -60,12 +57,11 @@ const NavBar = ({
     }
   };
 
-  function handleSelect(e: MouseEvent) {
-    const chosenCluster = e.target.value;
-    console.log('chosen', chosenCluster);
-    if (chosenCluster !== undefined) {
-      setPort(chosenCluster);
+  function handleSelect(value: string) {
+    if (value) {
+      setPort(Number(value));
       formSubmission(true);
+      handleClusterMenuClose();
     }
   }
 
@@ -89,7 +85,7 @@ const NavBar = ({
               const label = cluster.cluster_port.toString();
               return { value: value, label: label };
             });
-            await setClustersOptions(convertData);
+            setClustersOptions(convertData);
           }
         } else {
           console.error('Error fetching clusters');
@@ -152,8 +148,11 @@ const NavBar = ({
               onClose={handleClusterMenuClose}
               onClick={handleSelect}
             >
-              {clusterOptions.map((element: cluster, index : number) => (
-                <MenuItem key={index} value={element.value}>
+              {clusterOptions.map((element: Cluster, index : number) => (
+                <MenuItem
+                 key={element.value || index} 
+                 onClick={()=> handleSelect(element.value)}
+                 >
                   {element.label}
                 </MenuItem>
               ))}
