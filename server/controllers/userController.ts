@@ -77,22 +77,20 @@ const userController = {
     }
 
     try {
-      const { rows: [user] } = await pool.query(
-        `SELECT user_id, password FROM "users" WHERE username = $1`,
-        [username]
-      );
+      // Query to retrieve the user based on the provided username
+      const existingUsernameQuery = `SELECT * FROM "users" WHERE username = $1`;
+      const userResult = await pool.query(existingUsernameQuery, [username]);
 
       // If no match is found for the username
-      if (!user) {
-        res.status(401).json({ error: 'Invalid Username or Password' });
-        return;
+      if (userResult.rows.length === 0) {
+        res.status(409).json({ error: 'Invalid Username or Password' });
       }
 
       // Validate the provided password against the stored hash
+      const user = userResult.rows[0];
       const isPasswordMatch = await bcrypt.compare(password, user.password);
       if (!isPasswordMatch) {
         res.status(401).json({ error: 'Invalid Username or Password' });
-        return;
       }
 
       // Store the user's id in res.locals for subsequent middleware
