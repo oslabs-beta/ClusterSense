@@ -1,6 +1,5 @@
-import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import MouseEvent from 'react';
+import { useState, useEffect, MouseEvent } from 'react';
 import NavBar from '../components/NavBar';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
@@ -15,34 +14,38 @@ const MainPage = () => {
     navigate(path);
   };
 
-  const [clusterOptions, setClustersOptions] = useState([]);
-  const [port, setPort] = useState();
+  const [clusterOptions, setClustersOptions] = useState<{value: string, label: string}[]>([]);
+  const [port, setPort] = useState<string>('');
   const [isFormSubmitted, setIsFormSubmitted] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
-  const handleSubmission = async (e: MouseEvent) => {
+  const handlePortSubmit = async (e: MouseEvent) => {
     e.preventDefault();
+    setIsLoading(true);
+    setError(null);
     try {
-      //this will put the cluster into the database
-      const numPort = Number(port);
-      const data = { port: numPort };
+      const portNumber = Number(port);
+      const payload = { port: portNumber };
       const response = await fetch('/cluster', {
         method: 'POST',
         credentials: 'include',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
       });
       if (response.ok) {
         setIsFormSubmitted(true);
-        const updatedClusters = [
+        setClustersOptions([
           ...clusterOptions,
           { value: port.toString(), label: port.toString() },
-        ];
-        setClustersOptions(updatedClusters);
+        ]);
+      } else {
+        setError('Failed to save cluster. Please try again.');
       }
     } catch (error) {
-      console.log('error: ', error);
+      setError('An unexpected error occurred.');
+    } finally {
+      setIsLoading(false);
     }
   };
 
