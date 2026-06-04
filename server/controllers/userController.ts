@@ -2,22 +2,6 @@ import { NextFunction, Request, Response } from "express";
 import { pool } from "../database/userDatabase";
 import bcrypt from 'bcryptjs';
 
-/**
- * Database table structure:
- *
- *  CREATE TABLE "users" (
- *    user_id serial PRIMARY KEY,
- *    username varchar(50) NOT NULL,
- *    password varchar(255), 
- *    oauth_provider varchar(255),
- *    oauth_id varchar(255),
- *    oauth_access_token varchar(255),
- *    oauth_refresh_token varchar(255),
- *    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, 
- *    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
- *  );
- */
-
 const userController = {
   
   /**
@@ -26,13 +10,13 @@ const userController = {
    * @param res - Express response object
    * @param next - Express next function
    * @returns Promise<void>
-   */
+  */
+
   createUser: async (
     req: Request, res: Response, next: NextFunction
   ): Promise<void> => {
     const { username, password } = req.body;
 
-    // Validate input fields
     if (!username || !password) {
       return next({
         log: "Error in userController.createUser: Missing input fields",
@@ -42,12 +26,9 @@ const userController = {
     }
 
     try {
-      // Query to check if the username already exists in the database
-      const existingUserQuery = `SELECT * FROM "users" WHERE username = $1`;
-      const existingUserValues = [req.body.username];
       const existingUserResult = await pool.query(
-        existingUserQuery,
-        existingUserValues
+        `SELECT * FROM "users" WHERE username = $1`,
+        [username]
       );
 
       // If user exists, send an error response
@@ -59,12 +40,13 @@ const userController = {
       // Encrypt user password and insert the new user into the database
       const salt = await bcrypt.genSalt(10);
       const hashedPassword = await bcrypt.hash(password, salt);
-      const insertQuery = `INSERT INTO "users" (username, password) VALUES ($1, $2) RETURNING *`;
-      const insertValues = [username, hashedPassword];
-      const createUser = await pool.query(insertQuery, insertValues);
+      const { rows:[newUser] } = await pool.query(
+        `INSERT INTO "users" (username, password) VALUES ($1, $2) RETURNING user_id`,
+        [username, hashedPassword]
+      );
 
       // Store the user's id in res.locals for subsequent middleware
-      res.locals.user_id = createUser.rows[0].user_id;
+      res.locals.user_id = newUser.user_id;
       return next();
     } catch (err) {
       return next({
@@ -95,20 +77,22 @@ const userController = {
     }
 
     try {
-      // Query to retrieve the user based on the provided username
-      const existingUsernameQuery = `SELECT * FROM "users" WHERE username = $1`;
-      const userResult = await pool.query(existingUsernameQuery, [username]);
+      const { rows: [user] } = await pool.query(
+        `SELECT user_id, password FROM "users" WHERE username = $1`,
+        [username]
+      );
 
       // If no match is found for the username
-      if (userResult.rows.length === 0) {
-        res.status(409).json({ error: 'Invalid Username or Password' });
+      if (!user) {
+        res.status(401).json({ error: 'Invalid Username or Password' });
+        return;
       }
 
       // Validate the provided password against the stored hash
-      const user = userResult.rows[0];
       const isPasswordMatch = await bcrypt.compare(password, user.password);
       if (!isPasswordMatch) {
         res.status(401).json({ error: 'Invalid Username or Password' });
+        return;
       }
 
       // Store the user's id in res.locals for subsequent middleware

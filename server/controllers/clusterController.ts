@@ -16,23 +16,30 @@ const clusterController = {
    * @param next - Express next middleware function.
    */
   storeCluster: async (
-    req: Request, res: Response, next: NextFunction
+    req: Request, _res: Response, next: NextFunction
   ): Promise<void> => {
     try {
       const { port } = req.body;
       const user_id = req.cookies.ssid;
-      const checkExisting = `SELECT * FROM cluster WHERE user_id=$1 AND cluster_port=$2`;
+      //port validation
+      if (!port || isNaN(Number(port))){
+        return next({
+          log: "Error in clusterController.storeCluster: Invalid Port",
+          status: 400,
+          message: {err: "Valid port number required"}
+        })
+      }
+      //changed SELECT 1 from SELECT *, since we only want to check it exists, don't need to get any data
+      const checkExisting = `SELECT 1 FROM cluster WHERE user_id=$1 AND cluster_port=$2`;
       const existingEntry = await pool.query(checkExisting, [user_id, port]);
 
       // If the port number is not already associated with the user ID, insert into the database.
-      if (existingEntry.rows.length === 0) {
-        const queryCluster = `INSERT INTO cluster (user_id, cluster_port) VALUES ($1, $2)`;
-        const clusterResult = await pool.query(queryCluster, [user_id, port]);
-        res.locals.clusterResult = clusterResult;
-      } else {
-        res.locals.clusterResult = 'it exists';
+      if (existingEntry.rows.length === 0){
+        await pool.query(
+          `INSERT INTO cluster (user_id, cluster_port) VALUES ($1, $2)`,
+          [user_id, port]
+        );
       }
-
       return next();
     } catch (err) {
       return next({
@@ -56,8 +63,10 @@ const clusterController = {
   ): Promise<void> => {
     try {
       const user_id = req.cookies.ssid;
-      const queryClusters = `SELECT cluster_port FROM "cluster" WHERE user_id = $1`;
-      const clusterResult = await pool.query(queryClusters, [user_id]);
+      const clusterResult = await pool.query(
+        `SELECT cluster_port FROM "cluster" WHERE user_id = $1`,
+        [user_id]
+        );
 
       res.locals.clusters = clusterResult.rows;
       return next();

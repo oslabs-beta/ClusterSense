@@ -1,5 +1,4 @@
-import express from "express";
-import { Request, Response } from 'express';
+import express, { Request, Response } from 'express';
 import { clusterController } from "../controllers/clusterController";
 
 const clusterRouter = express.Router();
@@ -13,7 +12,9 @@ clusterRouter.post(
   "/", 
   clusterController.storeCluster,  
   (_req: Request, res: Response) => {
-    return res.status(200).send();
+    return res.status(200).json(
+      {message:'cluster saved'}
+      );
   },
 );
 
