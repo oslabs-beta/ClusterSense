@@ -1,5 +1,4 @@
-import { useState, useEffect } from 'react';
-import ReactElement from 'react';
+import { useState, useEffect, ReactElement } from 'react';
 import {
   Chart as ChartJS,
   LineElement,
@@ -16,6 +15,14 @@ type ChartProps = {
   query: string;
   title: string;
 };
+
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title
+);
 
 const loading = {
   labels: [],
@@ -69,13 +76,6 @@ const organizeData = (array: DataPoint) => {
 };
 
 const Chart: React.FC<ChartProps> = ({ port, query, title }: ChartProps): ReactElement => {
-  ChartJS.register(
-    CategoryScale,
-    LinearScale,
-    PointElement,
-    LineElement,
-    Title
-  );
   const [data, setData] = useState(loading);
 
   const url = `http://localhost:${port}/api/v1/query?query=${query}[1m]`;
@@ -97,7 +97,7 @@ const Chart: React.FC<ChartProps> = ({ port, query, title }: ChartProps): ReactE
     fetchData();
     const interval = setInterval(fetchData, 3000);
     return () => clearInterval(interval);
-  }, [data, port]);
+  }, [port]);
 
   const options = {
     maintainAspectRatio: false,
@@ -108,12 +108,12 @@ const Chart: React.FC<ChartProps> = ({ port, query, title }: ChartProps): ReactE
     scales: {
       y: {
         ticks: {
-          color: '#black',
+          color: 'black',
         },
       },
       x: {
         ticks: {
-          color: '#black',
+          color: 'black',
         },
       },
     },
@@ -122,7 +122,7 @@ const Chart: React.FC<ChartProps> = ({ port, query, title }: ChartProps): ReactE
         display: true,
         position: 'top' as const,
         text: `${title}`,
-        color: '#black',
+        color: 'black',
         align: 'start' as const,
         padding: {
           top: 10,
