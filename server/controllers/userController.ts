@@ -40,13 +40,13 @@ const userController = {
       // Encrypt user password and insert the new user into the database
       const salt = await bcrypt.genSalt(10);
       const hashedPassword = await bcrypt.hash(password, salt);
-      const createUser = await pool.query(
-        `INSERT INTO "users" (username, password) VALUES ($1, $2) RETURNING *`,
+      const { rows:[newUser] } = await pool.query(
+        `INSERT INTO "users" (username, password) VALUES ($1, $2) RETURNING user_id`,
         [username, hashedPassword]
       );
 
       // Store the user's id in res.locals for subsequent middleware
-      res.locals.user_id = createUser.rows[0].user_id;
+      res.locals.user_id = newUser.user_id;
       return next();
     } catch (err) {
       return next({
