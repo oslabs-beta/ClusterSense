@@ -1,5 +1,4 @@
-import ReactElement from 'react';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, ReactElement, useMemo } from 'react';
 import logo2 from '../assets/logo2.png';
 import MeetTeam from '../components/MeetTeam';
 import SignIn from '../components/SignIn';
@@ -16,6 +15,11 @@ import TimelineIcon from '@mui/icons-material/Timeline';
 import VerifiedUserIcon from '@mui/icons-material/VerifiedUser';
 import CableIcon from '@mui/icons-material/Cable';
 import chartsVisual from '../assets/Charts.gif'
+
+const CustomAppBar = styled(AppBar)`
+    background-color: transparent;
+    box-shadow: none;
+  ` as unknown as typeof AppBar;
 
 const WelcomePage = (): ReactElement => {  
 
@@ -53,21 +57,16 @@ const WelcomePage = (): ReactElement => {
     const appIntro = `An intuitive and feature-rich GUI that simplifies Kafka cluster management, monitoring, and interaction to streamline operations and efficiency when working with Kafka clusters.`;
     const ourApp = `ClusterSense provides pre-built charts for the most important metrics in your Kafka Application.
     User port numbers are saved and available with our drop own menu.`
-    // const loremParagraph3 = "Port information of existing users are stored in our database for immediate access to their metrics. Metrics are not stored in our database.";
 
-    const CustomAppBar = styled(AppBar)`
-    background-color: transparent;
-    box-shadow: none;
-  ` as unknown as typeof AppBar;
     
       const theme = useTheme();
       const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
   
-      const containerStyle = {
-          padding: isSmallScreen ? '0 1rem' : '0 5rem',
-          marginBottom: '4rem',
-          background: 'transparent'
-      };
+      const containerStyle = useMemo(() => ({
+        padding: isSmallScreen ? '0 1rem' : '0 5rem',
+        marginBottom: '4rem',
+        background: 'transparent'
+      }), [isSmallScreen]);
     return (
         <div>
             {/* Navigation bar */}

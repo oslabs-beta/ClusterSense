@@ -1,4 +1,4 @@
-import  { useState } from 'react';
+import  { useState, ChangeEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { TERipple } from 'tw-elements-react';
 import TextField from '@mui/material/TextField';
@@ -7,21 +7,18 @@ interface SignUpProps {
   showSignIn: () => void;
 }
 
-const SignUp: React.FC<SignUpProps> = ({ showSignIn }) => {
+const SignUp = ({ showSignIn }: SignUpProps) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
 
   const navigate = useNavigate();
-  const goLogin = () => {
-    showSignIn();
-  };
   const toHome = () => {
     const path = '/home';
     navigate(path);
   };
   //
-  const handleClick = async () => {
+  const handleSubmit = async () => {
     try {
       const body = {
         username: username,
@@ -29,6 +26,7 @@ const SignUp: React.FC<SignUpProps> = ({ showSignIn }) => {
       };
       const data = await fetch(`/login/signupRequest`, {
         method: 'POST',
+        // credentials: 'include',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(body),
       });
@@ -39,11 +37,10 @@ const SignUp: React.FC<SignUpProps> = ({ showSignIn }) => {
       } else if (data.status === 409) {
         setError('Username already exists!');
       } else {
-        console.log(data);
         setError('Unable to create user. Please try again!');
       }
     } catch (err) {
-      console.log(err);
+      console.error(err);
       setError('An error occurred.');
     }
   };
@@ -77,7 +74,7 @@ const SignUp: React.FC<SignUpProps> = ({ showSignIn }) => {
               <button
                 className="mb-3 inline-block w-full rounded px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_rgba(0,0,0,0.2)] transition duration-150 ease-in-out hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.1),0_4px_18px_0_rgba(0,0,0,0.2)] focus:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.1),0_4px_18px_0_rgba(0,0,0,0.2)] focus:outline-none focus:ring-0 active:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.1),0_4px_18px_0_rgba(0,0,0,0.2)] gradient-background"
                 type="button"
-                onClick={handleClick}
+                onClick={handleSubmit}
               >
                 Register
               </button>
@@ -96,7 +93,7 @@ const SignUp: React.FC<SignUpProps> = ({ showSignIn }) => {
             <TERipple rippleColor="light">
               <button
                 type="button"
-                onClick={goLogin}
+                onClick={showSignIn}
                 className="button-color"
               >
                 Login
