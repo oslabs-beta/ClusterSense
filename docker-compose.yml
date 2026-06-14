@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   zookeeper:
     image: confluentinc/cp-zookeeper:latest
@@ -17,11 +15,15 @@ services:
     environment:
       KAFKA_BROKER_ID: 1
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:29092,PLAINTEXT_HOST://localhost:9092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
       KAFKA_JMX_PORT: 9991
       KAFKA_JMX_HOSTNAME: kafka
+      KAFKA_JMX_OPTS: "-Dcom.sun.management.jmxremote=true -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Djava.rmi.server.hostname=kafka -Dcom.sun.management.jmxremote.rmi.port=9991"
 
+  # Replace your existing jmx-exporter service with this:
+  # Replace your existing jmx-exporter service with this:
   jmx-exporter:
     image: bitnami/jmx-exporter:latest
     ports:
@@ -30,6 +32,10 @@ services:
       - ./jmx-exporter/config.yml:/opt/bitnami/jmx-exporter/config.yml
     depends_on:
       - kafka
+    # Wait 15 seconds for Kafka's JMX server to fully initialize before starting
+    entrypoint: ["sh", "-c", "sleep 15 && java -jar /opt/bitnami/jmx-exporter/jmx_prometheus_standalone.jar 5556 /opt/bitnami/jmx-exporter/config.yml"]
+    environment:
+      JAVA_TOOL_OPTIONS: "--module-path=/opt/bitnami/bc-fips/ -Djava.security.properties==/opt/bitnami/java/conf/security/java.security.restricted"
 
   prometheus:
     image: prom/prometheus:latest

@@ -8,7 +8,7 @@ import {
   Title,
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
-import axios from 'axios';
+// import axios from 'axios';
 
 type ChartProps = {
   port: number;
@@ -16,13 +16,7 @@ type ChartProps = {
   title: string;
 };
 
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title
-);
+ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title);
 
 const loading = {
   labels: [],
@@ -39,7 +33,7 @@ const loading = {
   ],
 };
 type DataPoint = string[][];
-type Data = string[]
+type Data = string[];
 
 //rounds the value to 4 decimals and returns values for Charts.js to use
 const organizeData = (array: DataPoint) => {
@@ -51,15 +45,8 @@ const organizeData = (array: DataPoint) => {
     value.push(el[1]);
   });
 
-  const newChartData = {
-    labels: [
-      'T-2:30',
-      'T-2:00',
-      'T-1:30',
-      'T-1:00',
-      'T-0:30',
-      'T-0:00',
-    ],
+  return {
+    labels: ['T-2:30', 'T-2:00', 'T-1:30', 'T-1:00', 'T-0:30', 'T-0:00'],
     datasets: [
       {
         label: 'Sample Line Chart',
@@ -72,32 +59,77 @@ const organizeData = (array: DataPoint) => {
       },
     ],
   };
-  return newChartData;
 };
 
 const Chart: React.FC<ChartProps> = ({ port, query, title }: ChartProps): ReactElement => {
   const [data, setData] = useState(loading);
 
-  const url = `http://localhost:${port}/api/v1/query?query=${query}[1m]`;
+  useEffect(() =>{
+    if (!port) return;
 
-  useEffect(() => {
-    if (!port || !data) return undefined;
-    const fetchData = async () => {
+    const ws = new WebSocket(`ws://localhost:4000`);
+
+    ws.onopen = () => {
+      ws.send (JSON.stringify({ port }));
+    }
+
+    ws.onmessage = (event) => {
       try {
-        const response = await axios.get(url);
-        if (response.data.data.result[0].values) {
-          const array = response.data.data.result[0].values;
-          setData(organizeData(array));
+        const payload = JSON.parse(event.data) as {
+          port: number;
+          metrics: {values?: string[][]} [];
+          error?: string;
+        };
+
+        if (payload.error){
+          console.error('Prometheus error from server:', payload.error);
+          return;
         }
+
+        //server sends metrics as result[] from prometheus
+        //organizeData expects result[0].values 
+        //Will need revisiting when Prometheus query on the server
+        //updated to a range query (query_range endpoint)
+
+        const values = payload.metrics[0]?.values;
+        if (values) setData(organizeData(values));
       } catch (err) {
-        console.log(err);
-        return;
+        console.error('Failed to parse WebSocket message:', err);
       }
     };
-    fetchData();
-    const interval = setInterval(fetchData, 3000);
-    return () => clearInterval(interval);
+
+    ws.onerror = (err) => {
+      console.error('WebSocket error:', err);
+    };
+
+    return () => ws.close();
   }, [port]);
+
+
+  // const options = {
+  //   maintainAspectRatio: false,
+  // }
+
+  // const url = `http://localhost:${port}/api/v1/query?query=${query}[1m]`;
+
+  // useEffect(() => {
+  //   if (!port || !data) return undefined;
+  //   const fetchData = async () => {
+  //     try {
+  //       const response = await axios.get(url);
+  //       if (response.data.data.result[0].values) {
+  //         const array = response.data.data.result[0].values;
+  //         setData(organizeData(array));
+  //       }
+  //     } catch (err) {
+  //       console.log(err);
+  //       return;
+  //     }
+  //   };
+  //   fetchData();
+  //   const interval = setInterval(fetchData, 3000);
+  //   return () => clearInterval(interval);
+  // }, [port]);
 
   const options = {
     maintainAspectRatio: false,
