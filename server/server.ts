@@ -7,6 +7,9 @@ import { ServerError } from '../types';
 import { loginRouter } from "./routes/loginRouter";
 import { clusterRouter } from "./routes/clusterRouter";
 
+import http from 'http';
+import {WebSocketServer, WebSocket} from 'ws';
+
 
 dotenv.config();
 
@@ -16,7 +19,7 @@ const app = express();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());          
 app.use(cors({
-  origin: 'http://localhost:3030',
+  origin: process.env.CORS_ORIGIN ||'http://localhost:3030',
   credentials: true
 }));
 app.use(cookieParser());
@@ -57,6 +60,44 @@ app.use((err: ServerError, _req: Request, res: Response, _next: NextFunction) =>
   return res.status(errorObj.status).json(errorObj.message);
 });
 
-app.listen(PORT, () => {
+const server = http.createServer(app);
+
+const wss = new WebSocketServer ({ server });
+
+const PROMETHEUS_BASE = process.env.PROMETHEUS_URL || 'http://localhost:9090';
+const POLL_INTERVAL_MS = 5000; //metrics every 5 seconds
+
+wss.on('connection', (ws: WebSocket) =>{
+  console.log ('Websocket client connected');
+
+  let intervalId: ReturnType<typeof setInterval> | null = null;
+
+  ws.on('message', raw =>{
+    const {port} = JSON.parse(raw.toString()) as {port: number};
+    //clears any existing interval if client sends a new port number
+    if (intervalId) clearInterval(intervalId);
+
+    intervalId = setInterval(async () =>{
+      if (ws.readyState !== WebSocket.OPEN) return;
+
+      try {
+        const url = `${PROMETHEUS_BASE}/api/v1/query_range?query=kafka_server_brokertopicmetrics_messagesin_total{instance="jmx-exporter:5556"}&start=${Math.floor(Date.now() / 1000) - 150}&end=${Math.floor(Date.now() / 1000)}&step=30`;
+        const response = await fetch(url);
+        const data = await response.json();
+
+        ws.send(JSON.stringify ({port, metrics: data.data?.result ?? []}));
+      }catch (err){
+        console.error(`Prometheus fetch error for port ${port}`, err);
+        ws.send(JSON.stringify({port, metrics:[], error: 'Prometheus unreachable'}))
+      }
+    }, POLL_INTERVAL_MS);
+  });
+  ws.on('close',() =>{
+    console.log('WebSocket client disconnected');
+    if(intervalId) clearInterval(intervalId);
+  })
+})
+
+server.listen(PORT, () => {
   console.log(`app is listening on port: ${PORT}...`);
 });
