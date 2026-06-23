@@ -1,4 +1,4 @@
-import  { useState, useEffect, MouseEvent } from 'react';
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
@@ -7,15 +7,16 @@ import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
-import logo2 from '../assets/logo2.png';
-import AccountCircle from '@mui/icons-material/AccountCircle';
 import Box from '@mui/material/Box';
+import AccountCircle from '@mui/icons-material/AccountCircle';
 import BubbleChartIcon from '@mui/icons-material/BubbleChart';
+import logo2 from '../assets/logo2.png';
+import useMenu from '../hooks/useMenu';
 
-type Cluster = {value: string, label: string}
+type Cluster = { value: string; label: string };
 
 interface NavProps {
-  setPort: (port: number) => void;
+  setPort: (port: string) => void;
   formStatus: boolean;
   formSubmission: (status: boolean) => void;
   clusterOptions: Cluster[];
@@ -29,15 +30,14 @@ const NavBar = ({
   clusterOptions,
   setClustersOptions,
 }: NavProps) => {
-  const [menuAnchorEl, setMenuAnchorEl] = useState<null | HTMLElement>(null);
-  const [clusterMenuAnchorEl, setClusterMenuAnchorEl] =
-    useState<null | HTMLElement>(null);
+  const accountMenu = useMenu();
+  const clusterMenu = useMenu();
 
   const navigate = useNavigate();
 
   const toHome = () => {
     formSubmission(false);
-    navigate('/home')
+    navigate('/home');
   };
 
   const signOut = async () => {
@@ -57,17 +57,18 @@ const NavBar = ({
     }
   };
 
-  function handleSelect(value: string) {
+  const handleSelect = (value: string) => {
     if (value) {
-      setPort(Number(value));
+      setPort(value);
       formSubmission(true);
-      handleClusterMenuClose();
+      clusterMenu.handleClose();
     }
-  }
+  };
 
-  interface clusterType {
+  interface ClusterType {
     cluster_port: number;
   }
+
   useEffect(() => {
     const fetchClusters = async () => {
       try {
@@ -80,11 +81,10 @@ const NavBar = ({
           if (!data.length) {
             setClustersOptions([{ value: '', label: 'Empty' }]);
           } else {
-            const convertData = data.map((cluster: clusterType) => {
-              const value = cluster.cluster_port.toString();
-              const label = cluster.cluster_port.toString();
-              return { value: value, label: label };
-            });
+            const convertData = data.map((cluster: ClusterType) => ({
+              value: cluster.cluster_port.toString(),
+              label: cluster.cluster_port.toString(),
+            }));
             setClustersOptions(convertData);
           }
         } else {
@@ -97,35 +97,18 @@ const NavBar = ({
     fetchClusters();
   }, [formStatus]);
 
-  const handleMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
-    setMenuAnchorEl(event.currentTarget);
-  };
-
-  const handleMenuClose = () => {
-    setMenuAnchorEl(null);
-  };
-
-  const handleClusterMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
-    setClusterMenuAnchorEl(event.currentTarget);
-  };
-
-  const handleClusterMenuClose = () => {
-    setClusterMenuAnchorEl(null);
-  };
-
   return (
     <div className="nav-bar">
-      <AppBar position="static"  
-      style={{ 
-            backgroundImage: 'linear-gradient(to left, #3D2F91, #89278D)',
-          }}
-        >
-        <Toolbar style={{ justifyContent: 'space-between' }}>
-          <div style={{ display: 'flex', alignItems: 'center' }}>
+      <AppBar
+        position="static"
+        className="bg-nav-gradient"
+      >
+        <Toolbar className="justify-between">
+          <div className="flex items-center">
             <Menu
-              anchorEl={menuAnchorEl}
-              open={Boolean(menuAnchorEl)}
-              onClose={handleMenuClose}
+              anchorEl={accountMenu.anchorEl}
+              open={Boolean(accountMenu.anchorEl)}
+              onClose={accountMenu.handleClose}
             >
               <MenuItem onClick={signOut}>Sign Out</MenuItem>
             </Menu>
@@ -136,51 +119,53 @@ const NavBar = ({
               src={logo2}
               onClick={toHome}
             />
-
-            <Typography variant="h5"  component="div" onClick={toHome} style={{ margin: '10px' }}>
+            <Typography
+              variant="h5"
+              component="div"
+              onClick={toHome}
+              className="m-2.5"
+            >
               ClusterSense
             </Typography>
           </div>
           <Stack direction="row" spacing={2}>
             <Menu
-              anchorEl={clusterMenuAnchorEl}
-              open={Boolean(clusterMenuAnchorEl)}
-              onClose={handleClusterMenuClose}
-              onClick={handleSelect}
+              anchorEl={clusterMenu.anchorEl}
+              open={Boolean(clusterMenu.anchorEl)}
+              onClose={clusterMenu.handleClose}
             >
-              {clusterOptions.map((element: Cluster, index : number) => (
+              {clusterOptions.map((element: Cluster, index: number) => (
                 <MenuItem
-                 key={element.value || index} 
-                 onClick={()=> handleSelect(element.value)}
-                 >
+                  key={element.value || index}
+                  onClick={() => handleSelect(element.value)}
+                >
                   {element.label}
                 </MenuItem>
               ))}
             </Menu>
-
             <IconButton
               size="large"
               aria-controls="menu-appbar"
               aria-haspopup="true"
-              onClick={handleClusterMenuOpen}
+              onClick={clusterMenu.handleOpen}
               color="inherit"
             >
               <BubbleChartIcon sx={{ color: 'white' }} />
             </IconButton>
-
             <IconButton
               size="large"
               aria-controls="menu-appbar"
               aria-haspopup="true"
-              onClick={handleMenuOpen}
+              onClick={accountMenu.handleOpen}
               color="inherit"
             >
               <AccountCircle />
             </IconButton>
           </Stack>
         </Toolbar>
-        </AppBar>
+      </AppBar>
     </div>
   );
 };
+
 export default NavBar;
