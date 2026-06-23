@@ -4,8 +4,8 @@ import path from 'path';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import { ServerError } from '../types';
-import { loginRouter } from "./routes/loginRouter";
-import { clusterRouter } from "./routes/clusterRouter";
+import { loginRouter } from "./routes/loginRouter.js";
+import { clusterRouter } from "./routes/clusterRouter.js";
 
 import http from 'http';
 import {WebSocketServer, WebSocket} from 'ws';

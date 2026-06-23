@@ -1,4 +1,4 @@
-import  { useState, ChangeEvent } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { TERipple } from 'tw-elements-react';
 import TextField from '@mui/material/TextField';
@@ -11,33 +11,24 @@ const SignUp = ({ showSignIn }: SignUpProps) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-
   const navigate = useNavigate();
-  const toHome = () => {
-    const path = '/home';
-    navigate(path);
-  };
-  //
+
+  const toHome = () => navigate('/home');
+
   const handleSubmit = async () => {
     try {
-      const body = {
-        username: username,
-        password: password,
-      };
-      const data = await fetch(`/login/signupRequest`, {
+      const response = await fetch(`/login/signupRequest`, {
         method: 'POST',
-        // credentials: 'include',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(body),
+        body: JSON.stringify({ username, password }),
       });
-      if (data.ok) {
+
+      if (response.ok) {
         toHome();
-      } else if (data.status === 400) {
-        setError('All fields are required');
-      } else if (data.status === 409) {
-        setError('Username already exists!');
       } else {
-        setError('Unable to create user. Please try again!');
+        // Read the actual error message from the server
+        const body = await response.json();
+        setError(body.error || 'Unable to create user. Please try again!');
       }
     } catch (err) {
       console.error(err);
@@ -46,28 +37,27 @@ const SignUp = ({ showSignIn }: SignUpProps) => {
   };
 
   return (
-
-  <div className = "flex justify-center items-center" style={{ width: '100%'}}>
-      <div className="signIn-up pr-20" style={{ boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)'}}>
-        <h2 className= "font-bold pb-4" >Sign Up</h2>
-        <div className="signInBox mb-4 ">
+    <div className="flex justify-center items-center" style={{ width: '100%' }}>
+      <div className="signIn-up pr-20" style={{ boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)' }}>
+        <h2 className="font-bold pb-4">Sign Up</h2>
+        <div className="signInBox mb-4">
           <TextField
             id="outlined-basic"
-            sx={{width: '100%', mb: 4}} 
+            sx={{ width: '100%', mb: 4 }}
             label="username"
             variant="outlined"
             type="text"
             value={username}
-            onChange={(e:React.ChangeEvent<HTMLInputElement>) => setUsername(e.target.value)}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setUsername(e.target.value)}
           />
           <TextField
             id="outlined-basic"
-            sx={{width: '100%', mb: 4}} 
+            sx={{ width: '100%', mb: 4 }}
             label="password"
             variant="outlined"
             type="password"
             value={password}
-            onChange={(e:React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
           />
           <div className="mb-12 pb-1 pt-1 text-center">
             <TERipple rippleColor="light" className="w-full">
@@ -81,10 +71,7 @@ const SignUp = ({ showSignIn }: SignUpProps) => {
             </TERipple>
           </div>
           {error && (
-            <div
-              className="error-message"
-              style={{ color: 'red', fontStyle: 'italic' }}
-            >
+            <div className="error-message" style={{ color: 'red', fontStyle: 'italic' }}>
               {error}
             </div>
           )}
@@ -101,8 +88,8 @@ const SignUp = ({ showSignIn }: SignUpProps) => {
             </TERipple>
           </div>
         </div>
+      </div>
     </div>
-  </div>
   );
 };
 
